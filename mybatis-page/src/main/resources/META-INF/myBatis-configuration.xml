@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+		<setting name="lazyLoadingEnabled" value="false" />
+		<setting name="multipleResultSetsEnabled" value="true" />
+		<setting name="useColumnLabel" value="true" />
+		<setting name="useGeneratedKeys" value="false" />
+		<setting name="defaultExecutorType" value="SIMPLE" />
+		<setting name="defaultStatementTimeout" value="25000" />
+	</settings>
+    <plugins>  
+        <plugin interceptor="plugin.mybatis.page.PageInterceptor">
+        	<!-- 
+        		选择数据库方言
+        	 -->
+        	<property name="dialectClass" value="plugin.mybatis.page.OracleDialect"/>
+        	<!-- 
+        		分页参数名称
+        		如mysql : select * from table limit #{start},#{size};中的start,end
+        	 -->
+        	 <property name="startParameterName" value="start"/>
+        	 <property name="sizeParameterName" value="size"/>
+        </plugin>  
+    </plugins>  
+</configuration>

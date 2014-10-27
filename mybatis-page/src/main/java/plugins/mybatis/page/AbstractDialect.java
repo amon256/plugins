@@ -33,8 +33,8 @@ import plugins.mybatis.DynamicSqlSourceUtil;
  */
 public abstract class AbstractDialect implements Dialect {
 	private static final Log log = LogFactory.getLog(AbstractDialect.class);
-	protected static final String START_PARAMETER_NAME = "_start_";
-	protected static final String SIZE_PARAMETER_NAME = "_size_";
+	protected String startParameterName = "_start_";
+	protected String sizeParameterName = "_size_";
 
 	@Override
 	public boolean isSupportLimit() {
@@ -149,12 +149,19 @@ public abstract class AbstractDialect implements Dialect {
 		}
 		return newMs;
 	}
-	
+	@Override
+	public void setStartParameterName(String startParameterName) {
+		this.startParameterName = startParameterName;
+	}
 	protected String getStartParameterName(){
-		return START_PARAMETER_NAME;
+		return startParameterName;
+	}
+	@Override
+	public void setSizeParameterName(String sizeParameterName) {
+		this.sizeParameterName = sizeParameterName;
 	}
 	protected String getSizeParameterName(){
-		return SIZE_PARAMETER_NAME;
+		return sizeParameterName;
 	}
 	
 	/**

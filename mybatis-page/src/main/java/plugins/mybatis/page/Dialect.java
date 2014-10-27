@@ -21,6 +21,17 @@ public interface Dialect {
 	boolean isSupportLimit();
 	
 	/**
+	 * 设置分页开始下标参数名
+	 * @param startParameterName
+	 */
+	void setStartParameterName(String startParameterName);
+	/**
+	 * 设置分页大小参数名
+	 * @param sizeParameterName
+	 */
+	void setSizeParameterName(String sizeParameterName);
+	
+	/**
 	 * 创建分页查询映射语句
 	 * @param selectMappedStatement
 	 * @return

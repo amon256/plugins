@@ -70,9 +70,17 @@ public class PageInterceptor implements Interceptor {
 		try {
 			dialect = (Dialect) Class.forName(dialectClass).newInstance();
 		} catch (Exception e) {
-			throw new RuntimeException(
-					"cannot create dialect instance by dialectClass:"
-							+ dialectClass, e);
+			throw new RuntimeException("cannot create dialect instance by dialectClass:" + dialectClass, e);
+		}
+		if(dialect != null){
+			String startParameterName = properties.getProperty("startParameterName");
+			String sizeParameterName = properties.getProperty("sizeParameterName");
+			if(startParameterName != null && !"".equals(startParameterName.trim())){
+				dialect.setStartParameterName(startParameterName);
+			}
+			if(sizeParameterName != null && !"".equals(sizeParameterName.trim())){
+				dialect.setSizeParameterName(sizeParameterName);
+			}
 		}
 	}
 
