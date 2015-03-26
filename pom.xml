@@ -9,5 +9,7 @@
   	<module>mybatis-page</module>
   	<module>datasource-Read-Write-spring</module>
     <module>http-plugin</module>
+    <module>database_report</module>
+    <module>web</module>
   </modules>
 </project>

@@ -24,19 +24,19 @@ public class HttpSocketProcessor implements SocketProcessor {
 
 	@Override
 	public void process(Socket socket) {
-		System.out.println("接收到来自:" + socket.getInetAddress().toString() + "的请求.");
-//		BufferedReader br = null;
+		System.out.println("in接收到来自:" + socket.getInetAddress().toString() + "的请求.");
+		BufferedReader br = null;
 		BufferedWriter bw = null;
-//		try {
-//			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-//			String line;
-//			while((line = br.readLine()) != null){
-//				System.out.println(line);
-//			}
-//			
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		try {
+			br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			String line;
+			while((line = br.readLine()) != null){
+				System.out.println(line);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		try {
 			HttpRequestWrap request = new HttpRequestWrap(socket.getInputStream()) {
 				
