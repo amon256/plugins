@@ -28,9 +28,12 @@ public class FileUtils {
 	 * @param from 源文件夹
 	 * @param to 目标文件夹
 	 */
-	public static void dirCopy(File from,File to){
+	public static void dirCopy(File from,File to,boolean removeIfExists){
 		if(from.exists() && from.isDirectory()){
-			if(to.exists() && to.isFile()){
+			if(removeIfExists && to.exists()){
+				delete(to);
+			}
+			if(to.exists() && to.isFile() && !removeIfExists){
 				logger.debug("目标文件己存在且并非文件夹。");
 			}else{
 				if(!to.exists()){
@@ -45,7 +48,7 @@ public class FileUtils {
 					if(file.isFile()){
 						fileCopy(file, new File(toPath));
 					}else{
-						dirCopy(file, new File(toPath));
+						dirCopy(file, new File(toPath),removeIfExists);
 					}
 				}
 			}
@@ -87,6 +90,27 @@ public class FileUtils {
 			}
 		}else{
 			logger.debug("源文件[{}]不存在或不是文件类型",from.getAbsolutePath());
+		}
+	}
+	
+	/**
+	 * 删除文件(文件夹 )
+	 * @param file
+	 */
+	public static void delete(File file){
+		if(file != null && file.exists()){
+			if(file.isFile()){
+				file.delete();
+			}else{
+				File[] files = file.listFiles();
+				if(files == null || files.length == 0){
+					file.delete();
+				}else{
+					for(File f : files){
+						delete(f);
+					}
+				}
+			}
 		}
 	}
 }

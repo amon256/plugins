@@ -5,13 +5,12 @@
  */
 package plugins.installation.execute;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
+import java.text.MessageFormat;
 import java.util.List;
 import java.util.Properties;
 
@@ -48,14 +47,16 @@ public class FileEditExecution implements Execution {
 	public void execute(InstallConfig config) throws Exception{
 		File file = new File(fileEditInfo.getFile().replace("${TARGET}", config.getTarget()));
 		if(file.exists() && file.isFile()){
-			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 			if(file.getName().toLowerCase().endsWith(".properties")){
 				if(fileEditInfo.getItems() != null && !fileEditInfo.getItems().isEmpty()){
 					logger.debug("修改文件{}的参数",fileEditInfo.getFile());
-					editProperties(file, fileEditInfo.getItems(), br);
+					editProperties(file, fileEditInfo.getItems());
 				}
 			}else if(file.getName().toLowerCase().endsWith(".xml")){
-				editXml(file, fileEditInfo.getItems(), br);
+				if(fileEditInfo.getItems() != null && !fileEditInfo.getItems().isEmpty()){
+					logger.debug("修改文件{}的参数",fileEditInfo.getFile());
+					editXml(file, fileEditInfo.getItems());
+				}
 			}else{
 				logger.error("{}文件类型暂时不支持修改,请自行修改",fileEditInfo.getFile());
 			}
@@ -64,22 +65,16 @@ public class FileEditExecution implements Execution {
 		}
 	}
 	
-	private static void editXml(File file,List<FileEditItem> items,BufferedReader br) throws IOException{
+	private static void editXml(File file,List<FileEditItem> items) throws IOException{
 		try{
 			Document document = new SAXReader().read(new FileInputStream(file));
 			boolean hasEdit = false;
 			for(FileEditItem item : items){
 				Node node = document.selectSingleNode(item.getItemName());
 				if(node != null){
-					System.out.print("\n*" + item.getItemDesc() + "(" + item.getItemName() + ") : ");
-					String line = br.readLine();
-					if(line != null){
-						node.setText(line);
-						hasEdit = true;
-						logger.debug("设置参数 {}={}",item.getItemName(),line);
-					}else{
-						logger.warn("{}的属性{}未修改",file.getAbsolutePath(),item.getItemName());
-					}
+					node.setText(item.getItemValue());
+					hasEdit = true;
+					logger.debug("设置参数 {}={}",item.getItemName(),item.getItemValue());
 				}else{
 					logger.error("{}不存在",item.getItemName());
 				}
@@ -96,20 +91,14 @@ public class FileEditExecution implements Execution {
 		}
 	}
 	
-	private static void editProperties(File file,List<FileEditItem> items,BufferedReader br) throws FileNotFoundException, IOException{
+	private static void editProperties(File file,List<FileEditItem> items) throws FileNotFoundException, IOException{
 		Properties prop = new Properties();
 		prop.load(new FileInputStream(file));
 		boolean hasEdit = false;
 		for(FileEditItem item : items){
-			System.out.print("\n*" + item.getItemDesc() + "(" + item.getItemName() + ") : ");
-			String line = br.readLine();
-			if(line != null){
-				prop.put(item.getItemName(), line);
-				logger.debug("设置参数 {}={}",item.getItemName(),prop.getProperty(item.getItemName()));
-				hasEdit = true;
-			}else{
-				logger.warn("{}的属性{}未修改",file.getAbsolutePath(),item.getItemName());
-			}
+			prop.put(item.getItemName(), item.getItemValue());
+			logger.debug("设置参数 {}={}",item.getItemName(), item.getItemValue());
+			hasEdit = true;
 		}
 		if(hasEdit){
 			FileOutputStream fos = new FileOutputStream(file);
@@ -117,6 +106,19 @@ public class FileEditExecution implements Execution {
 			fos.flush();
 			fos.close();
 		}
+	}
+	
+	@Override
+	public String info(InstallConfig config) {
+		File file = new File(fileEditInfo.getFile().replace("${TARGET}", config.getTarget()));
+		String pattern = "修改配置文件:{0}";
+		String itemPattern = "\n【{0}】:   {1} = {2}";
+		StringBuilder info = new StringBuilder(MessageFormat.format(pattern, file.getAbsolutePath()));
+		List<FileEditItem> items = fileEditInfo.getItems();
+		for(FileEditItem fi : items){
+			info.append(MessageFormat.format(itemPattern, fi.getItemDesc(),fi.getItemName(),fi.getItemValue()));
+		}
+		return info.toString();
 	}
 
 }

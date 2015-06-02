@@ -166,27 +166,27 @@ public class InstallConfig {
 	}
 	
 	public boolean validateFileCopy(){
-		logger.debug("开始校验安装配置【文件拷贝】");
+		logger.debug("\n开始校验安装配置");
 		boolean flag = true;
 		if(source == null || "".equals(source)){
-			logger.debug("源文件夹未配置(install.source)");
+			logger.debug("源文件夹未配置(source)");
 			flag = false;
 		}else{
 			File s = new File(source);
 			if(!s.exists() || s.isFile()){
-				logger.debug("install.source 不存在或不是文件夹");
+				logger.debug("source 不存在或不是文件夹");
 				flag = false;
 			}else{
 				logger.debug("源文件夹{} ok",source);
 			}
 		}
 		if(target == null || "".equals(target)){
-			logger.debug("目标文件夹未配置(install.target)");
+			logger.debug("目标文件夹未配置(target)");
 			flag = false;
 		}else{
 			File s = new File(target);
 			if(!s.exists() || s.isFile()){
-				logger.debug("install.target 不存在或不是文件夹");
+				logger.debug("target 不存在或不是文件夹");
 				flag = false;
 			}else{
 				logger.debug("目标文件夹{} ok",target);
@@ -195,7 +195,6 @@ public class InstallConfig {
 		if(fileCopyInfos != null){
 			for(FileCopyInfo info : fileCopyInfos){
 				File src = null;
-				File obj = null;
 				if(info.getFrom() == null || "".equals(info.getFrom().trim())){
 					logger.debug("源位置未配置");
 					flag = false;
@@ -210,13 +209,6 @@ public class InstallConfig {
 				if(info.getTo() == null || "".equals(info.getTo().trim())){
 					logger.debug("目标位置未配置");
 					flag = false;
-				}else{
-					String path = info.getFrom().replace("${TARGET}", source);
-					obj = new File(path);
-					if(obj.exists() && src != null && src.exists() && (obj.isDirectory() != src.isDirectory())){
-						logger.debug("目标文件与源文件的类型不匹配，{}",info.getNodeText());
-						flag = false;
-					}
 				}
 			}
 		}

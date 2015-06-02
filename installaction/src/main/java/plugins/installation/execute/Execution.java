@@ -21,4 +21,10 @@ public interface Execution {
 	 */
 	public void execute(InstallConfig config) throws Exception;
 	
+	/**
+	 * 描述字符串
+	 * @param config
+	 * @return
+	 */
+	public String info(InstallConfig config);
 }

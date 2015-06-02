@@ -159,3 +159,398 @@
 2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:119)] 拷贝文件过程完成
 2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
 2015-06-02 15:38:55 WARN [plugins.installation.Installer.editProperties(Installer.java:219)] g:\target\DNSCollectKernel\deploy_config_dns\compare\compare.properties的属性SplitRootPath未修改
+2015-06-02 16:33:02 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:33:02 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:33:15 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:33:15 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:target
+2015-06-02 16:33:15 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 开始校验安装配置【文件拷贝】
+2015-06-02 16:33:15 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:33:15 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:target ok
+2015-06-02 16:33:15 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:33:15 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:35:40 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath:g:/target/split
+2015-06-02 16:36:03 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath:g:/target/result
+2015-06-02 16:36:03 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:36:13 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url:111
+2015-06-02 16:36:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username:111
+2015-06-02 16:36:15 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password:111
+2015-06-02 16:36:15 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:36:16 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain:11
+2015-06-02 16:36:16 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:36:17 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code:11
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot:11
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@14b7453
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@c21495
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@1d5550d
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@c2ea3f
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@a0dcd9
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@1034bb5
+2015-06-02 16:36:18 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@15f5897
+2015-06-02 16:36:32 DEBUG [plugins.installation.Installer.main(Installer.java:87)] 取消安装。
+2015-06-02 16:37:13 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:37:13 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:37:23 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:37:23 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 16:37:23 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:37:23 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:37:23 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 16:37:23 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:37:23 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:37:37 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath:aaa
+2015-06-02 16:37:40 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath:aaa
+2015-06-02 16:37:40 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:37:47 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url:aaaa
+2015-06-02 16:37:48 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username:aaa
+2015-06-02 16:37:50 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password:aaa
+2015-06-02 16:37:50 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:37:52 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain:aaa
+2015-06-02 16:37:52 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:37:55 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code:aaa
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot:fs
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@14b7453
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@c21495
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@1d5550d
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@c2ea3f
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@a0dcd9
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@1034bb5
+2015-06-02 16:37:57 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@15f5897
+2015-06-02 16:38:16 DEBUG [plugins.installation.Installer.main(Installer.java:87)] 取消安装。
+2015-06-02 16:48:26 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:48:26 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:48:42 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:48:42 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:48:43 DEBUG [plugins.installation.Installer.readSourcePath(Installer.java:148)] E:\workspace\plugins\installaction
+2015-06-02 16:49:01 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:49:01 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:49:07 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:49:07 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 16:49:07 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:49:07 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:49:07 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 16:49:07 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:49:07 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:49:17 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = G:/target/split
+2015-06-02 16:49:25 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = G:/target/result
+2015-06-02 16:49:25 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:49:30 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 16:49:32 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = name
+2015-06-02 16:49:33 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 16:49:33 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:49:38 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = http?
+2015-06-02 16:49:38 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:49:42 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = G:/target/temp
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@14b7453
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@c21495
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@1d5550d
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@c2ea3f
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@a0dcd9
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@1034bb5
+2015-06-02 16:49:47 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@15f5897
+2015-06-02 16:49:59 DEBUG [plugins.installation.Installer.main(Installer.java:87)] 取消安装。
+2015-06-02 16:50:39 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:50:39 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:50:48 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:50:48 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 16:50:48 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:50:48 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:50:48 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 16:50:48 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:50:48 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:51:13 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = g:/taget/split
+2015-06-02 16:51:17 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = g:/target/result
+2015-06-02 16:51:17 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:51:20 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 16:51:22 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 16:51:23 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 16:51:23 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:51:26 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = httpssss
+2015-06-02 16:51:26 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:51:29 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = g:/taget/temp
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@14b7453
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@c21495
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileCopyExecution@1d5550d
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@c2ea3f
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@a0dcd9
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@1034bb5
+2015-06-02 16:51:35 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] plugins.installation.execute.FileEditExecution@15f5897
+2015-06-02 16:51:38 DEBUG [plugins.installation.Installer.main(Installer.java:87)] 取消安装。
+2015-06-02 16:52:20 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:52:20 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:52:35 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:52:35 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:52:41 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:52:41 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 16:52:41 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:52:41 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:52:41 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 16:52:41 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:52:41 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:52:47 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = g:/target/split
+2015-06-02 16:52:52 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = g:/target/result
+2015-06-02 16:52:52 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:52:57 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbcurl
+2015-06-02 16:52:59 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 16:53:00 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 16:53:00 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:53:03 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = https
+2015-06-02 16:53:03 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:53:06 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 16:53:11 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = g:/target/temp
+2015-06-02 16:53:11 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:53:11 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:54:44 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:54:44 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:54:55 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:54:55 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:g:/target
+2015-06-02 16:54:55 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:54:55 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:54:55 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹g:/target ok
+2015-06-02 16:54:55 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:54:55 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:55:02 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = g:/target/split
+2015-06-02 16:55:08 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = g:/target/result
+2015-06-02 16:55:08 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:55:10 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 16:55:11 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 16:55:12 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 16:55:12 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:55:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = https
+2015-06-02 16:55:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:55:17 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 16:55:34 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = g:/target/temp
+2015-06-02 16:55:34 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:55:34 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:57:09 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:57:09 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:57:16 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:57:16 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 16:57:16 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:57:16 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:57:16 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 16:57:16 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:57:16 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:57:20 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = g:/target/split
+2015-06-02 16:57:24 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = G:/target/result
+2015-06-02 16:57:24 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:57:26 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 16:57:29 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 16:57:29 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 16:57:29 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:57:31 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = https
+2015-06-02 16:57:31 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:57:34 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = g:/target/temp
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 本次安装包含以下内容:
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\target\DNSCollectKernel] 至 [{2}]。
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\target\DNSCollectKernel\config_dns] 至 [{2}]。
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\target\DNSCollectKernel\deploy_config_dns] 至 [{2}]。
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【】:   SplitRootPath = g:/target/split
+【】:   CompareResultRootPath = G:/target/result
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【】:   jdbc.url = jdbc
+【】:   jdbc.username = uname
+【】:   jdbc.password = pwd
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【】:   portalclient/portal/domain = https
+2015-06-02 16:57:40 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【】:   province.code = 9988
+【】:   workDirRoot = g:/target/temp
+2015-06-02 16:58:11 DEBUG [plugins.installation.Installer.main(Installer.java:87)] 取消安装。
+2015-06-02 16:59:05 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 16:59:05 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 16:59:22 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 16:59:22 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 16:59:22 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 16:59:22 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 16:59:22 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 16:59:22 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 16:59:22 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 16:59:31 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = G:/target/split
+2015-06-02 16:59:35 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = G:/target/result
+2015-06-02 16:59:35 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 16:59:37 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 16:59:42 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 16:59:45 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 16:59:45 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 16:59:49 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = https
+2015-06-02 16:59:49 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 16:59:52 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = G:/target/temp
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 
+***********本次安装包含以下内容************
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\target\DNSCollectKernel] 至 [{2}]。
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\target\DNSCollectKernel\config_dns] 至 [{2}]。
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\target\DNSCollectKernel\deploy_config_dns] 至 [{2}]。
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【SplitRootPath】:   G:/target/split = {3}
+【CompareResultRootPath】:   G:/target/result = {3}
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【jdbc.url】:   jdbc = {3}
+【jdbc.username】:   uname = {3}
+【jdbc.password】:   pwd = {3}
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【portalclient/portal/domain】:   https = {3}
+2015-06-02 16:59:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:{1}
+【province.code】:   9988 = {3}
+【workDirRoot】:   G:/target/temp = {3}
+2015-06-02 17:00:17 DEBUG [plugins.installation.Installer.main(Installer.java:87)] 取消安装。
+2015-06-02 17:00:58 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 17:00:58 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 17:01:08 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 17:01:08 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 17:01:08 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 17:01:08 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 17:01:08 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 17:01:08 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 17:01:08 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 17:01:12 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = G:/
+2015-06-02 17:01:15 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = G:/
+2015-06-02 17:01:15 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 17:01:17 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 17:01:19 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 17:01:19 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 17:01:19 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 17:01:22 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = https
+2015-06-02 17:01:22 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 17:01:25 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = g:/target/temp
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 
+***********本次安装包含以下内容***********
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\compare\compare.properties
+【核查文件分拆根目录】:   SplitRootPath = G:/
+【比对结果文件存放的根目录】:   CompareResultRootPath = G:/
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\database\jdbc.properties
+【Oracle数据库连接JDBC地址】:   jdbc.url = jdbc
+【数据库用户名】:   jdbc.username = uname
+【数据库密码】:   jdbc.password = pwd
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\portalclient\portalclient.xml
+【Portal门户Url】:   portalclient/portal/domain = https
+2015-06-02 17:01:32 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\province-config.properties
+【省份编码】:   province.code = 9988
+【系统临时文件存放目录】:   workDirRoot = g:/target/temp
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:38)] 拷贝DNSCollectKernel
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:40)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:38)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:40)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:38)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:40)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 17:01:45 DEBUG [plugins.installation.execute.FileEditExecution.execute(FileEditExecution.java:55)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 17:06:17 DEBUG [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:71)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 17:06:17 DEBUG [plugins.installation.Installer.main(Installer.java:51)] *************DNSCollectKernel安装****************
+2015-06-02 17:06:34 DEBUG [plugins.installation.Installer.main(Installer.java:60)] 安装资源文件夹:G:/source
+2015-06-02 17:06:34 DEBUG [plugins.installation.Installer.main(Installer.java:61)] 程序安装路径:G:/target
+2015-06-02 17:06:34 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:169)] 
+开始校验安装配置
+2015-06-02 17:06:34 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:180)] 源文件夹G:/source ok
+2015-06-02 17:06:34 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:192)] 目标文件夹G:/target ok
+2015-06-02 17:06:34 DEBUG [plugins.installation.config.InstallConfig.validateFileCopy(InstallConfig.java:215)] 校验结束，结果为:true
+2015-06-02 17:06:34 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties
+2015-06-02 17:07:36 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[核查文件分拆根目录]值  SplitRootPath = G:/target/split
+2015-06-02 17:07:42 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[比对结果文件存放的根目录]值  CompareResultRootPath = G:/target/result
+2015-06-02 17:07:42 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties
+2015-06-02 17:07:44 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Oracle数据库连接JDBC地址]值  jdbc.url = jdbc
+2015-06-02 17:07:46 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库用户名]值  jdbc.username = uname
+2015-06-02 17:07:48 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[数据库密码]值  jdbc.password = pwd
+2015-06-02 17:07:48 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml
+2015-06-02 17:07:50 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[Portal门户Url]值  portalclient/portal/domain = http
+2015-06-02 17:07:50 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:111)] 
+配置文件:${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties
+2015-06-02 17:07:53 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[省份编码]值  province.code = 9988
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:116)] 配置[系统临时文件存放目录]值  workDirRoot = g:/target/temp
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:120)] 文件编辑完成
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:95)] 
+***********本次安装包含以下内容***********
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\compare\compare.properties
+【核查文件分拆根目录】:   SplitRootPath = G:/target/split
+【比对结果文件存放的根目录】:   CompareResultRootPath = G:/target/result
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\database\jdbc.properties
+【Oracle数据库连接JDBC地址】:   jdbc.url = jdbc
+【数据库用户名】:   jdbc.username = uname
+【数据库密码】:   jdbc.password = pwd
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\portalclient\portalclient.xml
+【Portal门户Url】:   portalclient/portal/domain = http
+2015-06-02 17:07:58 DEBUG [plugins.installation.Installer.confirm(Installer.java:97)] 修改配置文件:G:\target\DNSCollectKernel\deploy_config_dns\province-config.properties
+【省份编码】:   province.code = 9988
+【系统临时文件存放目录】:   workDirRoot = g:/target/temp
+2015-06-02 17:08:19 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:38)] 拷贝DNSCollectKernel
+2015-06-02 17:08:19 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:40)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:38)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:40)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:38)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileCopyExecution.execute(FileCopyExecution.java:40)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.execute(FileEditExecution.java:52)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 SplitRootPath=G:/target/split
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 CompareResultRootPath=G:/target/result
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.execute(FileEditExecution.java:52)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties的参数
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 jdbc.url=jdbc
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 jdbc.username=uname
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 jdbc.password=pwd
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.execute(FileEditExecution.java:57)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml的参数
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editXml(FileEditExecution.java:77)] 设置参数 portalclient/portal/domain=http
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.execute(FileEditExecution.java:52)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties的参数
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 province.code=9988
+2015-06-02 17:08:20 DEBUG [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:100)] 设置参数 workDirRoot=g:/target/temp
+2015-06-02 17:08:20 DEBUG [plugins.installation.Installer.main(Installer.java:85)] 安装完成。
