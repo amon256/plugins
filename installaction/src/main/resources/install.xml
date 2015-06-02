@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install source="G:/source" target="G:/target">
+<install name="DNSCollectKernel安装">
 	<!-- 参数集合
-		${SOURCE} 源文件根目录 值为install.source属性
-		${TARGET} 安装目标根目录 值为install.target属性
+		${SOURCE} 源文件根目录
+		${TARGET} 安装目标根目录
 	 -->
 	<fileCopy>
 		<list>
 			<copyInfo desc="拷贝DNSCollectKernel" from="${SOURCE}/kernel/DNSCollectKernel" to="${TARGET}/DNSCollectKernel" />
 			<copyInfo desc="拷贝config_dns到DNSCollectKernel" from="${SOURCE}/dns-config/config/config_dns" to="${TARGET}/DNSCollectKernel/config_dns" />
 			<copyInfo desc="拷贝deploy_config_dns到DNSCollectKernel" from="${SOURCE}/dns-config/config/deploy_config_dns" to="${TARGET}/DNSCollectKernel/deploy_config_dns" />
-			
-			<copyInfo desc="拷贝DNSIssueKernel" from="${SOURCE}/kernel/DNSIssueKernel" to="${TARGET}/DNSIssueKernel" />
-			<copyInfo desc="拷贝config_dns到DNSIssueKernel" from="${SOURCE}/dns-config/config/config_dns" to="${TARGET}/DNSIssueKernel/config_dns" />
-			<copyInfo desc="拷贝deploy_config_dns到DNSIssueKernel" from="${SOURCE}/dns-config/config/deploy_config_dns" to="${TARGET}/DNSIssueKernel/deploy_config_dns" />
 		</list>
 	</fileCopy>
 	<fileEdit>
@@ -28,6 +24,17 @@
 					<item name="jdbc.url" desc="Oracle数据库连接JDBC地址"/>
 					<item name="jdbc.username" desc="数据库用户名"/>
 					<item name="jdbc.password" desc="数据库密码"/>
+				</items>
+			</editInfo>
+			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml">
+				<items>
+					<item name="portalclient/portal/domain" desc="Portal门户Url"/>
+				</items>
+			</editInfo>
+			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties">
+				<items>
+					<item name="province.code" desc="省份编码"/>
+					<item name="workDirRoot" desc="系统临时文件存放目录"/>
 				</items>
 			</editInfo>
 		</list>

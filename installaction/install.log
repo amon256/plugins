@@ -1,0 +1,161 @@
+2015-06-02 15:17:20 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:17:20 DEBUG [plugins.installation.Installer.main(Installer.java:66)] ==========DNSCollectKernel安装=========
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:109)] 安装资源文件夹:G:/source
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:110)] 程序安装路径:G:/target
+2015-06-02 15:17:49 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:167)] 开始校验安装配置【文件拷贝】
+2015-06-02 15:17:49 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:178)] 源文件夹G:/source ok
+2015-06-02 15:17:49 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:190)] 目标文件夹G:/target ok
+2015-06-02 15:17:49 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:221)] 校验结束，结果为:true
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:119)] ==========拷贝DNSCollectKernel开始============>
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:121)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:127)] <==========拷贝DNSCollectKernel结束============
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:119)] ==========拷贝config_dns到DNSCollectKernel开始============>
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:121)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:127)] <==========拷贝config_dns到DNSCollectKernel结束============
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:119)] ==========拷贝deploy_config_dns到DNSCollectKernel开始============>
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:121)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:127)] <==========拷贝deploy_config_dns到DNSCollectKernel结束============
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:129)] 拷贝文件过程完成
+2015-06-02 15:17:49 DEBUG [plugins.installation.Installer.main(Installer.java:139)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 15:18:50 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set SplitRootPath=G:/target/compare/split
+2015-06-02 15:18:59 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set CompareResultRootPath=G:/target/compare/result
+2015-06-02 15:18:59 DEBUG [plugins.installation.Installer.main(Installer.java:139)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties的参数
+2015-06-02 15:19:03 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set jdbc.url=1111
+2015-06-02 15:19:06 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set jdbc.username=111
+2015-06-02 15:19:08 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set jdbc.password=111
+2015-06-02 15:19:13 DEBUG [plugins.installation.Installer.main(Installer.java:139)] 修改文件${TARGET}/DNSIssueKernel/deploy_config_dns/province-config.properties的参数
+2015-06-02 15:19:19 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set province.code=088
+2015-06-02 15:19:32 DEBUG [plugins.installation.Installer.editProperties(Installer.java:196)] set workDirRoot=G:/target/temp
+2015-06-02 15:19:32 DEBUG [plugins.installation.Installer.main(Installer.java:151)] 文件编辑完成
+2015-06-02 15:29:31 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:29:31 DEBUG [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.main(Installer.java:66)] 安装资源文件夹:G:/source
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.main(Installer.java:67)] 程序安装路径:G:/target
+2015-06-02 15:29:46 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:167)] 开始校验安装配置【文件拷贝】
+2015-06-02 15:29:46 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:178)] 源文件夹G:/source ok
+2015-06-02 15:29:46 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:190)] 目标文件夹G:/target ok
+2015-06-02 15:29:46 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:221)] 校验结束，结果为:true
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:105)] 开始拷贝文件
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:109)] 拷贝DNSCollectKernel
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:111)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:109)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:111)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:109)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:111)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:118)] 拷贝文件过程完成
+2015-06-02 15:29:46 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:89)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 15:30:22 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set SplitRootPath=g:/target/split
+2015-06-02 15:30:29 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set CompareResultRootPath=g:/target/result
+2015-06-02 15:30:29 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:89)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties的参数
+2015-06-02 15:30:33 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set jdbc.url=aaaaa
+2015-06-02 15:30:34 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set jdbc.username=bbb
+2015-06-02 15:30:37 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set jdbc.password=cccc
+2015-06-02 15:30:37 ERROR [plugins.installation.Installer.processFileEdit(Installer.java:98)] ${TARGET}/DNSIssueKernel/deploy_config_dns/portalclient/portalclient.xml不存在或者不是文件类型。
+2015-06-02 15:30:37 ERROR [plugins.installation.Installer.processFileEdit(Installer.java:98)] ${TARGET}/DNSIssueKernel/deploy_config_dns/province-config.properties不存在或者不是文件类型。
+2015-06-02 15:30:37 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:101)] 文件编辑完成
+2015-06-02 15:31:29 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:31:29 DEBUG [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.main(Installer.java:66)] 安装资源文件夹:G:/source
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.main(Installer.java:67)] 程序安装路径:G:/target
+2015-06-02 15:31:36 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:167)] 开始校验安装配置【文件拷贝】
+2015-06-02 15:31:36 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:178)] 源文件夹G:/source ok
+2015-06-02 15:31:36 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:190)] 目标文件夹G:/target ok
+2015-06-02 15:31:36 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:221)] 校验结束，结果为:true
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:105)] 开始拷贝文件
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:109)] 拷贝DNSCollectKernel
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:111)] 拷贝文件夹[G:\source\kernel\DNSCollectKernel] 至 [G:\target\DNSCollectKernel]。
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:109)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:111)] 拷贝文件夹[G:\source\dns-config\config\config_dns] 至 [G:\target\DNSCollectKernel\config_dns]。
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:109)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:111)] 拷贝文件夹[G:\source\dns-config\config\deploy_config_dns] 至 [G:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:118)] 拷贝文件过程完成
+2015-06-02 15:31:36 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:89)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 15:31:42 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set SplitRootPath=G:target/split
+2015-06-02 15:31:48 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set CompareResultRootPath=G:/target/result
+2015-06-02 15:31:48 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:89)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties的参数
+2015-06-02 15:31:52 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set jdbc.url=11111
+2015-06-02 15:31:54 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set jdbc.username=1111
+2015-06-02 15:31:55 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set jdbc.password=111
+2015-06-02 15:31:58 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:89)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties的参数
+2015-06-02 15:32:02 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set province.code=9900
+2015-06-02 15:32:14 DEBUG [plugins.installation.Installer.editProperties(Installer.java:214)] set workDirRoot=g:/target/temp
+2015-06-02 15:32:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:101)] 文件编辑完成
+2015-06-02 15:32:50 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:32:50 DEBUG [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.main(Installer.java:66)] 安装资源文件夹:g:/source
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.main(Installer.java:67)] 程序安装路径:g:/target
+2015-06-02 15:33:01 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:167)] 开始校验安装配置【文件拷贝】
+2015-06-02 15:33:01 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:178)] 源文件夹g:/source ok
+2015-06-02 15:33:01 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:190)] 目标文件夹g:/target ok
+2015-06-02 15:33:01 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:221)] 校验结束，结果为:true
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:106)] 开始拷贝文件
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝DNSCollectKernel
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\kernel\DNSCollectKernel] 至 [g:\target\DNSCollectKernel]。
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\dns-config\config\config_dns] 至 [g:\target\DNSCollectKernel\config_dns]。
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\dns-config\config\deploy_config_dns] 至 [g:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:119)] 拷贝文件过程完成
+2015-06-02 15:33:01 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 15:33:08 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set SplitRootPath=g:/target/split
+2015-06-02 15:33:14 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set CompareResultRootPath=g:/target/result
+2015-06-02 15:33:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties的参数
+2015-06-02 15:33:16 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set jdbc.url=1111
+2015-06-02 15:33:17 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set jdbc.username=11111
+2015-06-02 15:33:18 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set jdbc.password=11111
+2015-06-02 15:33:21 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties的参数
+2015-06-02 15:33:24 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set province.code=11223
+2015-06-02 15:33:29 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set workDirRoot=g:/target/tmp
+2015-06-02 15:33:29 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:102)] 文件编辑完成
+2015-06-02 15:33:29 DEBUG [plugins.installation.Installer.main(Installer.java:81)] 安装过程结束
+2015-06-02 15:34:34 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:34:34 DEBUG [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.main(Installer.java:66)] 安装资源文件夹:g:/source
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.main(Installer.java:67)] 程序安装路径:g:/target
+2015-06-02 15:34:45 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:167)] 开始校验安装配置【文件拷贝】
+2015-06-02 15:34:45 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:178)] 源文件夹g:/source ok
+2015-06-02 15:34:45 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:190)] 目标文件夹g:/target ok
+2015-06-02 15:34:45 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:221)] 校验结束，结果为:true
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:106)] 开始拷贝文件
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝DNSCollectKernel
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\kernel\DNSCollectKernel] 至 [g:\target\DNSCollectKernel]。
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\dns-config\config\config_dns] 至 [g:\target\DNSCollectKernel\config_dns]。
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\dns-config\config\deploy_config_dns] 至 [g:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:119)] 拷贝文件过程完成
+2015-06-02 15:34:45 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 15:35:29 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set SplitRootPath=aaaaa
+2015-06-02 15:35:32 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set CompareResultRootPath=sss
+2015-06-02 15:35:32 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties的参数
+2015-06-02 15:35:34 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set jdbc.url=sss
+2015-06-02 15:35:35 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set jdbc.username=sss
+2015-06-02 15:35:36 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set jdbc.password=sss
+2015-06-02 15:35:37 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties的参数
+2015-06-02 15:35:37 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set province.code=sss
+2015-06-02 15:35:38 DEBUG [plugins.installation.Installer.editProperties(Installer.java:215)] set workDirRoot=sss
+2015-06-02 15:35:38 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:102)] 文件编辑完成
+2015-06-02 15:35:38 DEBUG [plugins.installation.Installer.main(Installer.java:81)] 安装过程结束
+2015-06-02 15:37:11 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:37:11 DEBUG [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
+2015-06-02 15:37:16 DEBUG [plugins.installation.Installer.readSourcePath(Installer.java:152)] null不存在
+2015-06-02 15:37:59 DEBUG [plugins.installation.file.InstallConfig.loadFrom(InstallConfig.java:69)] 加载安装配置文件[E:\workspace\plugins\installaction\src\main\resources\install.xml]
+2015-06-02 15:37:59 DEBUG [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
+2015-06-02 15:38:01 DEBUG [plugins.installation.Installer.readSourcePath(Installer.java:151)] aaa不存在
+2015-06-02 15:38:06 DEBUG [plugins.installation.Installer.readTargetPath(Installer.java:131)] aa不存在
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.main(Installer.java:66)] 安装资源文件夹:g:/source
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.main(Installer.java:67)] 程序安装路径:g:/target
+2015-06-02 15:38:14 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:167)] 开始校验安装配置【文件拷贝】
+2015-06-02 15:38:14 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:178)] 源文件夹g:/source ok
+2015-06-02 15:38:14 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:190)] 目标文件夹g:/target ok
+2015-06-02 15:38:14 DEBUG [plugins.installation.file.InstallConfig.validateFileCopy(InstallConfig.java:221)] 校验结束，结果为:true
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:106)] 开始拷贝文件
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝DNSCollectKernel
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\kernel\DNSCollectKernel] 至 [g:\target\DNSCollectKernel]。
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝config_dns到DNSCollectKernel
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\dns-config\config\config_dns] 至 [g:\target\DNSCollectKernel\config_dns]。
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:110)] 拷贝deploy_config_dns到DNSCollectKernel
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:112)] 拷贝文件夹[g:\source\dns-config\config\deploy_config_dns] 至 [g:\target\DNSCollectKernel\deploy_config_dns]。
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileCopy(Installer.java:119)] 拷贝文件过程完成
+2015-06-02 15:38:14 DEBUG [plugins.installation.Installer.processFileEdit(Installer.java:90)] 修改文件${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties的参数
+2015-06-02 15:38:55 WARN [plugins.installation.Installer.editProperties(Installer.java:219)] g:\target\DNSCollectKernel\deploy_config_dns\compare\compare.properties的属性SplitRootPath未修改

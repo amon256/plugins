@@ -3,7 +3,7 @@
  * @author FengMy
  * @since 2015年6月1日
  */
-package plugins.installation.file;
+package plugins.installation.config;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -19,6 +19,8 @@ import org.dom4j.io.SAXReader;
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
+import plugins.installation.file.FileCopyInfo;
+import plugins.installation.file.FileEditInfo;
 import plugins.installation.file.FileEditInfo.FileEditItem;
 
 /**  
@@ -30,6 +32,11 @@ import plugins.installation.file.FileEditInfo.FileEditItem;
 public class InstallConfig {
 	
 	private static final Logger logger = LoggerFactory.getLogger(InstallConfig.class);
+	
+	/**
+	 * install名称
+	 */
+	private String name;
 	
 	/**
 	 * 源文件夹
@@ -71,13 +78,7 @@ public class InstallConfig {
 		try {
 			Document document = new SAXReader().read(inputstream);
 			Element root = document.getRootElement();
-			if(root.attribute("source") != null && root.attribute("source").getText() != null){
-				config.source = root.attribute("source").getText().trim();
-			}
-			if(root.attribute("target") != null && root.attribute("target").getText() != null){
-				config.target = root.attribute("target").getText().trim();
-			}
-			
+			config.setName(root.attributeValue("name"));
 			List<Element> fileCopys = root.elements("fileCopy");
 			if(fileCopys != null){
 				config.fileCopyInfos = new LinkedList<FileCopyInfo>();
@@ -249,5 +250,13 @@ public class InstallConfig {
 	
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

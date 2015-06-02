@@ -58,6 +58,11 @@ public class FileEditInfo {
 		 * 修改项说明
 		 */
 		private String itemDesc;
+		
+		/**
+		 * 值
+		 */
+		private String itemValue;
 
 		public String getItemName() {
 			return itemName;
@@ -73,6 +78,14 @@ public class FileEditInfo {
 
 		public void setItemDesc(String itemDesc) {
 			this.itemDesc = itemDesc;
+		}
+
+		public String getItemValue() {
+			return itemValue;
+		}
+
+		public void setItemValue(String itemValue) {
+			this.itemValue = itemValue;
 		}
 	}
 }

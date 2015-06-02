@@ -60,12 +60,10 @@ public class FileUtils {
 	 * @param to
 	 */
 	public static void fileCopy(File from,File to){
-		logger.debug("准备拷贝文件[{}] 至 [{}]。",from.getAbsolutePath(),to.getAbsolutePath());
 		if(from.exists() && from.isFile()){
 			FileInputStream fis = null;
 			FileOutputStream fos = null;
 			try{
-				logger.debug("开始拷贝文件[{}] 至 [{}]。",from.getAbsolutePath(),to.getAbsolutePath());
 				fis = new FileInputStream(from);
 				fos = new FileOutputStream(to);
 				byte[] buff = new byte[IO_BUFF_SIZE];//4kbuff
@@ -73,9 +71,8 @@ public class FileUtils {
 				while((len = fis.read(buff)) != -1 ){
 					fos.write(buff, 0, len);
 				}
-				logger.debug("拷贝文件[{}] 至 [{}] 成功。",from.getAbsolutePath(),to.getAbsolutePath());
 			}catch(Exception e){
-				
+				throw new RuntimeException(e);
 			}finally{
 				try {
 					if(fis != null){
