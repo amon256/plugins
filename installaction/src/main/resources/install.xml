@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<install source="G:/source" target="G:/target">
+	<!-- 参数集合
+		${SOURCE} 源文件根目录 值为install.source属性
+		${TARGET} 安装目标根目录 值为install.target属性
+	 -->
+	<fileCopy>
+		<list>
+			<copyInfo desc="拷贝DNSCollectKernel" from="${SOURCE}/kernel/DNSCollectKernel" to="${TARGET}/DNSCollectKernel" />
+			<copyInfo desc="拷贝config_dns到DNSCollectKernel" from="${SOURCE}/dns-config/config/config_dns" to="${TARGET}/DNSCollectKernel/config_dns" />
+			<copyInfo desc="拷贝deploy_config_dns到DNSCollectKernel" from="${SOURCE}/dns-config/config/deploy_config_dns" to="${TARGET}/DNSCollectKernel/deploy_config_dns" />
+			
+			<copyInfo desc="拷贝DNSIssueKernel" from="${SOURCE}/kernel/DNSIssueKernel" to="${TARGET}/DNSIssueKernel" />
+			<copyInfo desc="拷贝config_dns到DNSIssueKernel" from="${SOURCE}/dns-config/config/config_dns" to="${TARGET}/DNSIssueKernel/config_dns" />
+			<copyInfo desc="拷贝deploy_config_dns到DNSIssueKernel" from="${SOURCE}/dns-config/config/deploy_config_dns" to="${TARGET}/DNSIssueKernel/deploy_config_dns" />
+		</list>
+	</fileCopy>
+	<fileEdit>
+		<list>
+			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties">
+				<items>
+					<item name="SplitRootPath" desc="核查文件分拆根目录"/>
+					<item name="CompareResultRootPath" desc="比对结果文件存放的根目录"/>
+				</items>
+			</editInfo>
+			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties">
+				<items>
+					<item name="jdbc.url" desc="Oracle数据库连接JDBC地址"/>
+					<item name="jdbc.username" desc="数据库用户名"/>
+					<item name="jdbc.password" desc="数据库密码"/>
+				</items>
+			</editInfo>
+		</list>
+	</fileEdit>
+</install>

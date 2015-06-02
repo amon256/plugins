@@ -11,5 +11,6 @@
     <module>http-plugin</module>
     <module>database_report</module>
     <module>web</module>
+    <module>installaction</module>
   </modules>
 </project>
