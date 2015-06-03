@@ -221,6 +221,12 @@ public class InstallConfig {
 				if(info.getTo() == null || "".equals(info.getTo().trim())){
 					logger.debug("目标位置未配置");
 					flag = false;
+				}else{
+					File obj = new File(info.getTo().replace("${SOURCE}", source).replace("${TARGET}", target));
+					if(src != null && src.exists() && obj.exists() && obj.isDirectory() != src.isDirectory()){
+						logger.debug("文件类型不匹配:[{}] | [{}]",src.getAbsolutePath(),obj.getAbsolutePath());
+						flag = false;
+					}
 				}
 			}
 		}
