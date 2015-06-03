@@ -5,13 +5,20 @@
  */
 package plugins.installation.execute;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.MessageFormat;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.dom4j.Document;
@@ -101,10 +108,55 @@ public class FileEditExecution implements Execution {
 			hasEdit = true;
 		}
 		if(hasEdit){
-			FileOutputStream fos = new FileOutputStream(file);
+			//使用生成临时文件+文本处理的方式，避免打乱己有的注释及格式
+			File tmp = new File(file.getAbsolutePath() + ".t");
+			FileOutputStream fos = new FileOutputStream(tmp);
 			prop.store(fos, null);
 			fos.flush();
 			fos.close();
+			//原配置文件各行
+			List<String> lines = new LinkedList<String>();
+			BufferedReader br = new BufferedReader(new FileReader(file));
+			String line = null;
+			while((line = br.readLine()) != null){
+				lines.add(line);
+			}
+			br.close();
+			//修改的配置行
+			Map<String,String> kvMap = new HashMap<String, String>();
+			br = new BufferedReader(new FileReader(tmp));
+			while((line = br.readLine()) != null){
+				if(line.trim().startsWith("#") || "".equals(line.trim())){
+					continue;
+				}
+				String[] ls = line.split("=");
+				for(FileEditItem item : items){
+					if(item.getItemName().equals(ls[0])){
+						kvMap.put(ls[0], null);
+						if(ls.length >= 2){
+							kvMap.put(ls[0], ls[1]);
+						}
+					}
+				}
+			}
+			br.close();
+			tmp.delete();
+			//写入配置文件
+			BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+			for(String li : lines){
+				if(li.trim().startsWith("#") || "".equals(li.trim())){
+					bw.write(li);
+				}else{
+					String[] ls = li.split("=");
+					if(kvMap.containsKey(ls[0].trim())){
+						bw.write(ls[0] + "=" + kvMap.get(ls[0]));
+					}else{
+						bw.write(li);
+					}
+				}
+				bw.write("\n");
+			}
+			bw.close();
 		}
 	}
 	
