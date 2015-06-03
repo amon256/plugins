@@ -41,7 +41,7 @@ public class FileCopyExecution implements Execution{
 			FileUtils.dirCopy(src, obj,true);
 		}else{
 			logger.debug("拷贝文件[{}] 至 [{}]。",src.getAbsolutePath(),obj.getAbsolutePath());
-			FileUtils.fileCopy(src, obj);
+			FileUtils.fileCopy(src, obj,true);
 		}
 	}
 	

@@ -51,11 +51,11 @@ public class Installer {
 		logger.debug("*************{}****************",config.getName());
 		String source = null;
 		while(source == null){
-			source = readSourcePath(br);
+			source = readSourcePath(config,br);
 		}
 		String target = null;
 		while(target == null){
-			target = readTargetPath(br);
+			target = readTargetPath(config,br);
 		}
 		logger.debug("安装资源文件夹:{}",source);
 		logger.debug("程序安装路径:{}",target);
@@ -121,8 +121,12 @@ public class Installer {
 		logger.debug("文件编辑完成");
 	}
 	
-	private static String readTargetPath(BufferedReader br) throws IOException{
-		System.out.print("\n*请输入程序安装路径 : ");
+	private static String readTargetPath(InstallConfig config,BufferedReader br) throws IOException{
+		String targetname = "程序安装路径";
+		if(config.getTargetname() != null){
+			targetname = config.getTargetname();
+		}
+		System.out.print("\n*请输入"+targetname+" : ");
 		String target = br.readLine();
 		if(target == null || "".equals(target.trim())){
 			logger.debug("程序安装路径不能为空,请重新输入");
@@ -140,9 +144,13 @@ public class Installer {
 		return target;
 	}
 	
-	private static String readSourcePath(BufferedReader br) throws IOException{
+	private static String readSourcePath(InstallConfig config, BufferedReader br) throws IOException{
 		String userDir = System.getProperty("user.dir");
-		System.out.print("\n*请输入安装资源文件夹完整路径(直接回车为当前文件夹) : ");
+		String sourcename = "安装资源文件夹完整路径(直接回车为当前文件夹) ";
+		if(config.getSourcename() != null){
+			sourcename = config.getSourcename();
+		}
+		System.out.print("\n*请输入"+sourcename+" : ");
 		String source = br.readLine();
 		if(source == null || "".equals(source.trim())){
 			source = userDir;

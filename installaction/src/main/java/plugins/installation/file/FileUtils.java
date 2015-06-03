@@ -46,7 +46,7 @@ public class FileUtils {
 				for(File file : fileList){
 					String toPath = to.getAbsolutePath() + File.separator + file.getName();
 					if(file.isFile()){
-						fileCopy(file, new File(toPath));
+						fileCopy(file, new File(toPath),removeIfExists);
 					}else{
 						dirCopy(file, new File(toPath),removeIfExists);
 					}
@@ -62,8 +62,11 @@ public class FileUtils {
 	 * @param from
 	 * @param to
 	 */
-	public static void fileCopy(File from,File to){
+	public static void fileCopy(File from,File to,boolean removeIfExists){
 		if(from.exists() && from.isFile()){
+			if(removeIfExists && to.exists()){
+				delete(to);
+			}
 			FileInputStream fis = null;
 			FileOutputStream fos = null;
 			try{

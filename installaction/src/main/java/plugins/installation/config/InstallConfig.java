@@ -49,6 +49,16 @@ public class InstallConfig {
 	private String target;
 	
 	/**
+	 * 源位置说明
+	 */
+	private String sourcename;
+	
+	/**
+	 * 目标位置说明
+	 */
+	private String targetname;
+	
+	/**
 	 * 文件拷贝项
 	 */
 	private List<FileCopyInfo> fileCopyInfos;
@@ -79,6 +89,8 @@ public class InstallConfig {
 			Document document = new SAXReader().read(inputstream);
 			Element root = document.getRootElement();
 			config.setName(root.attributeValue("name"));
+			config.setSourcename(root.attributeValue("sourcename"));
+			config.setTargetname(root.attributeValue("targetname"));
 			List<Element> fileCopys = root.elements("fileCopy");
 			if(fileCopys != null){
 				config.fileCopyInfos = new LinkedList<FileCopyInfo>();
@@ -251,4 +263,22 @@ public class InstallConfig {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getSourcename() {
+		return sourcename;
+	}
+
+	public void setSourcename(String sourcename) {
+		this.sourcename = sourcename;
+	}
+
+	public String getTargetname() {
+		return targetname;
+	}
+
+	public void setTargetname(String targetname) {
+		this.targetname = targetname;
+	}
+	
+	
 }
