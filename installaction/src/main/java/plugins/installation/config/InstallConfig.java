@@ -199,10 +199,10 @@ public class InstallConfig {
 					logger.debug("源位置未配置");
 					flag = false;
 				}else{
-					String path = info.getFrom().replace("${SOURCE}", source);
+					String path = info.getFrom().replace("${SOURCE}", source).replace("${TARGET}", target);
 					src = new File(path);
 					if(!src.exists()){
-						logger.debug("源位置[{}]不存在",info.getFrom());
+						logger.debug("文件[{}]不存在",info.getFrom());
 						flag = false;
 					}
 				}

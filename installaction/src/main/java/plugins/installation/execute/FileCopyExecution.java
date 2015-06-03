@@ -33,8 +33,8 @@ public class FileCopyExecution implements Execution{
 
 	@Override
 	public void execute(InstallConfig config) throws Exception{
-		File src = new File(fileCopyInfo.getFrom().replace("${SOURCE}", config.getSource()));
-		File obj = new File(fileCopyInfo.getTo().replace("${TARGET}", config.getTarget()));
+		File src = new File(fileCopyInfo.getFrom().replace("${SOURCE}", config.getSource()).replace("${TARGET}", config.getTarget()));
+		File obj = new File(fileCopyInfo.getTo().replace("${SOURCE}", config.getSource()).replace("${TARGET}", config.getTarget()));
 		logger.debug(fileCopyInfo.getDesc());
 		if(src.isDirectory()){
 			logger.debug("拷贝文件夹[{}] 至 [{}]。",src.getAbsolutePath(),obj.getAbsolutePath());
@@ -47,8 +47,8 @@ public class FileCopyExecution implements Execution{
 	
 	@Override
 	public String info(InstallConfig config) {
-		File src = new File(fileCopyInfo.getFrom().replace("${SOURCE}", config.getSource()));
-		File obj = new File(fileCopyInfo.getTo().replace("${TARGET}", config.getTarget()));
+		File src = new File(fileCopyInfo.getFrom().replace("${SOURCE}", config.getSource()).replace("${TARGET}", config.getTarget()));
+		File obj = new File(fileCopyInfo.getTo().replace("${SOURCE}", config.getSource()).replace("${TARGET}", config.getTarget()));
 		String pattern = "拷贝文件夹[{0}] 至 [{1}]。";
 		if(src.isFile()){
 			pattern = "拷贝文件[{0}] 至 [{1}]。";
