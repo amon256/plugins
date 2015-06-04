@@ -11,10 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -140,7 +142,6 @@ public class Installer {
 	 */
 	private static void readFileEditItemValueFromFile(List<FileEditInfo> fileEditInfos,InstallConfig config,BufferedReader br) throws IOException{
 		Map<String,String> valueMap = readValueMap(br);
-		logger.debug("开始从参数文件中读取");
 		for(FileEditInfo fileEdit : fileEditInfos){
 			if(fileEdit.getItems() != null && !fileEdit.getItems().isEmpty()){
 				List<FileEditItem> items = fileEdit.getItems();
@@ -159,7 +160,7 @@ public class Installer {
 	}
 	
 	private static Map<String,String> readValueMap(BufferedReader br) throws IOException{
-		Map<String,String> valueMap = new HashMap<String, String>();
+		Map<String,String> valueMap = new LinkedHashMap<String, String>();
 		String line = null;
 		File file = null;
 		while(line == null){
@@ -177,6 +178,7 @@ public class Installer {
 				line = null;
 			}
 		}
+		logger.debug("开始从参数文件{}中读取",line);
 		br = new BufferedReader(new FileReader(file));
 		while((line = br.readLine()) != null){
 			line = line.trim();
@@ -190,12 +192,15 @@ public class Installer {
 			if(idx > 0){
 				key = line.substring(0, idx).trim();
 				value = line.substring(idx + 1).trim();
-			}else{
-				key = line.trim();
+				valueMap.put(key, value);
 			}
-			valueMap.put(key, value);
 		}
 		br.close();
+		logger.debug("从参数配置文件中读取到的值:");
+		Set<Entry<String, String>> entrys = valueMap.entrySet();
+		for(Entry<String,String> entry : entrys){
+			logger.debug(" {} = {}",entry.getKey(),entry.getValue());
+		}
 		return valueMap;
 	}
 	
