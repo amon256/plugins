@@ -45,56 +45,60 @@ public class Installer {
 	 * @throws Exception 
 	 */
 	public static void main(String[] args) throws Exception {
-		String configPath = null;
-		if(args != null && args.length > 0){
-			configPath = args[0];
-		}
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		while(configPath == null){
-			configPath = readConfigPath(br);
-		}
-		InstallConfig config = InstallConfig.loadFrom(new File(configPath));
-		logger.debug("*************{}****************",config.getName());
-		String source = null;
-		while(source == null){
-			source = readSourcePath(config,br);
-		}
-		String target = null;
-		while(target == null){
-			target = readTargetPath(config,br);
-		}
-		logger.debug("安装资源文件夹:{}",source);
-		logger.debug("程序安装路径:{}",target);
-		config.setSource(source);
-		config.setTarget(target);
-		if(config.validateFileCopy()){
-			List<Execution> executions = new LinkedList<Execution>();
-			List<FileCopyInfo> fileCopyInfos = config.getFileCopyInfos();
-			if(fileCopyInfos != null){
-				for(FileCopyInfo fi : fileCopyInfos){
-					executions.add(new FileCopyExecution(fi));
-				}
+		try{
+			String configPath = null;
+			if(args != null && args.length > 0){
+				configPath = args[0];
 			}
-			
-			if(config.getFileEditInfos() != null && !config.getFileEditInfos().isEmpty()){
-				List<FileEditInfo> fileEditInfos = config.getFileEditInfos();
-				processFileEdit(fileEditInfos, config, br);
-				for(FileEditInfo fe : fileEditInfos){
-					executions.add(new FileEditExecution(fe));
-				}
+			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+			while(configPath == null){
+				configPath = readConfigPath(br);
 			}
-			
-			if(confirm(executions, config, br)){
-				logger.debug("\n开始安装.");
-				for(Execution exec : executions){
-					exec.execute(config);
+			InstallConfig config = InstallConfig.loadFrom(new File(configPath));
+			logger.debug("*************{}****************",config.getName());
+			String source = null;
+			while(source == null){
+				source = readSourcePath(config,br);
+			}
+			String target = null;
+			while(target == null){
+				target = readTargetPath(config,br);
+			}
+			logger.debug("安装资源文件夹:{}",source);
+			logger.debug("程序安装路径:{}",target);
+			config.setSource(source);
+			config.setTarget(target);
+			if(config.validateFileCopy()){
+				List<Execution> executions = new LinkedList<Execution>();
+				List<FileCopyInfo> fileCopyInfos = config.getFileCopyInfos();
+				if(fileCopyInfos != null){
+					for(FileCopyInfo fi : fileCopyInfos){
+						executions.add(new FileCopyExecution(fi));
+					}
 				}
-				logger.debug("安装完成。");
+				
+				if(config.getFileEditInfos() != null && !config.getFileEditInfos().isEmpty()){
+					List<FileEditInfo> fileEditInfos = config.getFileEditInfos();
+					processFileEdit(fileEditInfos, config, br);
+					for(FileEditInfo fe : fileEditInfos){
+						executions.add(new FileEditExecution(fe));
+					}
+				}
+				
+				if(confirm(executions, config, br)){
+					logger.debug("\n开始安装.");
+					for(Execution exec : executions){
+						exec.execute(config);
+					}
+					logger.debug("安装完成。");
+				}else{
+					logger.debug("取消安装。");
+				}
 			}else{
-				logger.debug("取消安装。");
+				logger.debug("校验失败,详情参看日志。");
 			}
-		}else{
-			logger.debug("校验失败,详情参看日志。");
+		}catch(Exception e){
+			logger.error("安装过程异常",e);
 		}
 	}
 	
