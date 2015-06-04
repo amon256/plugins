@@ -33,6 +33,7 @@ import org.slf4j.LoggerFactory;
 import plugins.installation.config.InstallConfig;
 import plugins.installation.file.FileEditInfo;
 import plugins.installation.file.FileEditInfo.FileEditItem;
+import plugins.installation.file.FileUtils;
 
 /**  
  * 功能描述：文件编辑执行
@@ -52,16 +53,16 @@ public class FileEditExecution implements Execution {
 
 	@Override
 	public void execute(InstallConfig config) throws Exception{
-		File file = new File(fileEditInfo.getFile().replace("${TARGET}", config.getTarget()));
+		File file = new File(FileUtils.pathFormat(fileEditInfo.getFile(), config.getContext()));
 		if(file.exists() && file.isFile()){
 			if(file.getName().toLowerCase().endsWith(".properties")){
 				if(fileEditInfo.getItems() != null && !fileEditInfo.getItems().isEmpty()){
-					logger.debug("修改文件{}的参数",fileEditInfo.getFile());
+					logger.info("修改文件{}的参数",fileEditInfo.getFile());
 					editProperties(file, fileEditInfo.getItems());
 				}
 			}else if(file.getName().toLowerCase().endsWith(".xml")){
 				if(fileEditInfo.getItems() != null && !fileEditInfo.getItems().isEmpty()){
-					logger.debug("修改文件{}的参数",fileEditInfo.getFile());
+					logger.info("修改文件{}的参数",fileEditInfo.getFile());
 					editXml(file, fileEditInfo.getItems());
 				}
 			}else{
@@ -81,7 +82,7 @@ public class FileEditExecution implements Execution {
 				if(node != null){
 					node.setText(item.getItemValue());
 					hasEdit = true;
-					logger.debug("设置参数 {}={}",item.getItemName(),item.getItemValue());
+					logger.info("设置参数 {}={}",item.getItemName(),item.getItemValue());
 				}else{
 					logger.error("{}不存在",item.getItemName());
 				}
@@ -104,7 +105,7 @@ public class FileEditExecution implements Execution {
 		boolean hasEdit = false;
 		for(FileEditItem item : items){
 			prop.put(item.getItemName(), item.getItemValue());
-			logger.debug("设置参数 {}={}",item.getItemName(), item.getItemValue());
+			logger.info("设置参数 {}={}",item.getItemName(), item.getItemValue());
 			hasEdit = true;
 		}
 		if(hasEdit){
@@ -162,7 +163,7 @@ public class FileEditExecution implements Execution {
 	
 	@Override
 	public String info(InstallConfig config) {
-		File file = new File(fileEditInfo.getFile().replace("${TARGET}", config.getTarget()));
+		File file = new File(FileUtils.pathFormat(fileEditInfo.getFile(), config.getContext()));
 		String pattern = "修改配置文件:{0}";
 		String itemPattern = "\n【{0}】:   {1} = {2}";
 		StringBuilder info = new StringBuilder(MessageFormat.format(pattern, file.getAbsolutePath()));

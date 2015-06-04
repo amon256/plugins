@@ -10,8 +10,10 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -22,6 +24,7 @@ import org.slf4j.Logger;
 import plugins.installation.file.FileCopyInfo;
 import plugins.installation.file.FileEditInfo;
 import plugins.installation.file.FileEditInfo.FileEditItem;
+import plugins.installation.file.FileUtils;
 
 /**  
  * 功能描述：安装配置
@@ -68,6 +71,11 @@ public class InstallConfig {
 	 */
 	private List<FileEditInfo> fileEditInfos;
 	
+	/**
+	 * 上下文
+	 */
+	private Map<String,Object> context = new HashMap<String,Object>();
+	
 	private InstallConfig(){
 	}
 
@@ -78,7 +86,7 @@ public class InstallConfig {
 	 * @throws FileNotFoundException 
 	 */
 	public static InstallConfig loadFrom(File configFile) throws FileNotFoundException {
-		logger.debug("加载安装配置文件[{}]",configFile.getAbsolutePath());
+		logger.info("加载安装配置文件[{}]",configFile.getAbsolutePath());
 		return loadFrom(new FileInputStream(configFile));
 	}
 	
@@ -202,59 +210,59 @@ public class InstallConfig {
 	 * @return
 	 */
 	public boolean validateFileCopy(){
-		logger.debug("\n开始校验安装配置");
+		logger.info("\n开始校验安装配置");
 		boolean flag = true;
 		if(source == null || "".equals(source)){
-			logger.debug("源文件夹未配置(source)");
+			logger.info("源文件夹未配置(source)");
 			flag = false;
 		}else{
 			File s = new File(source);
 			if(!s.exists() || s.isFile()){
-				logger.debug("source 不存在或不是文件夹");
+				logger.info("source 不存在或不是文件夹");
 				flag = false;
 			}else{
-				logger.debug("源文件夹{} ok",source);
+				logger.info("源文件夹{} ok",source);
 			}
 		}
 		if(target == null || "".equals(target)){
-			logger.debug("目标文件夹未配置(target)");
+			logger.info("目标文件夹未配置(target)");
 			flag = false;
 		}else{
 			File s = new File(target);
 			if(!s.exists() || s.isFile()){
-				logger.debug("target 不存在或不是文件夹");
+				logger.info("target 不存在或不是文件夹");
 				flag = false;
 			}else{
-				logger.debug("目标文件夹{} ok",target);
+				logger.info("目标文件夹{} ok",target);
 			}
 		}
 		if(fileCopyInfos != null){
 			for(FileCopyInfo info : fileCopyInfos){
 				File src = null;
 				if(info.getFrom() == null || "".equals(info.getFrom().trim())){
-					logger.debug("源位置未配置");
+					logger.info("源位置未配置");
 					flag = false;
 				}else{
-					String path = info.getFrom().replace("${SOURCE}", source).replace("${TARGET}", target);
+					String path = FileUtils.pathFormat(info.getFrom(), getContext());
 					src = new File(path);
 					if(!src.exists()){
-						logger.debug("文件[{}]不存在",info.getFrom());
+						logger.info("文件[{}]不存在",info.getFrom());
 						flag = false;
 					}
 				}
 				if(info.getTo() == null || "".equals(info.getTo().trim())){
-					logger.debug("目标位置未配置");
+					logger.info("目标位置未配置");
 					flag = false;
 				}else{
-					File obj = new File(info.getTo().replace("${SOURCE}", source).replace("${TARGET}", target));
+					File obj = new File(FileUtils.pathFormat(info.getTo(), getContext()));
 					if(src != null && src.exists() && obj.exists() && obj.isDirectory() != src.isDirectory()){
-						logger.debug("文件类型不匹配:[{}] | [{}]",src.getAbsolutePath(),obj.getAbsolutePath());
+						logger.info("文件类型不匹配:[{}] | [{}]",src.getAbsolutePath(),obj.getAbsolutePath());
 						flag = false;
 					}
 				}
 			}
 		}
-		logger.debug("校验结束，结果为:{}",flag);
+		logger.info("校验结束，结果为:{}",flag);
 		return flag;
 	}
 	
@@ -310,5 +318,9 @@ public class InstallConfig {
 		this.targetname = targetname;
 	}
 	
-	
+	public Map<String, Object> getContext() {
+		context.put("SOURCE", source);
+		context.put("TARGET", target);
+		return context;
+	}
 }

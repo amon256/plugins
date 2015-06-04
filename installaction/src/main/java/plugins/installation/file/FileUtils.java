@@ -3,13 +3,19 @@
  */
 package plugins.installation.file;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.StringReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
 
 /**  
  * 功能描述：文件工具类
@@ -34,7 +40,7 @@ public class FileUtils {
 				delete(to);
 			}
 			if(to.exists() && to.isFile() && !removeIfExists){
-				logger.debug("目标文件己存在且并非文件夹。");
+				logger.info("目标文件己存在且并非文件夹。");
 			}else{
 				if(!to.exists()){
 					if(!to.mkdirs()){
@@ -53,7 +59,7 @@ public class FileUtils {
 				}
 			}
 		}else{
-			logger.debug("源文件[{}]不存在或不是文件夹",from.getAbsolutePath());
+			logger.info("源文件[{}]不存在或不是文件夹",from.getAbsolutePath());
 		}
 	}
 	
@@ -92,7 +98,7 @@ public class FileUtils {
 				}
 			}
 		}else{
-			logger.debug("源文件[{}]不存在或不是文件类型",from.getAbsolutePath());
+			logger.info("源文件[{}]不存在或不是文件类型",from.getAbsolutePath());
 		}
 	}
 	
@@ -115,5 +121,26 @@ public class FileUtils {
 				}
 			}
 		}
+	}
+	
+	/**
+	 * 路径格式化:${xxxx}/abbb/${xxx}ccc/……
+	 * @param path
+	 * @param param
+	 * @return
+	 */
+	public static String pathFormat(String path,Object param){
+		try{
+			Configuration config = new Configuration();
+			Template template = new Template(path, new StringReader(path), config);
+			ByteArrayOutputStream out = new ByteArrayOutputStream();
+			template.process(param, new OutputStreamWriter(out));
+			out.flush();
+			out.close();
+			path = out.toString();
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+		return path;
 	}
 }
