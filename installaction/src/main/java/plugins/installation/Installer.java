@@ -8,10 +8,13 @@ package plugins.installation;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +38,7 @@ public class Installer {
 	private static Logger logger = LoggerFactory.getLogger(Installer.class);
 
 	/**
+	 * 安装程序入口
 	 * @param args
 	 * @throws Exception 
 	 */
@@ -106,6 +110,103 @@ public class Installer {
 	}
 	
 	private static void processFileEdit(List<FileEditInfo> fileEditInfos,InstallConfig config,BufferedReader br) throws FileNotFoundException, IOException{
+		String line = null;
+		while(line == null){
+			logger.debug("选择文件参数输入方式");
+			System.out.print("1、从控制台输入编辑项\n2、从参数表中读取编辑项\n[1 / 2]:");
+			line = br.readLine();
+			if(line == null){
+				continue;
+			}
+			if("1".equals(line.trim()) || "2".equals(line.trim())){
+				break;
+			}else{
+				line = null;
+			}
+		}
+		if("2".equals(line)){
+			readFileEditItemValueFromFile(fileEditInfos, config, br);
+		}else{
+			readFileEditItemValueFromConsole(fileEditInfos, config, br);
+		}
+	}
+	
+	/**
+	 * 从文件键值表中读取数据
+	 * @param fileEditInfos
+	 * @param config
+	 * @param br
+	 * @throws IOException 
+	 */
+	private static void readFileEditItemValueFromFile(List<FileEditInfo> fileEditInfos,InstallConfig config,BufferedReader br) throws IOException{
+		Map<String,String> valueMap = readValueMap(br);
+		logger.debug("开始从参数文件中读取");
+		for(FileEditInfo fileEdit : fileEditInfos){
+			if(fileEdit.getItems() != null && !fileEdit.getItems().isEmpty()){
+				List<FileEditItem> items = fileEdit.getItems();
+				logger.debug("\n配置文件:{}",fileEdit.getFile());
+				for(FileEditItem item : items){
+					if(valueMap.containsKey(item.getItemName())){
+						item.setItemValue(valueMap.get(item.getItemName()));
+					}else{
+						logger.debug("参数{}({})未配置",item.getItemName(),item.getItemDesc());
+						throw new RuntimeException("参数文件中缺少参数配置");
+					}
+					logger.debug("配置[{}]值  {} = {}",item.getItemDesc(),item.getItemName(),item.getItemValue());
+				}
+			}
+		}
+	}
+	
+	private static Map<String,String> readValueMap(BufferedReader br) throws IOException{
+		Map<String,String> valueMap = new HashMap<String, String>();
+		String line = null;
+		File file = null;
+		while(line == null){
+			System.out.print("请输入参数文件位置 : ");
+			line = br.readLine();
+			if(line != null && !"".equals(line)){
+				file = new File(line);
+				if(file.exists() && file.isFile()){
+					break;
+				}else{
+					logger.debug("文件{}不存在或者不是文件类型",line);
+					line = null;
+				}
+			}else{
+				line = null;
+			}
+		}
+		br = new BufferedReader(new FileReader(file));
+		while((line = br.readLine()) != null){
+			line = line.trim();
+			if("".equals(line) || line.startsWith("#")){
+				//忽略空行和注释行
+				continue;
+			}
+			int idx = line.indexOf("=");
+			String key = null;
+			String value = null;
+			if(idx > 0){
+				key = line.substring(0, idx).trim();
+				value = line.substring(idx + 1).trim();
+			}else{
+				key = line.trim();
+			}
+			valueMap.put(key, value);
+		}
+		br.close();
+		return valueMap;
+	}
+	
+	/**
+	 * 从控制台录入文件编辑项
+	 * @param fileEditInfos
+	 * @param config
+	 * @param br
+	 * @throws IOException
+	 */
+	private static void readFileEditItemValueFromConsole(List<FileEditInfo> fileEditInfos,InstallConfig config,BufferedReader br) throws IOException{
 		for(FileEditInfo fileEdit : fileEditInfos){
 			if(fileEdit.getItems() != null && !fileEdit.getItems().isEmpty()){
 				List<FileEditItem> items = fileEdit.getItems();

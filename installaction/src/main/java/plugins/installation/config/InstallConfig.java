@@ -82,6 +82,11 @@ public class InstallConfig {
 		return loadFrom(new FileInputStream(configFile));
 	}
 	
+	/**
+	 * 从inputstream加载配置
+	 * @param inputstream
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	public static InstallConfig loadFrom(InputStream inputstream){
 		InstallConfig config = new InstallConfig();
@@ -112,6 +117,11 @@ public class InstallConfig {
 		return config;
 	}
 	
+	/**
+	 * 读取文件编辑列表
+	 * @param ele
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	private static Collection<? extends FileEditInfo> readEditInfos(Element ele) {
 		List<FileEditInfo> fileEditInfo = new LinkedList<FileEditInfo>();
@@ -131,6 +141,11 @@ public class InstallConfig {
 		return fileEditInfo;
 	}
 	
+	/**
+	 * 读取文件编辑项
+	 * @param ele
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	private static List<FileEditItem> readEditItems(Element ele){
 		List<FileEditItem> editItems = new LinkedList<FileEditItem>();
@@ -150,6 +165,11 @@ public class InstallConfig {
 		return editItems;
 	}
 
+	/**
+	 * 读取文件复制项
+	 * @param ele
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
 	private static List<FileCopyInfo> readCopyInfos(Element ele){
 		List<FileCopyInfo> infos = new LinkedList<FileCopyInfo>();
@@ -177,6 +197,10 @@ public class InstallConfig {
 		return infos;
 	}
 	
+	/**
+	 * 校验文件拷贝合法性
+	 * @return
+	 */
 	public boolean validateFileCopy(){
 		logger.debug("\n开始校验安装配置");
 		boolean flag = true;
