@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install name="DNSCollectKernel安装">
+<install name="DNSCollectKernel安装" sourcename="安装源文件目录" targetname="DNSCollectKernel安装目录">
 	<!-- 参数集合
 		${SOURCE} 源文件根目录
 		${TARGET} 安装目标根目录

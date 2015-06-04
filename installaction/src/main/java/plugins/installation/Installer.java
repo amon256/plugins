@@ -235,17 +235,23 @@ public class Installer {
 		System.out.print("\n*请输入"+targetname+" : ");
 		String target = br.readLine();
 		if(target == null || "".equals(target.trim())){
-			logger.debug("程序安装路径不能为空,请重新输入");
+			logger.debug("{}不能为空,请重新输入",targetname);
 			target = null;
-		}
-		File s = new File(target);
-		if(!s.exists()){
-			logger.debug("{}不存在",target);
-			target = null;
-		}
-		if(s.isFile()){
-			logger.debug("{}不是文件夹",target);
-			target = null;
+		}else{
+			if(config.getSource().startsWith(target)){
+				logger.debug("{} 不能设置在{}下",targetname,config.getSource());
+				target = null;
+			}else{
+				File s = new File(target);
+				if(!s.exists()){
+					logger.debug("{}不存在",target);
+					target = null;
+				}
+				if(s.isFile()){
+					logger.debug("{}不是文件夹",target);
+					target = null;
+				}
+			}
 		}
 		return target;
 	}
