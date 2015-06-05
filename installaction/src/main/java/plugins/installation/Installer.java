@@ -57,7 +57,7 @@ public class Installer {
 				configPath = readConfigPath(br);
 			}
 			InstallConfig config = InstallConfig.loadFrom(new File(configPath));
-			
+			initContext(config);
 			logger.info("*************{}****************",config.getName());
 			String source = null;
 			while(source == null){
@@ -275,25 +275,24 @@ public class Installer {
 	}
 	
 	private static String readSourcePath(InstallConfig config, BufferedReader br) throws IOException{
-		String userDir = System.getProperty("user.dir");
-		String sourcename = "安装资源文件夹完整路径(直接回车为当前文件夹) ";
+		String sourcename = "安装资源文件夹完整路径";
 		if(config.getSourcename() != null){
 			sourcename = config.getSourcename();
 		}
 		System.out.print("\n*请输入"+sourcename+" : ");
 		String source = br.readLine();
 		if(source == null || "".equals(source.trim())){
-			source = userDir;
-			logger.info(source);
-		}
-		File s = new File(source);
-		if(!s.exists()){
-			logger.info("{}不存在",source);
 			source = null;
-		}
-		if(s.isFile()){
-			logger.info("{}不是文件夹",source);
-			source = null;
+		}else{
+			File s = new File(source);
+			if(!s.exists()){
+				logger.info("{}不存在",source);
+				source = null;
+			}
+			if(s.isFile()){
+				logger.info("{}不是文件夹",source);
+				source = null;
+			}
 		}
 		return source;
 	}
