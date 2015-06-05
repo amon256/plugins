@@ -73,6 +73,11 @@ public class FileEditExecution implements Execution {
 		}
 	}
 	
+	@Override
+	public boolean validate(InstallConfig config) {
+		return true;
+	}
+	
 	private static void editXml(File file,List<FileEditItem> items) throws IOException{
 		try{
 			Document document = new SAXReader().read(new FileInputStream(file));
@@ -174,4 +179,13 @@ public class FileEditExecution implements Execution {
 		return info.toString();
 	}
 
+	public FileEditInfo getFileEditInfo() {
+		return fileEditInfo;
+	}
+
+	public void setFileEditInfo(FileEditInfo fileEditInfo) {
+		this.fileEditInfo = fileEditInfo;
+	}
+
+	
 }

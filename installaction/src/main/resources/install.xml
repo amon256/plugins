@@ -1,42 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<install name="DNSCollectKernel安装" sourcename="安装源文件目录" targetname="DNSCollectKernel安装目录">
+<install name="DNSCollectKernel安装" targetname="DNSCollectKernel安装目录">
 	<!-- 参数集合
-		${SOURCE} 源文件根目录
+		${home} 程序执行目录
 		${TARGET} 安装目标根目录
 	 -->
-	<fileCopy>
-		<list>
-			<copyInfo desc="拷贝DNSCollectKernel" from="${SOURCE}/kernel/DNSCollectKernel" to="${TARGET}/DNSCollectKernel" />
-			<copyInfo desc="拷贝config_dns到DNSCollectKernel" from="${SOURCE}/dns-config/config/config_dns" to="${TARGET}/DNSCollectKernel/config_dns" />
-			<copyInfo desc="拷贝deploy_config_dns到DNSCollectKernel" from="${SOURCE}/dns-config/config/deploy_config_dns" to="${TARGET}/DNSCollectKernel/deploy_config_dns" />
-		</list>
-	</fileCopy>
-	<fileEdit>
-		<list>
-			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties">
-				<items>
-					<item name="SplitRootPath" desc="核查文件分拆根目录"/>
-					<item name="CompareResultRootPath" desc="比对结果文件存放的根目录"/>
-				</items>
-			</editInfo>
-			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties">
-				<items>
-					<item name="jdbc.url" desc="Oracle数据库连接JDBC地址"/>
-					<item name="jdbc.username" desc="数据库用户名"/>
-					<item name="jdbc.password" desc="数据库密码"/>
-				</items>
-			</editInfo>
-			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml">
-				<items>
-					<item name="portalclient/portal/domain" desc="Portal门户Url"/>
-				</items>
-			</editInfo>
-			<editInfo file="${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties">
-				<items>
-					<item name="province.code" desc="省份编码"/>
-					<item name="workDirRoot" desc="系统临时文件存放目录"/>
-				</items>
-			</editInfo>
-		</list>
-	</fileEdit>
+	<unzip desc="解压dns-config.zip" file="${home}/dns-config1.zip" to="${home}/dns_config"/>
+	<!-- 
+	<copy desc="拷贝DNSCollectKernel" from="${home}/kernel/DNSCollectKernel" to="${TARGET}/DNSCollectKernel" />
+	<copy desc="拷贝config_dns到DNSCollectKernel" from="${home}/dns_config/config/config_dns" to="${TARGET}/DNSCollectKernel/config_dns" />
+	<copy desc="拷贝deploy_config_dns到DNSCollectKernel" from="${home}/dns_config/config/deploy_config_dns" to="${TARGET}/DNSCollectKernel/deploy_config_dns" />
+	
+	<edit file="${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties">
+		<item name="SplitRootPath" desc="核查文件分拆根目录"/>
+		<item name="CompareResultRootPath" desc="比对结果文件存放的根目录"/>
+	</edit>
+	<edit file="${TARGET}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties">
+		<item name="jdbc.url" desc="Oracle数据库连接JDBC地址"/>
+		<item name="jdbc.username" desc="数据库用户名"/>
+		<item name="jdbc.password" desc="数据库密码"/>
+	</edit>
+	<edit file="${TARGET}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml">
+		<item name="portalclient/portal/domain" desc="Portal门户Url"/>
+	</edit>
+	<edit file="${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties">
+		<item name="province.code" desc="省份编码"/>
+		<item name="workDirRoot" desc="系统临时文件存放目录"/>
+	</edit> -->
 </install>

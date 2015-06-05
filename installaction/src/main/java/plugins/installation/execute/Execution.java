@@ -22,6 +22,12 @@ public interface Execution {
 	public void execute(InstallConfig config) throws Exception;
 	
 	/**
+	 * 执行前校验
+	 * @param validate
+	 */
+	public boolean validate(InstallConfig config);
+	
+	/**
 	 * 执行过程描述
 	 * @param config
 	 * @return

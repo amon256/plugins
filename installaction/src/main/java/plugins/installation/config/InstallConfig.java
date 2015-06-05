@@ -9,7 +9,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -18,13 +17,17 @@ import java.util.Map;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import plugins.installation.execute.Execution;
+import plugins.installation.execute.FileCopyExecution;
+import plugins.installation.execute.FileEditExecution;
+import plugins.installation.execute.FileUnZipExecution;
 import plugins.installation.file.FileCopyInfo;
 import plugins.installation.file.FileEditInfo;
 import plugins.installation.file.FileEditInfo.FileEditItem;
-import plugins.installation.file.FileUtils;
+import plugins.installation.file.FileUnZipInfo;
 
 /**  
  * 功能描述：安装配置
@@ -42,19 +45,9 @@ public class InstallConfig {
 	private String name;
 	
 	/**
-	 * 源文件夹
-	 */
-	private String source;
-	
-	/**
 	 * 目标文件夹
 	 */
 	private String target;
-	
-	/**
-	 * 源位置说明
-	 */
-	private String sourcename;
 	
 	/**
 	 * 目标位置说明
@@ -62,14 +55,9 @@ public class InstallConfig {
 	private String targetname;
 	
 	/**
-	 * 文件拷贝项
+	 * 执行集
 	 */
-	private List<FileCopyInfo> fileCopyInfos;
-	
-	/**
-	 * 文件编辑项
-	 */
-	private List<FileEditInfo> fileEditInfos;
+	private List<Execution> executions;
 	
 	/**
 	 * 上下文
@@ -102,27 +90,44 @@ public class InstallConfig {
 			Document document = new SAXReader().read(inputstream);
 			Element root = document.getRootElement();
 			config.setName(root.attributeValue("name"));
-			config.setSourcename(root.attributeValue("sourcename"));
 			config.setTargetname(root.attributeValue("targetname"));
-			List<Element> fileCopys = root.elements("fileCopy");
-			if(fileCopys != null){
-				config.fileCopyInfos = new LinkedList<FileCopyInfo>();
-				for(Element ele : fileCopys){
-					config.fileCopyInfos.addAll(readCopyInfos(ele));
+			
+			List<Element> elements = root.elements();
+			config.executions = new LinkedList<Execution>();
+			if(elements != null){
+				for(Element e : elements){
+					if("unzip".equals(e.getName())){
+						config.executions.add(new FileUnZipExecution(readFileUnzipInfo(e)));
+					}else if("copy".equals(e.getName())){
+						config.executions.add(new FileCopyExecution(readCopyInfo(e)));
+					}else if("edit".equals(e.getName())){
+						config.executions.add(new FileEditExecution(readEditInfo(e)));
+					}
 				}
 			}
 			
-			List<Element> fileEdits = root.elements("fileEdit");
-			if(fileEdits != null){
-				config.fileEditInfos = new LinkedList<FileEditInfo>();
-				for(Element ele : fileEdits){
-					config.fileEditInfos.addAll(readEditInfos(ele));
-				}
-			}
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}
 		return config;
+	}
+	
+	public List<FileEditInfo> getEditInfoList(){
+		List<FileEditInfo> editInfos = new LinkedList<FileEditInfo>();
+		for(Execution exec : executions){
+			if(exec instanceof FileEditExecution){
+				editInfos.add(((FileEditExecution)exec).getFileEditInfo());
+			}
+		}
+		return editInfos;
+	}
+	
+	private static FileUnZipInfo readFileUnzipInfo(Element e){
+		FileUnZipInfo fi = new FileUnZipInfo();
+		fi.setFile(e.attributeValue("file"));
+		fi.setDesc(e.attributeValue("desc"));
+		fi.setTo(e.attributeValue("to"));
+		return fi;
 	}
 	
 	/**
@@ -130,23 +135,11 @@ public class InstallConfig {
 	 * @param ele
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	private static Collection<? extends FileEditInfo> readEditInfos(Element ele) {
-		List<FileEditInfo> fileEditInfo = new LinkedList<FileEditInfo>();
-		ele = ele.element("list");
-		if(ele == null){
-			return fileEditInfo;
-		}
-		List<Element> infoElements = ele.elements("editInfo");
-		if(infoElements != null){
-			for(Element e : infoElements){
-				FileEditInfo fi = new FileEditInfo();
-				fi.setFile(e.attributeValue("file"));
-				fi.setItems(readEditItems(e));
-				fileEditInfo.add(fi);
-			}
-		}
-		return fileEditInfo;
+	private static FileEditInfo readEditInfo(Element e) {
+		FileEditInfo fi = new FileEditInfo();
+		fi.setFile(e.attributeValue("file"));
+		fi.setItems(readEditItems(e));
+		return fi;
 	}
 	
 	/**
@@ -157,10 +150,6 @@ public class InstallConfig {
 	@SuppressWarnings("unchecked")
 	private static List<FileEditItem> readEditItems(Element ele){
 		List<FileEditItem> editItems = new LinkedList<FileEditItem>();
-		ele = ele.element("items");
-		if(ele == null){
-			return editItems;
-		}
 		List<Element> infoElements = ele.elements("item");
 		if(infoElements != null){
 			for(Element e : infoElements){
@@ -178,52 +167,28 @@ public class InstallConfig {
 	 * @param ele
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	private static List<FileCopyInfo> readCopyInfos(Element ele){
-		List<FileCopyInfo> infos = new LinkedList<FileCopyInfo>();
-		ele = ele.element("list");
-		if(ele == null){
-			return infos;
+	private static FileCopyInfo readCopyInfo(Element e){
+		FileCopyInfo info = new FileCopyInfo();
+		info.setNodeText(e.asXML());
+		if(e.attribute("desc") != null && e.attribute("desc").getText() != null){
+			info.setDesc(e.attribute("desc").getText());
 		}
-		List<Element> infoElements = ele.elements("copyInfo");
-		if(infoElements != null){
-			for(Element e : infoElements){
-				FileCopyInfo info = new FileCopyInfo();
-				info.setNodeText(e.asXML());
-				if(e.attribute("desc") != null && e.attribute("desc").getText() != null){
-					info.setDesc(e.attribute("desc").getText());
-				}
-				if(e.attribute("from") != null && e.attribute("from").getText() != null){
-					info.setFrom(e.attribute("from").getText());
-				}
-				if(e.attribute("to") != null && e.attribute("to").getText() != null){
-					info.setTo(e.attribute("to").getText());
-				}
-				infos.add(info);
-			}
+		if(e.attribute("from") != null && e.attribute("from").getText() != null){
+			info.setFrom(e.attribute("from").getText());
 		}
-		return infos;
+		if(e.attribute("to") != null && e.attribute("to").getText() != null){
+			info.setTo(e.attribute("to").getText());
+		}
+		return info;
 	}
 	
 	/**
 	 * 校验文件拷贝合法性
 	 * @return
 	 */
-	public boolean validateFileCopy(){
+	public boolean validate(){
 		logger.info("\n开始校验安装配置");
 		boolean flag = true;
-		if(source == null || "".equals(source)){
-			logger.info("源文件夹未配置(source)");
-			flag = false;
-		}else{
-			File s = new File(source);
-			if(!s.exists() || s.isFile()){
-				logger.info("source 不存在或不是文件夹");
-				flag = false;
-			}else{
-				logger.info("源文件夹{} ok",source);
-			}
-		}
 		if(target == null || "".equals(target)){
 			logger.info("目标文件夹未配置(target)");
 			flag = false;
@@ -236,58 +201,12 @@ public class InstallConfig {
 				logger.info("目标文件夹{} ok",target);
 			}
 		}
-		if(fileCopyInfos != null){
-			for(FileCopyInfo info : fileCopyInfos){
-				File src = null;
-				if(info.getFrom() == null || "".equals(info.getFrom().trim())){
-					logger.info("源位置未配置");
-					flag = false;
-				}else{
-					String path = FileUtils.pathFormat(info.getFrom(), getContext());
-					src = new File(path);
-					if(!src.exists()){
-						logger.info("文件[{}]不存在",info.getFrom());
-						flag = false;
-					}
-				}
-				if(info.getTo() == null || "".equals(info.getTo().trim())){
-					logger.info("目标位置未配置");
-					flag = false;
-				}else{
-					File obj = new File(FileUtils.pathFormat(info.getTo(), getContext()));
-					if(src != null && src.exists() && obj.exists() && obj.isDirectory() != src.isDirectory()){
-						logger.info("文件类型不匹配:[{}] | [{}]",src.getAbsolutePath(),obj.getAbsolutePath());
-						flag = false;
-					}
-				}
-			}
-		}
 		logger.info("校验结束，结果为:{}",flag);
 		return flag;
 	}
 	
-	public List<FileCopyInfo> getFileCopyInfos() {
-		return fileCopyInfos;
-	}
-
-	public List<FileEditInfo> getFileEditInfos() {
-		return fileEditInfos;
-	}
-
-	public void setFileEditInfos(List<FileEditInfo> fileEditInfos) {
-		this.fileEditInfos = fileEditInfos;
-	}
-	
-	public String getSource() {
-		return source;
-	}
-	
 	public String getTarget() {
 		return target;
-	}
-	
-	public void setSource(String source) {
-		this.source = source;
 	}
 	
 	public void setTarget(String target) {
@@ -302,14 +221,6 @@ public class InstallConfig {
 		this.name = name;
 	}
 
-	public String getSourcename() {
-		return sourcename;
-	}
-
-	public void setSourcename(String sourcename) {
-		this.sourcename = sourcename;
-	}
-
 	public String getTargetname() {
 		return targetname;
 	}
@@ -319,8 +230,15 @@ public class InstallConfig {
 	}
 	
 	public Map<String, Object> getContext() {
-		context.put("SOURCE", source);
 		context.put("TARGET", target);
 		return context;
+	}
+
+	public List<Execution> getExecutions() {
+		return executions;
+	}
+
+	public void setExecutions(List<Execution> executions) {
+		this.executions = executions;
 	}
 }

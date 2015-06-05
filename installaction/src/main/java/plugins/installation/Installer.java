@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,9 +24,6 @@ import org.slf4j.LoggerFactory;
 
 import plugins.installation.config.InstallConfig;
 import plugins.installation.execute.Execution;
-import plugins.installation.execute.FileCopyExecution;
-import plugins.installation.execute.FileEditExecution;
-import plugins.installation.file.FileCopyInfo;
 import plugins.installation.file.FileEditInfo;
 import plugins.installation.file.FileEditInfo.FileEditItem;
 
@@ -59,36 +55,26 @@ public class Installer {
 			InstallConfig config = InstallConfig.loadFrom(new File(configPath));
 			initContext(config);
 			logger.info("*************{}****************",config.getName());
-			String source = null;
-			while(source == null){
-				source = readSourcePath(config,br);
-			}
-			config.setSource(source);
+			logger.info("当前路径:{}",System.getProperty("user.dir"));
+//			String source = null;
+//			while(source == null){
+//				source = readSourcePath(config,br);
+//			}
+//			config.setSource(source);
 			String target = null;
 			while(target == null){
 				target = readTargetPath(config,br);
 			}
 			config.setTarget(target);
-			logger.info("安装资源文件夹:{}",source);
+//			logger.info("安装资源文件夹:{}",source);
 			logger.info("程序安装路径:{}",target);
 			
-			if(config.validateFileCopy()){
-				List<Execution> executions = new LinkedList<Execution>();
-				List<FileCopyInfo> fileCopyInfos = config.getFileCopyInfos();
-				if(fileCopyInfos != null){
-					for(FileCopyInfo fi : fileCopyInfos){
-						executions.add(new FileCopyExecution(fi));
-					}
-				}
-				
-				if(config.getFileEditInfos() != null && !config.getFileEditInfos().isEmpty()){
-					List<FileEditInfo> fileEditInfos = config.getFileEditInfos();
+			if(config.validate()){
+				List<FileEditInfo> fileEditInfos = config.getEditInfoList();
+				if(fileEditInfos != null && !fileEditInfos.isEmpty()){
 					processFileEdit(fileEditInfos, config, br);
-					for(FileEditInfo fe : fileEditInfos){
-						executions.add(new FileEditExecution(fe));
-					}
 				}
-				
+				List<Execution> executions = config.getExecutions();
 				if(confirm(executions, config, br)){
 					logger.info("\n开始安装.");
 					for(Execution exec : executions){
@@ -108,12 +94,14 @@ public class Installer {
 	
 	public static void initContext(InstallConfig config){
 		Date date = new Date();
+		Map<String,Object> ctx = config.getContext();
+		ctx.put("home", System.getProperty("user.dir"));
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
-		config.getContext().put("DATE", dateFormat.format(date));
+		ctx.put("DATE", dateFormat.format(date));
 		SimpleDateFormat timeFormat = new SimpleDateFormat("HHmmss");
-		config.getContext().put("TIME", timeFormat.format(date));
+		ctx.put("TIME", timeFormat.format(date));
 		SimpleDateFormat dateTimeFormat = new SimpleDateFormat("yyyyMMddHHmmss");
-		config.getContext().put("DATETIME", dateTimeFormat.format(date));
+		ctx.put("DATETIME", dateTimeFormat.format(date));
 	}
 	
 	private static boolean confirm(List<Execution> executions,InstallConfig config,BufferedReader br) throws IOException{
@@ -256,46 +244,41 @@ public class Installer {
 			logger.info("{}不能为空,请重新输入",targetname);
 			target = null;
 		}else{
-			if(config.getSource().startsWith(target)){
-				logger.info("{} 不能设置在{}下",targetname,config.getSource());
+			File s = new File(target);
+			if(!s.exists()){
+				logger.info("{}不存在",target);
 				target = null;
-			}else{
-				File s = new File(target);
-				if(!s.exists()){
-					logger.info("{}不存在",target);
-					target = null;
-				}
-				if(s.isFile()){
-					logger.info("{}不是文件夹",target);
-					target = null;
-				}
+			}
+			if(s.isFile()){
+				logger.info("{}不是文件夹",target);
+				target = null;
 			}
 		}
 		return target;
 	}
 	
-	private static String readSourcePath(InstallConfig config, BufferedReader br) throws IOException{
-		String sourcename = "安装资源文件夹完整路径";
-		if(config.getSourcename() != null){
-			sourcename = config.getSourcename();
-		}
-		System.out.print("\n*请输入"+sourcename+" : ");
-		String source = br.readLine();
-		if(source == null || "".equals(source.trim())){
-			source = null;
-		}else{
-			File s = new File(source);
-			if(!s.exists()){
-				logger.info("{}不存在",source);
-				source = null;
-			}
-			if(s.isFile()){
-				logger.info("{}不是文件夹",source);
-				source = null;
-			}
-		}
-		return source;
-	}
+//	private static String readSourcePath(InstallConfig config, BufferedReader br) throws IOException{
+//		String sourcename = "安装资源文件夹完整路径";
+//		if(config.getSourcename() != null){
+//			sourcename = config.getSourcename();
+//		}
+//		System.out.print("\n*请输入"+sourcename+" : ");
+//		String source = br.readLine();
+//		if(source == null || "".equals(source.trim())){
+//			source = null;
+//		}else{
+//			File s = new File(source);
+//			if(!s.exists()){
+//				logger.info("{}不存在",source);
+//				source = null;
+//			}
+//			if(s.isFile()){
+//				logger.info("{}不是文件夹",source);
+//				source = null;
+//			}
+//		}
+//		return source;
+//	}
 	
 	private static String readConfigPath(BufferedReader br) throws IOException{
 		System.out.print("\n*请输入安装配置文件完整路径 : ");
