@@ -105,7 +105,7 @@ public class Installer {
 	}
 	
 	private static boolean confirm(List<Execution> executions,InstallConfig config,BufferedReader br) throws IOException{
-		logger.info("\n***********本次安装包含以下内容***********");
+		logger.info("\n***********本次安装将会执行以下内容***********");
 		for(Execution exec : executions){
 			logger.info(exec.info(config));
 		}
