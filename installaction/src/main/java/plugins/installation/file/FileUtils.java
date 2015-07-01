@@ -70,8 +70,13 @@ public class FileUtils {
 	 */
 	public static void fileCopy(File from,File to,boolean removeIfExists){
 		if(from.exists() && from.isFile()){
+			logger.info("拷贝文件:[{}] to [{}]",from.getAbsolutePath(),to.getAbsolutePath());
 			if(removeIfExists && to.exists()){
 				delete(to);
+			}
+			File parent = to.getParentFile();
+			if(!parent.exists()){
+				parent.mkdirs();
 			}
 			FileInputStream fis = null;
 			FileOutputStream fos = null;
@@ -142,5 +147,9 @@ public class FileUtils {
 			throw new RuntimeException(e);
 		}
 		return path;
+	}
+	
+	public static void main(String[] args) {
+		dirCopy(new File("G:\\source\\config"), new File("G:\\target\\config"), true);
 	}
 }
