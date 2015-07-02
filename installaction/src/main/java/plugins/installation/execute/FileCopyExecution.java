@@ -36,6 +36,10 @@ public class FileCopyExecution implements Execution{
 		File src = new File(FileUtils.pathFormat(fileCopyInfo.getFrom(), config.getContext()));
 		File obj = new File(FileUtils.pathFormat(fileCopyInfo.getTo(), config.getContext()));
 		logger.info(fileCopyInfo.getDesc());
+		if(obj.exists()){
+			logger.info("目标{}己存在，先删除",obj.getAbsolutePath());
+			FileUtils.delete(obj);
+		}
 		if(src.isDirectory()){
 			logger.info("拷贝文件夹[{}] 至 [{}]。",src.getAbsolutePath(),obj.getAbsolutePath());
 			FileUtils.dirCopy(src, obj,true);
@@ -53,7 +57,7 @@ public class FileCopyExecution implements Execution{
 			logger.info("源位置未配置");
 			flag = false;
 		}else{
-			String path = FileUtils.pathFormat(this.fileCopyInfo.getFrom(), config);
+			String path = FileUtils.pathFormat(this.fileCopyInfo.getFrom(), config.getContext());
 			src = new File(path);
 			if(!src.exists()){
 				logger.info("文件[{}]不存在",this.fileCopyInfo.getFrom());
@@ -64,7 +68,7 @@ public class FileCopyExecution implements Execution{
 			logger.info("目标位置未配置");
 			flag = false;
 		}else{
-			File obj = new File(FileUtils.pathFormat(this.fileCopyInfo.getTo(), config));
+			File obj = new File(FileUtils.pathFormat(this.fileCopyInfo.getTo(), config.getContext()));
 			if(src != null && src.exists() && obj.exists() && obj.isDirectory() != src.isDirectory()){
 				logger.info("文件类型不匹配:[{}] | [{}]",src.getAbsolutePath(),obj.getAbsolutePath());
 				flag = false;

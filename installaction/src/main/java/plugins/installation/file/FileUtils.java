@@ -117,13 +117,12 @@ public class FileUtils {
 				file.delete();
 			}else{
 				File[] files = file.listFiles();
-				if(files == null || files.length == 0){
-					file.delete();
-				}else{
+				if(files != null){
 					for(File f : files){
 						delete(f);
 					}
 				}
+				file.delete();
 			}
 		}
 	}

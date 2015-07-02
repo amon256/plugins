@@ -4,11 +4,11 @@
 		${home} 程序执行目录
 		${TARGET} 安装目标根目录
 	 -->
-	<unzip desc="解压dns-config.zip" file="${home}/dns-config1.zip" to="${home}/dns_config"/>
-	<!-- 
-	<copy desc="拷贝DNSCollectKernel" from="${home}/kernel/DNSCollectKernel" to="${TARGET}/DNSCollectKernel" />
-	<copy desc="拷贝config_dns到DNSCollectKernel" from="${home}/dns_config/config/config_dns" to="${TARGET}/DNSCollectKernel/config_dns" />
-	<copy desc="拷贝deploy_config_dns到DNSCollectKernel" from="${home}/dns_config/config/deploy_config_dns" to="${TARGET}/DNSCollectKernel/deploy_config_dns" />
+	<unzip desc="解压dns-config.zip" file="${home}/../dns-config.zip" to="${home}/../dns_config"/>
+	
+	<copy desc="拷贝DNSCollectKernel" from="${home}/../kernel/DNSCollectKernel" to="${TARGET}/DNSCollectKernel" />
+	<copy desc="拷贝config_dns到DNSCollectKernel" from="${home}/../dns_config/config/config_dns" to="${TARGET}/DNSCollectKernel/config_dns" />
+	<copy desc="拷贝deploy_config_dns到DNSCollectKernel" from="${home}/../dns_config/config/deploy_config_dns" to="${TARGET}/DNSCollectKernel/deploy_config_dns" />
 	
 	<edit file="${TARGET}/DNSCollectKernel/deploy_config_dns/compare/compare.properties">
 		<item name="SplitRootPath" desc="核查文件分拆根目录"/>
@@ -25,5 +25,5 @@
 	<edit file="${TARGET}/DNSCollectKernel/deploy_config_dns/province-config.properties">
 		<item name="province.code" desc="省份编码"/>
 		<item name="workDirRoot" desc="系统临时文件存放目录"/>
-	</edit> -->
+	</edit>
 </install>
