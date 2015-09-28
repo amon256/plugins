@@ -12,5 +12,6 @@
     <module>database_report</module>
     <module>web</module>
     <module>installaction</module>
+    <module>portal</module>
   </modules>
 </project>
