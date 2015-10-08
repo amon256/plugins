@@ -1,38 +1,132 @@
 /**
  * CoreServiceImpl.java.java
  * @author FengMy
- * @since 2015年9月25日
+ * @since 2015年7月1日
  */
 package plugin.portal.service.impl;
 
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaQuery;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import plugin.portal.entity.CoreEntity;
 import plugin.portal.service.CoreService;
-import plugin.portal.utils.ExecuteCallback;
+
+import com.mongodb.DBObject;
 
 /**  
  * 功能描述：
  * 
  * @author FengMy
- * @since 2015年9月25日
+ * @since 2015年7月1日
  */
 public abstract class CoreServiceImpl<T extends CoreEntity> implements CoreService<T> {
-	
-	@PersistenceContext
-	private EntityManager entityManager;
-	
 
-	public EntityManager getEntityManager() {
-		return entityManager;
+	/**
+	 * MongoTemplate实例
+	 */
+	@Autowired
+	private MongoTemplate mongoTemplate;
+	
+	public T add(T entity) {
+		if(entity == null){
+			return null;
+		}
+		setDefautAddValue(entity);
+		mongoTemplate.insert(entity);
+		return entity;
+	}
+	
+	protected void setDefautAddValue(T entity){
+		if(entity.getId() == null){
+			entity.setId(UUID.randomUUID().toString().toLowerCase().replaceAll("-", ""));
+		}
+	}
+	
+	@Override
+	public void add(List<T> entityList) {
+		if(entityList == null){
+			return;
+		}
+		for(T entity : entityList){
+			if(entity != null){
+				setDefautAddValue(entity);
+			}
+		}
+		mongoTemplate.insert(entityList, getCurrentClass());
+	}
+	
+	@Override
+	public void update(T entity, Collection<String> updateFields) {
+		if(entity == null || entity.getId() == null || updateFields == null || updateFields.isEmpty()){
+			return;
+		}
+		Update update = Update.update("lastUpdateTime", new Date());
+		try{
+			for(String field : updateFields){
+				update.set(field, BeanUtils.getPropertyDescriptor(entity.getClass(), field).getReadMethod().invoke(entity, new Object[]{}));
+			}
+		}catch(Exception e){
+			throw new RuntimeException(e);
+		}
+		mongoTemplate.updateFirst(Query.query(Criteria.where("id").is(entity.getId())), update, entity.getClass());
+	}
+	
+	@Override
+	public void update(Query query, Update update) {
+		mongoTemplate.updateMulti(query, update, getCurrentClass());
+	}
+	
+	@Override
+	public boolean delete(T entity) {
+		mongoTemplate.remove(entity);
+		return true;
+	}
+	
+	@Override
+	public boolean delete(Query query) {
+		mongoTemplate.remove(query, getCurrentClass());
+		return true;
+	}
+	
+	@Override
+	public boolean checkExists(Criteria criteria) {
+		return mongoTemplate.exists(Query.query(criteria), getCurrentClass());
+	}
+	
+	public T findById(String id){
+		Class<T> entityClass = getCurrentClass();
+		return mongoTemplate.findById(id, entityClass);
+	}
+	
+	@Override
+	public T findOne(Query query) {
+		return mongoTemplate.findOne(query, getCurrentClass());
+	}
+	
+	@Override
+	public List<T> findAll() {
+		return mongoTemplate.findAll(getCurrentClass());
+	}
+	
+	@Override
+	public List<T> findList(Query query) {
+		return mongoTemplate.find(query, getCurrentClass());
+	}
+	
+	@Override
+	public long count(Query query) {
+		return mongoTemplate.count(query, getCurrentClass());
 	}
 	
 	protected Class<T> getCurrentClass(){
@@ -41,78 +135,24 @@ public abstract class CoreServiceImpl<T extends CoreEntity> implements CoreServi
 		Class<T> entityClass= (Class<T>)(parameterizedType.getActualTypeArguments()[0]); 
 		return entityClass;
 	}
-
-	@Override
-	public void insert(T entity) {
-		if(entity.getId() == null){
-			entity.setId(UUID.randomUUID().toString());
-		}
-		entityManager.persist(entity);
-	}
-
-	@Override
-	public void insert(Collection<T> entityList) {
-		if(entityList != null){
-			for(T entity : entityList){
-				insert(entity);
-			}
-		}
-	}
-
-	@Override
-	public void update(T entity) {
-		entityManager.merge(entity);
-	}
-
-	@Override
-	public T findById(String id) {
-		return entityManager.find(getCurrentClass(), id);
-	}
-
-	@Override
-	public void deleteById(String id) {
-		try{
-			Class<T> clazz = getCurrentClass();
-			T entity = clazz.newInstance();
-			entity.setId(id);
-			delete(entity);
-		}catch(Exception e){
-			throw new RuntimeException(e);
-		}
+	
+	/**
+	 * 获取MongoTemplate
+	 */
+	public MongoTemplate getMongoTemplate() {
+		return mongoTemplate;
 	}
 	
 	@Override
-	public void delete(T entity) {
-		entityManager.remove(entity);
+	public DBObject group(DBObject keys, DBObject condition, DBObject initial, String reduce, String finalize) {
+		String collectionName = getCurrentClass().getAnnotation(Document.class).collection();
+		return mongoTemplate.getCollection(collectionName ).group(keys, condition, initial, reduce, finalize);
 	}
 	
+	@SuppressWarnings("deprecation")
 	@Override
-	public List<T> find(String jpql,Object... params) {
-		TypedQuery<T> query = entityManager.createQuery(jpql,getCurrentClass());
-		if(params != null && params.length > 0){
-			for(int i = 0; i < params.length; i++){
-				query.setParameter(i+1, params[i]);
-			}
-		}
-		return query.getResultList();
+	public DBObject group(DBObject args) {
+		String collectionName = getCurrentClass().getAnnotation(Document.class).collection();
+		return mongoTemplate.getCollection(collectionName ).group(args);
 	}
-	
-	@Override
-	public T findOne(String jpql,Object... params) {
-		List<T> resultList = find(jpql,params);
-		if(resultList != null && !resultList.isEmpty()){
-			return resultList.get(0);
-		}
-		return null;
-	}
-	
-	@Override
-	public List<T> find(ExecuteCallback<T> callback) {
-		CriteriaQuery<T> query = entityManager.getCriteriaBuilder().createQuery(getCurrentClass());
-		if(callback != null){
-			callback.callback(query);
-		}
-		return entityManager.createQuery(query).getResultList();
-	}
-
 }

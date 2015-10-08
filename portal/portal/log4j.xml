@@ -101,10 +101,10 @@
         </filter> 
     </appender>
     
-    <!-- sqldebug日志 -->
-    <appender name="sql_debug" class="plugin.portal.log.MyRollingFileAppender">        
+    <!-- Mongodebug日志 -->
+    <appender name="mongo_debug" class="plugin.portal.log.MyRollingFileAppender">        
     	<!-- 设置日志输出文件名 -->     
-        <param name="file" value="portal/sql/debug.log" />
+        <param name="file" value="portal/mongo/debug.log" />
         <!-- 编码格式 -->
         <param name="encoding" value="utf8" />
         <!-- 单个文件上限大小 (30M) -->
@@ -123,10 +123,10 @@
             <param name="AcceptOnMatch" value="true" />     
         </filter>     
     </appender>     
-     <!-- sqlinfo日志 -->
-    <appender name="sql_info" class="plugin.portal.log.MyRollingFileAppender">        
+     <!-- Mongoinfo日志 -->
+    <appender name="mongo_info" class="plugin.portal.log.MyRollingFileAppender">        
     	<!-- 设置日志输出文件名 -->     
-        <param name="file" value="portal/sql/info.log" />
+        <param name="file" value="portal/mongo/info.log" />
         <!-- 编码格式 -->
         <param name="encoding" value="utf8" />
         <!-- 单个文件上限大小 (30M) -->
@@ -144,10 +144,10 @@
             <param name="acceptOnMatch" value="true" />     
         </filter> 
     </appender>     
-     <!-- sqlwarn日志 -->
-    <appender name="sql_warn" class="plugin.portal.log.MyRollingFileAppender">        
+     <!-- Mongowarn日志 -->
+    <appender name="mongo_warn" class="plugin.portal.log.MyRollingFileAppender">        
     	<!-- 设置日志输出文件名 -->     
-        <param name="file" value="portal/sql/warn.log" />
+        <param name="file" value="portal/mongo/warn.log" />
         <!-- 编码格式 -->
         <param name="encoding" value="utf8" />
         <!-- 单个文件上限大小 (30M) -->
@@ -165,10 +165,10 @@
             <param name="acceptOnMatch" value="true" />     
         </filter> 
     </appender>     
-     <!-- sqlerror日志 -->
-    <appender name="sql_error" class="plugin.portal.log.MyRollingFileAppender">        
+     <!-- Mongoerror日志 -->
+    <appender name="mongo_error" class="plugin.portal.log.MyRollingFileAppender">        
     	<!-- 设置日志输出文件名 -->     
-        <param name="file" value="portal/sql/error.log" />
+        <param name="file" value="portal/mongo/error.log" />
         <!-- 编码格式 -->
         <param name="encoding" value="utf8" />
         <!-- 单个文件上限大小 (30M) -->
@@ -274,7 +274,7 @@
     </appender>
         
     <!-- 指定app日志 -->
-    <logger name="plugin.portal" additivity="false">     
+    <logger name="com.sos" additivity="false">     
         <level value ="debug"/>       
         <appender-ref ref="app_debug" />       
         <appender-ref ref="app_info" />       
@@ -283,13 +283,13 @@
         <appender-ref ref="console" />       
     </logger>   
     
-    <!-- 指定sql日志 -->
-    <logger name="java.sql" additivity="false">     
+    <!-- 指定mongo日志 -->
+    <logger name="org.springframework.data.mongodb" additivity="false">     
         <level value ="debug"/>       
-        <appender-ref ref="sql_debug" />       
-        <appender-ref ref="sql_info" />       
-        <appender-ref ref="sql_warn" />       
-        <appender-ref ref="sql_error" />       
+        <appender-ref ref="mongo_debug" />       
+        <appender-ref ref="mongo_info" />       
+        <appender-ref ref="mongo_warn" />       
+        <appender-ref ref="mongo_error" />       
         <appender-ref ref="console" />       
     </logger>   
      

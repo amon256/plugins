@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
@@ -140,8 +142,8 @@ public class LoginController extends BaseController {
 			model.put("msg", "密码不能为空");
 			return false;
 		}
-		String jpql = "select u from USER u where u.account = ? and u.password = ?";
-		User validateUser = userService.findOne(jpql,user.getAccount(),SecurityUtil.encryptSHA(user.getPassword()));
+		Query query = new Query(Criteria.where("account").is(user.getAccount()).and("password").is(SecurityUtil.encryptSHA(user.getPassword())));
+		User validateUser = userService.findOne(query);
 		if(validateUser != null){
 			WebContext.login(validateUser);
 			return true;

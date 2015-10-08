@@ -1,0 +1,1 @@
+WARN 2015-09-29 11:24:51,803 [org.springframework.data.mongodb.core.index.MongoPersistentEntityIndexCreator$1.doWithPersistentProperty(MongoPersistentEntityIndexCreator.java:137)]   The index name IDX_USERS_ACCOUNT doesn't match this property name: account. Setting sparse=true on this index will prevent errors when inserting documents.

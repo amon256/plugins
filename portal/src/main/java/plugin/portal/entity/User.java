@@ -7,8 +7,8 @@ package plugin.portal.entity;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
 /**  
@@ -17,50 +17,44 @@ import javax.persistence.Entity;
  * @author FengMy
  * @since 2015年7月1日
  */
-@Entity(name="USER")
+@Document(collection="users")
 public class User extends DataEntity implements Roleable {
 	private static final long serialVersionUID = -9147696470362067547L;
 
 	/**
 	 * 账号
 	 */
-	@Column(name="ACCOUNT",nullable=false,length=40,unique=true)
+	@Indexed(unique=true,name="IDX_USERS_ACCOUNT")
 	private String account;
 	
 	/**
 	 * 密码
 	 */
-	@Column(name="PASSWORD",length=40)
 	private String password;
 	
 	/**
 	 * 姓名
 	 */
-	@Column(name="NAME",length=40)
 	private String name;
 	
 	/**
 	 * 昵称
 	 */
-	@Column(name="NICKNAME",length=40)
 	private String nickName;
 	
 	/**
 	 * 手机
 	 */
-	@Column(name="MOBILE",length=20)
 	private String mobile;
 	
 	/**
 	 * 头像
 	 */
-	@Column(name="HEADPHOTO",length=40)
 	private String headPhoto;
 	
 	/**
 	 * 最后一次登录时间
 	 */
-	@Column(name="LASTLOGINTIME")
 	private Date lastLoginTime;
 	
 	/**

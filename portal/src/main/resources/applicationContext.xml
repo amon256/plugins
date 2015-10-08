@@ -22,54 +22,34 @@
 	<!-- 自定义ObjectMapper -->
 	<bean id="customObjectMapper" class="plugin.portal.utils.CustomObjectMapper"/>
 	
-	<context:property-placeholder location="file:${user.dir}/portal/jdbc.properties"/>
+	<context:property-placeholder location="file:${user.dir}/portal/mongo.properties"/>
 	
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="false">
-		<!-- 数据库连接 -->
-		<property name="url" value="${jdbc.url}"/>
-		<!-- 用户 -->
-		<property name="username" value="${jdbc.username}" />
-		<!-- 密码 -->
-		<property name="password" value="${jdbc.password}" />
-		<!-- 驱动 -->
-		<property name="driverClassName" value="${jdbc.driverClassName}" />
-		<!-- 连接数初始连接数 --> 
-		<property name="initialSize" value="${jdbc.initialSize}" />
-		<!-- 最大连接数 -->
-		<property name="maxActive" value="${jdbc.maxActive}" />
-		<!-- 最小空闲连接 -->
-		<property name="minIdle" value="${jdbc.minIdle}"/>
-		<!-- 最大空闲连接 -->
-		<property name="maxIdle" value="${jdbc.maxIdle}" />
-		<!-- 自动提交 -->
-		<property name="defaultAutoCommit" value="false" />
-		<!-- 自动回收超时连接 -->
-		<property name="removeAbandoned" value="true" />
-		<!-- 超时时间(以秒数为单位) 
-		<property name="removeAbandonedTimeout" value="30"/>-->
-		<!-- 测试连接有效性 
-		<property name="validationQuery" value="select 1 from mysql.user "/>-->
-		<!-- 获取连接时测试连接 
-		<property name="testOnBorrow" value="true" />-->
+	<!-- mongoOptions配置 -->
+	<bean id="mongoOptions" class="com.mongodb.MongoOptions">
+		<!-- 每个库的连接数 -->
+		<property name="connectionsPerHost" value="${mongo.connectionsPerHost}"/>
+	</bean>
+	<!-- mongo实例 -->
+	<bean id="mongo" class="org.springframework.data.mongodb.core.MongoFactoryBean">
+		<property name="host" value="${mongo.host}" />
+		<property name="port" value="${mongo.port}" />
+		<property name="mongoOptions" ref="mongoOptions"/>
+	</bean>
+	<!-- 用户名密码验证 -->
+	<bean id="userCredentials" class="org.springframework.data.authentication.UserCredentials">
+		<constructor-arg name="username" value="${mongo.username}"/>
+		<constructor-arg name="password" value="${mongo.password}"/>
+	</bean>
+	<bean id="mongoDbFactory" class="org.springframework.data.mongodb.core.SimpleMongoDbFactory">
+		<constructor-arg name="mongo" ref="mongo" />
+		<constructor-arg name="databaseName" value="${mongo.dbName}" />
+		<constructor-arg name="credentials" ref="userCredentials" />
 	</bean>
 	
-	<!-- 配置实体管理对象 p:persistenceUnitManager-ref="persistenceUnitManager" -->
-	<bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<property name="dataSource" ref="dataSource" />
-		<!-- 选配属性 -->
-		<property name="jpaVendorAdapter">
-			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-				<!-- <property name="databasePlatform" value="org.hibernate.dialect.MySQLDialect" /> -->
-				<property name="showSql" value="true" />
-				<property name="generateDdl" value="true" />
-			</bean>
-		</property>
+	<!-- mongoTemplate,提供持久化接口 -->
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg name="mongoDbFactory" ref="mongoDbFactory" />
 	</bean>
- 
-	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
-	<tx:annotation-driven transaction-manager="transactionManager"/>
 	
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

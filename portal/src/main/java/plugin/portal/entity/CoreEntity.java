@@ -7,9 +7,7 @@ package plugin.portal.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.MappedSuperclass;
+import org.springframework.data.annotation.Id;
 
 /**  
  * 功能描述：实体基类
@@ -17,12 +15,10 @@ import javax.persistence.MappedSuperclass;
  * @author FengMy
  * @since 2015年7月1日
  */
-@MappedSuperclass
 public abstract class CoreEntity implements Serializable{
 	private static final long serialVersionUID = 925904316481738175L;
 	
 	@Id
-	@Column(length=40,name="ID")
 	private String id;
 
 	public String getId() {

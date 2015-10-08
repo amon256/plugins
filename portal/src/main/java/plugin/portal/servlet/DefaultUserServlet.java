@@ -35,8 +35,9 @@ public class DefaultUserServlet extends HttpServlet {
 			user.setName("超级管理员");
 			user.setNickName("超级管理员");
 			user.setId("0");
-			user.setRoles("");
-			userService.insert(user);
+			user.setRoles("M0000,M0001,M0002");
+			user.setHeadPhoto("/adminLTE/img/avatar.png");
+			userService.add(user);
 		}
 	}
 }

@@ -1,85 +1,106 @@
 /**
  * CoreService.java.java
  * @author FengMy
- * @since 2015年9月25日
+ * @since 2015年7月1日
  */
 package plugin.portal.service;
 
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 
 import plugin.portal.entity.CoreEntity;
-import plugin.portal.utils.ExecuteCallback;
+
+import com.mongodb.DBObject;
 
 /**  
  * 功能描述：
  * 
  * @author FengMy
- * @since 2015年9月25日
+ * @since 2015年7月1日
  */
-@Transactional
 public interface CoreService<T extends CoreEntity> {
-
 	/**
-	 * 新增
-	 * @param entity
+	 * 增加实体
 	 */
-	public void insert(T entity);
+	public T add(T entity);
 	
 	/**
-	 * 批量新增
-	 * @param entityList
+	 * 批量插入
 	 */
-	public void insert(Collection<T> entityList);
+	public void add(List<T> entityList);
 	
 	/**
-	 * 更新
-	 * @param entity
+	 * 更新数据
 	 */
-	public void update(T entity);
+	public void update(T entity,Collection<String> updateFields);
 	
 	/**
-	 * 根据id查询
-	 * @param id
+	 * 自定义更新
+	 */
+	public void update(Query query,Update update);
+	
+	/**
+	 * 删除实体
+	 */
+	public boolean delete(T Entity);
+	
+	/**
+	 * 按query删除
+	 * @param query
 	 * @return
+	 */
+	public boolean delete(Query query);
+	
+	/**
+	 * 检查是否存在数据
+	 */
+	public boolean checkExists(Criteria criteria);
+	
+	/**
+	 * 按ID查找
 	 */
 	public T findById(String id);
 	
 	/**
-	 * 根据id删除
-	 * @param id
+	 * 查询所有结果
 	 */
-	public void deleteById(String id);
+	public List<T> findAll();
 	
 	/**
-	 * 删除实体
-	 * @param entity
+	 * 查询唯一对象
 	 */
-	public void delete(T entity);
-	
-	
+	public T findOne(Query query);
 	
 	/**
 	 * 自定义查询
-	 * @param query
-	 * @return
 	 */
-	public T findOne(String jpql,Object... params);
+	public List<T> findList(Query query);
 	
 	/**
-	 * 自定义查询
-	 * @param query
-	 * @return
+	 * 查询数据条数
 	 */
-	public List<T> find(String jqpl,Object... params);
+	public long count(Query query);
 	
 	/**
-	 * 查询时设置查询参数
-	 * @param callback
+	 * 分组查询
+	 * @param command
 	 * @return
 	 */
-	public List<T> find(ExecuteCallback<T> callback);
+	public DBObject group(DBObject keys, DBObject condition, DBObject initial, String reduce, String finalize);
+	
+	/**
+	 * 分组查询
+	 * @param args   
+	 *  args.put( "key" , keys );//args.put( "keyf" , "function(doc){......return {key,value}}" );
+        args.put( "cond" , condition );
+        args.put( "$reduce" , reduce );
+        args.put( "initial" , initial );
+	 * @return
+	 */
+	public DBObject group(DBObject args);
 	
 }

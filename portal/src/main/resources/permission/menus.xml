@@ -1,49 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <menus>
 	<menu id="M0000" name="首页" page="P0000" default="true">
-		<page id="P0000" name="主页" default="true">/main</page>
+		<page id="P0000" name="主页" default="true">/homepage</page>
 		<page id="P0001" name="重复提交">/submitRepeat</page>
 		<page id="P0002" name="权限不足">/noPermission</page>
 		<page id="P0003" name="修改个人信息">/user/useredit</page>
 		<page id="P0004" name="保存个人信息">/user/userSave</page>
 		<page id="P0005" name="修改密码">/user/password</page>
 		<page id="P0006" name="保存密码">/user/changepwd</page>
+		<page id="P0007" name="我的应用列表">/portal/appList</page>
+		<page id="P0008" name="进入应用">/portal/portalLogin</page>
 	</menu>
-	<group id="G0001" name="财务总汇">
-		<menu id="M0101" name="奖金记录" page="P0101">
-			<page id="P0101" name="奖金记录">/bonus/bonushistory</page>
-		</menu>
-		<menu id="M0102" name="奖金汇总记录" page="P0102">
-			<page id="P0102" name="奖金汇总记录">/bonus/totalhistory</page>
-		</menu>
-		<menu id="M0103" name="奖金转让" page="P0103">
-			<page id="P0103" name="奖金转让">/bonus/totransfer</page>
-			<page id="P0104" name="奖金转让">/bonus/transfer</page>
-		</menu>
-		<menu id="M0104" name="奖金转让记录" page="P0105">
-			<page id="P0105" name="奖金转让记录">/bonus/transferhistory</page>
-		</menu>
-		<menu id="M0105" name="奖金提现" page="P0106">
-			<page id="P0106" name="奖金提现">/bonuscash/applyList</page>
-			<page id="P0107" name="奖金提现">/bonuscash/toApply</page>
-			<page id="P0108" name="奖金提现">/bonuscash/apply</page>
-		</menu>
-		<menu id="M0106" name="返现查询" page="P0109">
-			<page id="P0109" name="消费记录">/consume/list</page>
-			<page id="P0410" name="返现明细">/consume/detail</page>
-		</menu>
-		
-	</group>
-	<group id="G0002" name="团队系统">
-		<menu id="M0201" name="介绍系统" page="P0201">
-			<page id="P0201" name="介绍系统">/user/recommend</page>
-		</menu>
-		<menu id="M0203" name="安置系统" page="P0203">
-			<page id="P0203" name="安置系统">/user/usergragh</page>
-			<page id="P0204" name="用户信息">/user/userinfo</page>
-			<page id="P0205" name="注册用户">/user/toregister</page>
-			<page id="P0206" name="保存注册用户">/user/register</page>
-		</menu>
-	</group>
-	
+	<menu id="M0001" name="用户管理" page="P0010">
+		<page id="P0010" name="用户列表">/user/list</page>
+		<page id="P0011" name="用户信息">/user/userinfo</page>
+		<page id="P0012" name="用户注册">/user/toregister</page>
+		<page id="P0013" name="用户注册">/user/register</page>
+	</menu>	
+	<menu id="M0002" name="应用管理" page="P0020">
+		<page id="P0020" name="应用列表">/app/list</page>
+		<page id="P0021" name="应用新增">/app/toadd</page>
+		<page id="P0022" name="应用新增">/app/add</page>
+		<page id="P0023" name="应用新增">/app/toupdate</page>
+		<page id="P0024" name="应用新增">/app/update</page>
+		<page id="P0025" name="关联用户">/app/linkuser</page>
+		<page id="P0026" name="关联用户">/app/linksave</page>
+		<page id="P0027" name="解除关联">/app/unlink</page>
+	</menu>
 </menus>

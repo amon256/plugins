@@ -35,7 +35,7 @@ public class IndexController extends BaseController {
 	@RequestMapping(value="index")
 	public String index(@RequestParam(value="_m",required=false)String menu,@RequestParam(value="_p",required=false)String page,ModelMap model){
 //		AdminUser user = WebContext.getLoginUser();
-		model.put("user", WebContext.getLoginUser());		
+		model.put("loginUser", WebContext.getLoginUser());		
 		//TODO 要验证权限获取菜单列表
 		StringBuilder openMenus = new StringBuilder();
 		SystemMenu activeMenu = permissionManager.getDefaultMenu();

@@ -1,6 +1,6 @@
 <%@page import="java.util.LinkedList"%>
 <%@page import="java.util.List"%>
-<%@page import="com.winplan.utils.Pagination"%>
+<%@page import="plugin.portal.utils.Pagination"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%

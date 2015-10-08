@@ -74,5 +74,5 @@
 				</div>
 				<button type="submit" class="btn btn-primary">修改个人资料</button>&nbsp;&nbsp;<a href="${ctx }/${cus:url(null,'/user/password') }">修改密码</a>
 			</form>
-		<div class="editpanel">
+		</div>
 	</div>

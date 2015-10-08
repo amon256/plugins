@@ -14,8 +14,8 @@
 		<header class="main-header">
 			<!-- Logo -->
 			<a href="${ctx }/index" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels --> 
-				<span class="logo-mini"><b>JK</b></span> <!-- logo for regular state and mobile devices --> 
-				<span class="logo-lg"><b>JK Group</b> Manager</span>
+				<span class="logo-mini"><b>PM</b></span> <!-- logo for regular state and mobile devices --> 
+				<span class="logo-lg"><b>Portal</b> Manager</span>
 			</a>
 			<!-- Header Navbar -->
 			<nav class="navbar navbar-static-top" role="navigation">
@@ -37,7 +37,7 @@
 											<!-- start message --> <a href="#">
 												<div class="pull-left">
 													<!-- User Image -->
-													<img src="${ctx}${user.headPhoto}" class="img-circle" alt="User Image">
+													<img src="${ctx}${loginUser.headPhoto}" class="img-circle" alt="User Image">
 												</div> 
 												<!-- Message title and timestamp -->
 												<h4>
@@ -108,14 +108,14 @@
 						<li class="dropdown user user-menu">
 							<!-- Menu Toggle Button --> 
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown"> <!-- The user image in the navbar--> 
-								<img src="${ctx}${user.headPhoto}" class="user-image" alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. --> 
-								<span class="hidden-xs">${user.nickName }(${user.account })</span>
+								<img src="${ctx}${loginUser.headPhoto}" class="user-image" alt="User Image" /> <!-- hidden-xs hides the username on small devices so only the image appears. --> 
+								<span class="hidden-xs">${loginUser.nickName }(${loginUser.account })</span>
 							</a>
 							<ul class="dropdown-menu">
 								<!-- The user image in the menu -->
-								<li class="user-header"><img src="${ctx}${user.headPhoto}" class="img-circle" alt="User Image">
+								<li class="user-header"><img src="${ctx}${loginUser.headPhoto}" class="img-circle" alt="User Image">
 									<p>
-										${user.nickName }(${user.account })<small>Member since <fmt:formatDate value="${user.createTime }" pattern="yyyy.MM"/></small>
+										${loginUser.nickName }(${loginUser.account })<small>Member since <fmt:formatDate value="${loginUser.createTime }" pattern="yyyy.MM"/></small>
 									</p>
 								</li>
 								<!-- Menu Body -->
@@ -157,10 +157,10 @@
 				<!-- Sidebar user panel (optional) -->
 				<div class="user-panel">
 					<div class="pull-left image">
-						<img src="${ctx}${user.headPhoto}" class="img-circle" alt="User Image">
+						<img src="${ctx}${loginUser.headPhoto}" class="img-circle" alt="User Image">
 					</div>
 					<div class="pull-left info">
-						<p>${user.nickName }(${user.account })</p>
+						<p>${loginUser.nickName }(${loginUser.account })</p>
 						<!-- Status -->
 						<a href="#"><i class="fa fa-circle text-success"></i> Online</a>
 					</div>

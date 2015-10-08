@@ -5,8 +5,6 @@
  */
 package plugin.portal.service;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import plugin.portal.entity.User;
 
 /**  
@@ -15,7 +13,6 @@ import plugin.portal.entity.User;
  * @author FengMy
  * @since 2015年9月25日
  */
-@Transactional
 public interface UserService extends CoreService<User>{
 
 }
