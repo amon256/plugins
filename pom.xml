@@ -13,5 +13,6 @@
     <module>web</module>
     <module>installaction</module>
     <module>portal</module>
+    <module>wsclient</module>
   </modules>
 </project>
