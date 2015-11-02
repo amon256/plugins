@@ -73,16 +73,10 @@
 						</c:otherwise>
 					</c:choose>
 				</tbody>
-				<tfoot>
-					<tr>
-						<td colspan="5">
-							<jsp:include page="../common/pagination.jsp" flush="true">
-								<jsp:param value="${cus:url(activeMenu.id,'/app/linkuser') }&name=${user.name }&account=${user.account }&appid=${app.id }" name="url"/>
-							</jsp:include>
-						</td>
-					</tr>
-				</tfoot>
 			</table>
+			<jsp:include page="../common/pagination.jsp" flush="true">
+				<jsp:param value="${cus:url(activeMenu.id,'/app/linkuser') }&name=${user.name }&account=${user.account }&appid=${app.id }" name="url"/>
+			</jsp:include>
 			<script type="text/javascript">
 				$(function(){
 					$('a[linkType]').each(function(i,a){
