@@ -14,5 +14,6 @@
     <module>installaction</module>
     <module>portal</module>
     <module>wsclient</module>
+    <module>applicationUpgradeKit</module>
   </modules>
 </project>

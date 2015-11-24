@@ -139,11 +139,10 @@ public abstract class AbstractDialect implements Dialect {
 			builder.keyProperty(delimitedArraytoString(selectMappedStatement.getKeyProperties()));
 			builder.timeout(selectMappedStatement.getTimeout());
 			builder.parameterMap(selectMappedStatement.getParameterMap());
-			builder.resultMaps(selectMappedStatement.getResultMaps());
 			builder.cache(selectMappedStatement.getCache());
-//			List<ResultMap> resultMaps = new ArrayList<ResultMap>();
-//			resultMaps.add(new ResultMap.Builder(selectMappedStatement.getConfiguration(), countId, Integer.class, new ArrayList<ResultMapping>()).build());
-//			builder.resultMaps(resultMaps);
+			List<ResultMap> resultMaps = new ArrayList<ResultMap>();
+			resultMaps.add(new ResultMap.Builder(selectMappedStatement.getConfiguration(), countId, Integer.class, new ArrayList<ResultMapping>()).build());
+			builder.resultMaps(resultMaps);
 			newMs = builder.build();
 			selectMappedStatement.getConfiguration().addMappedStatement(newMs);
 		}
