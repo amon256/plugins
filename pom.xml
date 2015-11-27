@@ -15,5 +15,6 @@
     <module>portal</module>
     <module>wsclient</module>
     <module>applicationUpgradeKit</module>
+    <module>monitortools</module>
   </modules>
 </project>
