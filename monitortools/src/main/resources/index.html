@@ -9,25 +9,8 @@
 <script type="text/javascript" src="jquery/jquery.min.js"></script>
 <script type="text/javascript" src="bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="Highcharts-4.1.3/js/highcharts.js"></script>
+<script type="text/javascript" src="index.js"></script>
 <title>JAVA 平台环境监控工具</title>
-<script type="text/javascript">
-	$(function(){
-		$.getJSON("machine",function(data){
-			var ids = ["name","arch","version","availableProcessors","vmName","vmVendor","vmVersion","vmStartTime"];
-			for(var i = 0; i < ids.length; i++){
-				if(data[ids[i]]){
-					$('#'+ids[i]).text(data[ids[i]]);
-				}
-			}
-			if(data.systemProperties){
-				var con = $('#systemProperties');
-				for(var key in data.systemProperties){
-					con.append("<code>" + key +"</code> = <var>" + data.systemProperties[key] + "</var><br/>" );
-				}
-			}
-		});
-	});
-</script>
 </head>
 <body>
 	<div class="container-fluid">
@@ -39,6 +22,12 @@
 					<li role="presentation"><a href="#performance" aria-controls="performance" role="tab" data-toggle="tab">性能监控</a></li>
 				</ul>
 				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane" id="systemProperties">
+					</div>
+					<div role="tabpanel" class="tab-pane" id="performance">
+						<div id="cpuPerf" style="float:left;"></div>
+						<div id="memPerf" style="float:left;"></div>
+					</div>
 					<div role="tabpanel" class="tab-pane active" id="system">
 						<table class="table table-bordered">
 							<tbody>
@@ -55,7 +44,7 @@
 								</tr>
 								
 								<tr>
-									<td rowspan="3" width="80" valign="middle" >虚拟机</td>
+									<td rowspan="5" width="80" valign="middle" >虚拟机</td>
 								</tr>
 								<tr>
 									<td width="80">名称</td><td id="vmName"></td>
@@ -65,13 +54,16 @@
 									<td width="80">版本</td><td id="vmVersion"></td>
 									<td width="80">启动时间</td><td id="vmStartTime"></td>
 								</tr>
+								<tr>
+									<td width="80">初始堆内存(MB)</td><td id="initHeapMemory"></td>
+									<td width="80">最大堆内存(MB)</td><td id="maxHeapMemory"></td>
+								</tr>
+								<tr>
+									<td width="80">初始非堆内存(MB)</td><td id="initNonHeapMemory"></td>
+									<td width="80">最大非堆内存(MB)</td><td id="maxNonHeapMemory"></td>
+								</tr>
 							</tbody>
 						</table>
-					</div>
-					<div role="tabpanel" class="tab-pane" id="systemProperties">
-					</div>
-					<div role="tabpanel" class="tab-pane" id="performance">
-						
 					</div>
 				</div>
 			</div>

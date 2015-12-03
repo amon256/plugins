@@ -6,6 +6,7 @@
 package plugins.monitortools.beans;
 
 import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
 import java.lang.management.OperatingSystemMXBean;
 import java.lang.management.RuntimeMXBean;
 import java.util.Date;
@@ -57,6 +58,26 @@ public class SystemInfo implements MonitorInterface{
 	private String vmVersion;
 	
 	/**
+	 * 初始化堆内存,MB
+	 */
+	private int initHeapMemory;
+	
+	/**
+	 * 最大堆内存,MB
+	 */
+	private int maxHeapMemory;
+	
+	/**
+	 * 初始化非堆内存,MB
+	 */
+	private int initNonHeapMemory;
+	
+	/**
+	 * 最大非堆内存,MB
+	 */
+	private int maxNonHeapMemory;
+	
+	/**
 	 * Java虚拟机启动时间
 	 */
 	@JSONField(format="yyyy-MM-dd HH:mm:ss")
@@ -79,6 +100,13 @@ public class SystemInfo implements MonitorInterface{
         this.setVmVersion(System.getProperty("java.runtime.version"));//        返回 Java 虚拟机实现版本。 
         this.setVmStartTime(new Date(runtime.getStartTime()));
         this.setSystemProperties(runtime.getSystemProperties());
+        
+        MemoryMXBean memory = ManagementFactory.getMemoryMXBean();
+        int mb = 1024*1024;
+        this.setInitHeapMemory((int) (memory.getHeapMemoryUsage().getInit() / mb));
+        this.setMaxHeapMemory((int) (memory.getNonHeapMemoryUsage().getMax() / mb));
+        this.setInitNonHeapMemory((int) (memory.getNonHeapMemoryUsage().getInit() / mb));
+        this.setMaxNonHeapMemory((int) (memory.getNonHeapMemoryUsage().getMax() / mb));
 		return this;
 	}
 
@@ -153,6 +181,39 @@ public class SystemInfo implements MonitorInterface{
 	public void setSystemProperties(Map<String,String> systemProperties) {
 		this.systemProperties = systemProperties;
 	}
+
+	public int getInitHeapMemory() {
+		return initHeapMemory;
+	}
+
+	public void setInitHeapMemory(int initHeapMemory) {
+		this.initHeapMemory = initHeapMemory;
+	}
+
+	public int getMaxHeapMemory() {
+		return maxHeapMemory;
+	}
+
+	public void setMaxHeapMemory(int maxHeapMemory) {
+		this.maxHeapMemory = maxHeapMemory;
+	}
+
+	public int getInitNonHeapMemory() {
+		return initNonHeapMemory;
+	}
+
+	public void setInitNonHeapMemory(int initNonHeapMemory) {
+		this.initNonHeapMemory = initNonHeapMemory;
+	}
+
+	public int getMaxNonHeapMemory() {
+		return maxNonHeapMemory;
+	}
+
+	public void setMaxNonHeapMemory(int maxNonHeapMemory) {
+		this.maxNonHeapMemory = maxNonHeapMemory;
+	}
+
 	
 	
 }

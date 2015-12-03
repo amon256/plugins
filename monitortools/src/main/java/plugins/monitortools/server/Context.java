@@ -10,6 +10,7 @@ import java.util.Map;
 
 import plugins.monitortools.server.handlers.DefaultHttpHandler;
 import plugins.monitortools.server.handlers.MachineInfoHandler;
+import plugins.monitortools.server.handlers.ResourceUsageHttpHandler;
 
 import com.sun.net.httpserver.HttpHandler;
 
@@ -24,6 +25,7 @@ public class Context {
 	private static final Map<String,Class<? extends HttpHandler>> handlers = new HashMap<String, Class<? extends HttpHandler>>();
 	static{
 		Context.registerHandler("/machine", MachineInfoHandler.class);
+		Context.registerHandler("/usage", ResourceUsageHttpHandler.class);
 	}
 
 	public static String getContextPath(){
