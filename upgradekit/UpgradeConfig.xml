@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<applications charset="gbk">
+	<application>
+		<id>NDMP-WEB</id>
+		<name>网络局数据前台WEB</name>
+		<commands>
+			<command>
+				<cmd>G:\source\install.bat</cmd>
+				<params>
+					<param>
+						<name>versionFile</name>
+						<value>${version.file}</value>
+					</param>
+					<param>
+						<name>versionFileName</name>
+						<value>${version.fileName}</value>
+					</param>
+					<param>
+						<name>parameterFile</name>
+						<value>${version.parameterFile}</value>
+					</param>
+					<param>
+						<name>parameterFileName</name>
+						<value>${version.parameterFileName}</value>
+					</param>
+				</params>
+			</command>
+		</commands>
+	</application>
+</applications>

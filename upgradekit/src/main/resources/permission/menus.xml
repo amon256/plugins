@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menus>
+	<menu id="M0000" name="首页" page="P0000" default="true">
+		<page id="P0000" name="主页" default="true">/homepage</page>
+		<page id="P0001" name="重复提交">/submitRepeat</page>
+		<page id="P0002" name="权限不足">/noPermission</page>
+		<page id="P0003" name="配置">/adminuser/toProfile</page>
+		<page id="P0004" name="保存配置">/adminuser/profile</page>
+		<page id="P0005" name="修改密码">/adminuser/toPassword</page>
+		<page id="P0006" name="保存密码">/adminuser/password</page>
+	</menu>
+	<group id="G1000" name="个人信息">
+		<menu id="M1001" name="信息修改" page="P1001">
+			<page id="P1001" name="信息修改">/adminuser/toProfile</page>
+			<page id="P1001" name="保存信息">/adminuser/profile</page>
+		</menu>
+		<menu id="M1002" name="密码修改" page="P2001">
+			<page id="P2001" name="密码修改">/adminuser/toPassword</page>
+			<page id="P2001" name="密码信息">/adminuser/password</page>
+		</menu>
+	</group>
+	<menu id="M0001" name="管理员" page="P0101">
+		<page id="P0101" name="管理员列表">/adminuser/list</page>
+		<page id="P0102" name="管理员新增页面">/adminuser/toAdd</page>
+		<page id="P0103" name="管理员新增">/adminuser/add</page>
+		<page id="P0104" name="管理员修改页面">/adminuser/toUpdate</page>
+		<page id="P0105" name="管理员修改">/adminuser/update</page>
+		<page id="P0106" name="管理员激活页面">/adminuser/toEffect</page>
+		<page id="P0107" name="管理员激活">/adminuser/effect</page>
+		<page id="P0108" name="管理员禁止">/adminuser/disabled</page>
+	</menu>
+	<menu id="M0005" name="产品" page="P0501">
+		<page id="P0501" name="产品列表">/product/list</page>
+		<page id="P0502" name="产品新增页面">/product/toAdd</page>
+		<page id="P0503" name="产品新增">/product/add</page>
+		<page id="P0504" name="产品修改页面">/product/toUpdate</page>
+		<page id="P0505" name="产品修改">/product/update</page>
+		<page id="P0506" name="版本列表">/version/list</page>
+		<page id="P0507" name="版本新增页面">/version/toAdd</page>
+		<page id="P0508" name="版本新增">/version/add</page>
+		<page id="P0509" name="版本修改页面">/version/toUpdate</page>
+		<page id="P0510" name="版本修改">/version/update</page>
+	</menu>
+	<menu id="M0002" name="主机" page="P0201">
+		<page id="P0201" name="主机列表">/hostMachine/list</page>
+		<page id="P0202" name="主机新增页面">/hostMachine/toAdd</page>
+		<page id="P0203" name="主机新增">/hostMachine/add</page>
+		<page id="P0204" name="主机修改页面">/hostMachine/toUpdate</page>
+		<page id="P0205" name="主机修改">/hostMachine/update</page>
+	</menu>
+</menus>

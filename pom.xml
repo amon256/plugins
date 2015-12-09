@@ -16,5 +16,6 @@
     <module>wsclient</module>
     <module>applicationUpgradeKit</module>
     <module>monitortools</module>
+    <module>upgradekit</module>
   </modules>
 </project>
