@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="plugins.upgradekit.entitys.Application">
+	<select id="select" parameterType="plugins.upgradekit.entitys.Application" resultType="plugins.upgradekit.entitys.Application">
+		SELECT * FROM APPLICATION
+		<where>
+			<if test="name != '' and name != null">
+				AND NAME = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="keyword != '' and keyword != null">
+				AND 
+					(NAME LIKE '%${keyword}%'
+					OR NUMBER LIKE '%${keyword}%'
+					OR DESCRIPTION LIKE '%${keyword}%'
+					)
+			</if>
+		</where>
+		<if test="sort_ != '' and sort_ != null">
+			ORDER BY ${sort_} ${order_}
+		</if>
+	</select>
+</mapper>
