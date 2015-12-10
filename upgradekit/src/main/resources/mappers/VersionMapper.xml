@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="plugins.upgradekit.entitys.Version">
+	<select id="select" parameterType="plugins.upgradekit.entitys.Version" resultType="plugins.upgradekit.entitys.Version">
+		SELECT 
+		V.ID AS "id",
+		V.NUMBER AS "number",
+		V.FILENAME AS "fileName",
+		V.PARAMETERFILENAME AS "parameterFileName",
+		V.STATUS AS "status",
+		V.CREATETIME AS "createTime",
+		V.UPGRADETIME AS "upgradeTime",
+		A.ID AS "application.id",
+		A.NAME AS "application.name"
+		FROM VERSION V
+		LEFT JOIN APPLICATION A
+		ON V.APPLICATIONID = A.ID
+		<where>
+			<if test="number != '' and number != null">
+				AND V.NUMBER = #{number,jdbcType=VARCHAR}
+			</if>
+			<if test="application != null and application.id != null and application.id != ''">
+				AND V.APPLICATIONID = #{application.id,jdbcType=VARCHAR}
+			</if>
+			<if test="keyword != '' and keyword != null">
+				AND V.NUMBER LIKE '%${keyword}%'
+			</if>
+		</where>
+		<if test="sort_ != '' and sort_ != null">
+			ORDER BY V.${sort_} ${order_}
+		</if>
+	</select>
+</mapper>

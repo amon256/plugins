@@ -30,7 +30,7 @@ public class NativeCommandExecutor {
 				pw.flush();
 			}
 		};
-		executeNativeCommand(writer, "gbk", "G:\\source\\install.bat ", new String[]{"P20151209202207075.docx","V20151209202207075.txt"});
+		executeNativeCommand(writer, "gbk", "java -version", new String[]{});
 	}
 	
 	public static void executeNativeCommand(MessageWriter writer,String charset,String command,String[] params){

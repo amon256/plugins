@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * <b>描述：</b> Spring上下文<br/>
  * <b>@author： </b>fengmengyue<br/>
  */
-@Component
+@Component(value="applicationContextAware")
 @Lazy(value=false)
 public class ApplicationContextAware implements org.springframework.context.ApplicationContextAware {
 	private static ApplicationContext ctx;

@@ -5,12 +5,9 @@
  */
 package plugins.upgradekit.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import plugins.upgradekit.entitys.AdminUser;
-import plugins.utils.Pagination;
 
 /**  
  * 功能描述：
@@ -28,11 +25,4 @@ public interface AdminUserService extends BaseService<AdminUser> {
 	 */
 	public AdminUser findByAccount(String account);
 	
-	/**
-	 * 分页查找
-	 * @param pagination
-	 * @param param
-	 * @return
-	 */
-	public List<AdminUser> findPagination(Pagination<AdminUser> pagination,AdminUser param);
 }

@@ -20,7 +20,10 @@ var DefaultConfig = {
  */
 function gridDateFormatterFunction(pattern){
 	return function(rowdata, index, value){
-		return dateFormatter(new Date(value), pattern);
+		if(value){
+			return dateFormatter(new Date(value), pattern);
+		}
+		return "";
 	};
 }
 

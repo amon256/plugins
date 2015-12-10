@@ -10,20 +10,33 @@
 <script type="text/javascript">
 	
 	$(function(){
-		var params = [];
+		var appId = '${app.id}';
+		var params = [{appId:appId}];
 		var gridConfig = {
-			url : webCtx + "/application/listData",
+			url : webCtx + "/version/listData",
 			params : params,
 			columns: [
-                { display: '应用名', name: 'name', width: 100},
-                { display: '编号', name: 'number', width: 100,align:'left' }, 
-                { display: '创建日期', name: 'createTime', width: 75,align : "right" ,render : gridDateFormatterFunction('yyyy-MM-dd')},
-                { display: '最后更新时间', name: 'lastUpdateTime',width : 130 ,align : "right",render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
-                { display: '描述', name: 'description', width: 100,align:'left' }, 
-                { display: '操作', name: 'operation',width : 100,isSort : false,render : function(rowdata, index, value){
-                	var result = hrefCallbackLabel('版本更新',function(){
-                		openDialog(webCtx + '/version/list?appId='+rowdata.id,'版本更新',{width:900,height:500});
-                	});
+                { display: '应用名', name: 'application.name', isSort : false,width: 100},
+                { display: '版本号', name: 'number', width: 100,align:'left' }, 
+                { display: '版本文件', name: 'fileName', width: 100,align:'left' }, 
+                { display: '参数文件', name: 'parameterFileName', width: 100,align:'left' }, 
+                { display: '创建日期', name: 'createTime', width: 130,align : "right" ,render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
+                { display: '升级时间', name: 'upgradeTime',width : 130 ,align : "right",render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
+                { display: '状态', name: 'status', width: 60,align:'center', render: function(rowdata, index, value){
+                	switch(value){
+                		case 'NOTDO' : value = "未升级";break;
+                		case 'SUCCESS' : value = "成功";break;
+                		case 'FAIL' : value = "失败";break;
+                		default : break;
+                	}
+                	return value;
+                } }, 
+                { display: '操作', name: '',width : 100,isSort : false,render : function(rowdata, index, value){
+                	if(rowdata.status && rowdata.status != 'SUCCESS'){
+                		var result = hrefCallbackLabel('更新',function(){
+                    		openDialog(webCtx + '/version/toUpgrade?id='+rowdata.id,'应用更新('+rowdata.application.name+':'+rowdata.number+')');
+                    	});
+                	}
                 	return result;
                 }}
             ]
@@ -39,22 +52,21 @@
             }
 		});
 		$('#addBtn').bind('click',function(){
-			openDialog(webCtx + '/application/toAdd','新增');
+			openDialog(webCtx + '/version/toAdd?appId='+appId,'新增');
 		});
-		function openDialog(url,title,config){
-			config = config || {};
-			art.dialog.open(url,$.extend({
+		function openDialog(url,title){
+			art.dialog.open(url,{
     			title : title,
     			lock : true,
 				opacity : 0.2,
 				close : function(){
 					$('#searchBtn').trigger('click');
 				}
-    		},config),false);
+    		},false);
 		}
 	});
 </script>
-<body  style="overflow:hidden;padding: 5px;">
+<body  style="overflow:hidden;min-width: 600px;min-height: 400px;">
 	<div id="main">
 		<div position="center">
 			<div id="queryPanel" class="l-panel" style="height:60px;padding-left: 0px;padding-right: 0px;">

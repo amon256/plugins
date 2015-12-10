@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import plugins.upgradekit.entitys.CoreEntity;
 import plugins.utils.CreateQueryHandler;
+import plugins.utils.Pagination;
 
 /**
  * @描述: 业务层基类接口
@@ -96,5 +97,13 @@ public interface BaseService<T extends CoreEntity> {
 	 * @return
 	 */
 	List<T> findByQuery(CreateQueryHandler<T> handler);
+	
+	/**
+	 * 分页查找
+	 * @param pagination
+	 * @param param
+	 * @return
+	 */
+	public List<T> findPagination(Pagination<T> pagination,T param);
 	
 }

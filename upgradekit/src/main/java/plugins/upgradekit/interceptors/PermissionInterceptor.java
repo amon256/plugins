@@ -17,7 +17,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import plugins.permission.PermissionManager;
-import plugins.permission.PermissionUtil;
 import plugins.spring.ApplicationContextAware;
 import plugins.upgradekit.context.WebContext;
 import plugins.upgradekit.entitys.Roleable;

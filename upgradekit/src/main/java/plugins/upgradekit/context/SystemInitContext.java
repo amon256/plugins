@@ -7,11 +7,7 @@ package plugins.upgradekit.context;
 
 import java.util.List;
 
-import javax.annotation.PostConstruct;
-
 import org.apache.ibatis.logging.LogFactory;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
 
 import plugins.permission.PermissionManager;
 import plugins.permission.SystemMenu;
@@ -27,15 +23,12 @@ import plugins.utils.SecurityUtil;
  * @author FengMy
  * @since 2015年11月23日
  */
-@Component
-@Lazy(value=false)
 public class SystemInitContext {
 	
 	public static final String DEFAULT_HEAD_PHOTO = "/adminLTE/img/avatar5.png";
 	
 	private static final String DEFAULT_ADMINUSER_ID = "000000000000000000000000001";
 
-	@PostConstruct
 	public void systemInit(){
 		myBatisLogUsing();
 		createDefaultAdminUser();

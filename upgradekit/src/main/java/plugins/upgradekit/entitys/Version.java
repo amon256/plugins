@@ -5,6 +5,8 @@
  */
 package plugins.upgradekit.entitys;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -67,6 +69,12 @@ public class Version extends DataEntity {
 	@Column(length=20)
 	@Enumerated(EnumType.STRING)
 	private UpgradeStatusEnum status;
+	
+	/**
+	 * 升级时间
+	 */
+	@Column
+	private Date upgradeTime;
 
 	public String getNumber() {
 		return number;
@@ -122,5 +130,13 @@ public class Version extends DataEntity {
 
 	public void setParameterFileName(String parameterFileName) {
 		this.parameterFileName = parameterFileName;
+	}
+
+	public Date getUpgradeTime() {
+		return upgradeTime;
+	}
+
+	public void setUpgradeTime(Date upgradeTime) {
+		this.upgradeTime = upgradeTime;
 	}
 }
