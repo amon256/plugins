@@ -41,16 +41,23 @@ public class InstallAuto {
 			logger.info("校验不通过,终止安装.");
 			return;
 		}
-		InstallConfig config = InstallConfig.loadFrom(new File(argMap.get(ARG_CONFIG)));
-		config.setTarget(argMap.get(ARG_TARGET));
-		config.getContext().putAll(argMap);
+		install(argMap.get(ARG_HOME), argMap.get(ARG_TARGET), argMap.get(ARG_CONFIG),argMap);
+		
+	}
+	
+	public static void install(String installHome,String installTarget,String installConfig,Map<String,String> otherArgs) throws Exception{
+		InstallConfig config = InstallConfig.loadFrom(new File(installConfig));
+		config.setTarget(installTarget);
+		otherArgs.put(ARG_HOME, installHome);
+		otherArgs.put(ARG_TARGET, installTarget);
+		otherArgs.put(ARG_CONFIG, installConfig);
+		config.getContext().putAll(otherArgs);
 		List<Execution> executions = config.getExecutions();
 		logger.info("\n开始安装.");
 		for(Execution exec : executions){
 			exec.execute(config);
 		}
 		logger.info("安装完成.");
-		
 	}
 	
 	public static void initContext(InstallConfig config){
