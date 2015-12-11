@@ -3,19 +3,13 @@
  */
 package plugins.installation.file;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.StringReader;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import freemarker.template.Configuration;
-import freemarker.template.Template;
 
 /**  
  * 功能描述：文件工具类
@@ -134,18 +128,7 @@ public class FileUtils {
 	 * @return
 	 */
 	public static String pathFormat(String path,Object param){
-		try{
-			Configuration config = new Configuration();
-			Template template = new Template(path, new StringReader(path), config);
-			ByteArrayOutputStream out = new ByteArrayOutputStream();
-			template.process(param, new OutputStreamWriter(out));
-			out.flush();
-			out.close();
-			path = out.toString();
-		}catch(Exception e){
-			throw new RuntimeException(e);
-		}
-		return path;
+		return ELUtils.parseTemplate(path, param);
 	}
 	
 	public static void main(String[] args) {

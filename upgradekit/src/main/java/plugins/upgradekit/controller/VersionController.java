@@ -12,9 +12,6 @@ import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.el.ELContext;
-import javax.el.ExpressionFactory;
-import javax.el.VariableMapper;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -31,19 +28,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import de.odysseus.el.ExpressionFactoryImpl;
-import de.odysseus.el.util.SimpleContext;
 import plugins.upgradekit.entitys.Application;
 import plugins.upgradekit.entitys.Version;
 import plugins.upgradekit.enums.UpgradeStatusEnum;
 import plugins.upgradekit.service.ApplicationService;
 import plugins.upgradekit.service.VersionService;
-import plugins.upgradekit.tools.ApplicationUpgradeConfig;
 import plugins.upgradekit.tools.MessageWriter;
-import plugins.upgradekit.tools.NativeCommandExecutor;
 import plugins.upgradekit.tools.UpgradeContext;
-import plugins.upgradekit.tools.ApplicationUpgradeConfig.App;
-import plugins.upgradekit.tools.ApplicationUpgradeConfig.Cmd;
+import plugins.upgradekit.tools.VersionUpgradeExecutor;
 import plugins.utils.CollectionUtils;
 import plugins.utils.CreateQueryHandler;
 import plugins.utils.Pagination;
@@ -95,7 +87,7 @@ public class VersionController extends BaseController {
 	@ResponseBody
 	public ResponseObject addSave(final Version version,
 			@RequestParam(value = "versionFileUpload", required = true) MultipartFile versionFile,
-			@RequestParam(value = "parameterFileUpload", required = false) MultipartFile parameterFile) throws IllegalStateException, IOException{
+			@RequestParam(value = "configFileUpload", required = false) MultipartFile configFile) throws IllegalStateException, IOException{
 		ResponseObject rb = ResponseObject.newInstance().fail();
 		Application application = applicationService.getEntityById(version.getApplication().getId());
 		version.setApplication(application);
@@ -117,11 +109,11 @@ public class VersionController extends BaseController {
 			versionFile.transferTo(file);
 			version.setFile(file.getName());
 			version.setFileName(versionFile.getOriginalFilename());
-			if(!parameterFile.isEmpty()){
-				file = new File(rootPath + File.separator + "P" + sdf.format(new Date()) + parameterFile.getOriginalFilename().substring(parameterFile.getOriginalFilename().lastIndexOf(".")));
-				parameterFile.transferTo(file);
-				version.setParameterFile(file.getName());
-				version.setParameterFileName(parameterFile.getOriginalFilename());
+			if(!configFile.isEmpty()){
+				file = new File(rootPath + File.separator + "P" + sdf.format(new Date()) + configFile.getOriginalFilename().substring(configFile.getOriginalFilename().lastIndexOf(".")));
+				configFile.transferTo(file);
+				version.setConfigFile(file.getName());
+				version.setConfigFileName(configFile.getOriginalFilename());
 			}
 			version.setStatus(UpgradeStatusEnum.NOTDO);
 			versionService.addEntity(version);
@@ -150,36 +142,18 @@ public class VersionController extends BaseController {
 		MessageWriter writer = new MessageWriter() {
 			@Override
 			public void write(String message) {
-				String script = msgScript(message, msgFunctionName);
+				String script = VersionUpgradeExecutor.messageScript(message, msgFunctionName);
 				pw.write(script);
 				pw.flush();
 			}
 		};
 		if(version != null && version.getApplication() != null){
 			version.setUpgradeTime(new Date());
-			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
-			App app = config.getApp(version.getApplication().getNumber());
-			if(app != null && app.getCmds() != null){
-				ExpressionFactory elFactory = new ExpressionFactoryImpl();
-				ELContext elCtx = new SimpleContext();
-				VariableMapper variableMapper = elCtx.getVariableMapper();
-				variableMapper.setVariable("version", elFactory.createValueExpression(version, Version.class));
-				for(Cmd cmd : app.getCmds()){
-					String c = cmd.getCmd();
-					String[] params = new String[0];
-					if(cmd.getParams() != null && !cmd.getParams().isEmpty()){
-						params = new String[cmd.getParams().size()];
-						for(int i = 0; i < cmd.getParams().size(); i++){
-							params[i] = cmd.getParams().get(i).getName() + "=" + (String) elFactory.createValueExpression(elCtx, cmd.getParams().get(i).getValue(), String.class).getValue(elCtx);
-						}
-					}
-					NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, c, params);
-				}
-			}
+			VersionUpgradeExecutor.execute(version, writer);
 			version.setStatus(UpgradeStatusEnum.SUCCESS);
 			versionService.updateEntity(version, CollectionUtils.createSet(String.class, "status","upgradeTime"));
 		}
-		String msg = msgScript("success",completeFunctionName);
+		String msg = VersionUpgradeExecutor.messageScript("success",completeFunctionName);
 		pw.write(msg);
 		pw.flush();
 	}

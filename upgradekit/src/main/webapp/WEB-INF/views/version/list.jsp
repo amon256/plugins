@@ -19,7 +19,7 @@
                 { display: '应用名', name: 'application.name', isSort : false,width: 100},
                 { display: '版本号', name: 'number', width: 100,align:'left' }, 
                 { display: '版本文件', name: 'fileName', width: 100,align:'left' }, 
-                { display: '参数文件', name: 'parameterFileName', width: 100,align:'left' }, 
+                { display: '配置文件', name: 'configFileName', width: 100,align:'left' }, 
                 { display: '创建日期', name: 'createTime', width: 130,align : "right" ,render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
                 { display: '升级时间', name: 'upgradeTime',width : 130 ,align : "right",render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
                 { display: '状态', name: 'status', width: 60,align:'center', render: function(rowdata, index, value){

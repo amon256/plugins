@@ -6,7 +6,7 @@
 		V.ID AS "id",
 		V.NUMBER AS "number",
 		V.FILENAME AS "fileName",
-		V.PARAMETERFILENAME AS "parameterFileName",
+		V.CONFIGFILENAME AS "configFileName",
 		V.STATUS AS "status",
 		V.CREATETIME AS "createTime",
 		V.UPGRADETIME AS "upgradeTime",

@@ -31,6 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import plugins.installation.config.InstallConfig;
+import plugins.installation.file.ELUtils;
 import plugins.installation.file.FileEditInfo;
 import plugins.installation.file.FileEditInfo.FileEditItem;
 import plugins.installation.file.FileUtils;
@@ -58,12 +59,12 @@ public class FileEditExecution implements Execution {
 			if(file.getName().toLowerCase().endsWith(".properties")){
 				if(fileEditInfo.getItems() != null && !fileEditInfo.getItems().isEmpty()){
 					logger.info("修改文件{}的参数",fileEditInfo.getFile());
-					editProperties(file, fileEditInfo.getItems());
+					editProperties(file, fileEditInfo.getItems(), config);
 				}
 			}else if(file.getName().toLowerCase().endsWith(".xml")){
 				if(fileEditInfo.getItems() != null && !fileEditInfo.getItems().isEmpty()){
 					logger.info("修改文件{}的参数",fileEditInfo.getFile());
-					editXml(file, fileEditInfo.getItems());
+					editXml(file, fileEditInfo.getItems(), config);
 				}
 			}else{
 				logger.error("{}文件类型暂时不支持修改,请自行修改",fileEditInfo.getFile());
@@ -78,11 +79,17 @@ public class FileEditExecution implements Execution {
 		return true;
 	}
 	
-	private static void editXml(File file,List<FileEditItem> items) throws IOException{
+	private static void editXml(File file,List<FileEditItem> items,InstallConfig config) throws IOException{
 		try{
 			Document document = new SAXReader().read(new FileInputStream(file));
 			boolean hasEdit = false;
 			for(FileEditItem item : items){
+				if(item.getItemName() == null || item.getItemValue() == null){
+					logger.info("参数{},{}={}为空,设置为空字符串",item.getItemDesc(),item.getItemName(),item.getItemValue());
+					item.setItemValue("");
+				}else{
+					item.setItemValue(ELUtils.parseTemplate(item.getItemValue(), config.getContext()));
+				}
 				Node node = document.selectSingleNode(item.getItemName());
 				if(node != null){
 					node.setText(item.getItemValue());
@@ -104,11 +111,17 @@ public class FileEditExecution implements Execution {
 		}
 	}
 	
-	private static void editProperties(File file,List<FileEditItem> items) throws FileNotFoundException, IOException{
+	private static void editProperties(File file,List<FileEditItem> items,InstallConfig config) throws FileNotFoundException, IOException{
 		Properties prop = new Properties();
 		prop.load(new FileInputStream(file));
 		boolean hasEdit = false;
 		for(FileEditItem item : items){
+			if(item.getItemName() == null || item.getItemValue() == null){
+				logger.info("参数{},{}={}为空,设置为空字符串",item.getItemDesc(),item.getItemName(),item.getItemValue());
+				item.setItemValue("");
+			}else{
+				item.setItemValue(ELUtils.parseTemplate(item.getItemValue(), config.getContext()));
+			}
 			prop.put(item.getItemName(), item.getItemValue());
 			logger.info("设置参数 {}={}",item.getItemName(), item.getItemValue());
 			hasEdit = true;

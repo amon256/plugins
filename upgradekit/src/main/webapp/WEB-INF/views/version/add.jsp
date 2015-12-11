@@ -60,12 +60,12 @@
 							<td><input type="text" id="number" name="number"/></td>
 						</tr>
 						<tr>
-							<td>升级附件</td>
+							<td>升级文件</td>
 							<td><input type="file" id="versionFile" name="versionFileUpload"/></td>
 						</tr>
 						<tr>
-							<td>参数文件</td>
-							<td><input type="file" id="parameterFile" name="parameterFileUpload"/></td>
+							<td>安装过程文件</td>
+							<td><input type="file" id="configFile" name="configFileUpload"/></td>
 						</tr>
 						<tr>
 							<td>

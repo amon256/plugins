@@ -156,6 +156,7 @@ public class InstallConfig {
 				FileEditItem item = new FileEditItem();
 				item.setItemName(e.attributeValue("name"));
 				item.setItemDesc(e.attributeValue("desc"));
+				item.setItemValue(e.attributeValue("value"));
 				editItems.add(item);
 			}
 		}
@@ -230,7 +231,6 @@ public class InstallConfig {
 	}
 	
 	public Map<String, Object> getContext() {
-		context.put("TARGET", target);
 		return context;
 	}
 

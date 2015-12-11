@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <applications charset="gbk">
 	<application>
-		<id>NDMP-WEB</id>
+		<id>DNS_COLLECT</id>
 		<name>网络局数据前台WEB</name>
 		<commands>
 			<command>
@@ -16,12 +16,12 @@
 						<value>${version.fileName}</value>
 					</param>
 					<param>
-						<name>parameterFile</name>
-						<value>${version.parameterFile}</value>
+						<name>configFile</name>
+						<value>${version.configFile}</value>
 					</param>
 					<param>
-						<name>parameterFileName</name>
-						<value>${version.parameterFileName}</value>
+						<name>configFileName</name>
+						<value>${version.configFileName}</value>
 					</param>
 				</params>
 			</command>

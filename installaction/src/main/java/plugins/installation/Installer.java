@@ -56,17 +56,11 @@ public class Installer {
 			initContext(config);
 			logger.info("*************{}****************",config.getName());
 			logger.info("当前路径:{}",System.getProperty("user.dir"));
-//			String source = null;
-//			while(source == null){
-//				source = readSourcePath(config,br);
-//			}
-//			config.setSource(source);
 			String target = null;
 			while(target == null){
 				target = readTargetPath(config,br);
 			}
 			config.setTarget(target);
-//			logger.info("安装资源文件夹:{}",source);
 			logger.info("程序安装路径:{}",target);
 			
 			if(config.validate()){

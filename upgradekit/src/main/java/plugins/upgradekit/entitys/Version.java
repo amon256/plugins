@@ -48,16 +48,16 @@ public class Version extends DataEntity {
 	private String fileName;
 	
 	/**
-	 * 升级参数文件
+	 * 升级过程配置文件
 	 */
 	@Column(length=80)
-	private String parameterFile;
+	private String configFile;
 	
 	/**
 	 * 升级参数文件原文件名
 	 */
 	@Column(length=80)
-	private String parameterFileName;
+	private String configFileName;
 	
 	@ManyToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="applicationId")
@@ -92,14 +92,6 @@ public class Version extends DataEntity {
 		this.file = file;
 	}
 
-	public String getParameterFile() {
-		return parameterFile;
-	}
-
-	public void setParameterFile(String parameterFile) {
-		this.parameterFile = parameterFile;
-	}
-
 	public Application getApplication() {
 		return application;
 	}
@@ -124,12 +116,20 @@ public class Version extends DataEntity {
 		this.fileName = fileName;
 	}
 
-	public String getParameterFileName() {
-		return parameterFileName;
+	public String getConfigFile() {
+		return configFile;
 	}
 
-	public void setParameterFileName(String parameterFileName) {
-		this.parameterFileName = parameterFileName;
+	public void setConfigFile(String configFile) {
+		this.configFile = configFile;
+	}
+
+	public String getConfigFileName() {
+		return configFileName;
+	}
+
+	public void setConfigFileName(String configFileName) {
+		this.configFileName = configFileName;
 	}
 
 	public Date getUpgradeTime() {
