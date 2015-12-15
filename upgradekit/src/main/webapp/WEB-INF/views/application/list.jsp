@@ -21,8 +21,9 @@
                 { display: '最后更新时间', name: 'lastUpdateTime',width : 130 ,align : "right",render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
                 { display: '描述', name: 'description', width: 100,align:'left' }, 
                 { display: '操作', name: 'operation',width : 100,isSort : false,render : function(rowdata, index, value){
+                	var rowId = rowdata.id;
                 	var result = hrefCallbackLabel('版本更新',function(){
-                		openDialog(webCtx + '/version/list?appId='+rowdata.id,'版本更新',{width:900,height:500});
+                		openDialog(webCtx + '/version/list?appId='+rowId,'版本更新',{width:900,height:500});
                 	});
                 	return result;
                 }}

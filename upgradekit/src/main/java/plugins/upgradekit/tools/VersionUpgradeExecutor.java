@@ -15,11 +15,11 @@ import javax.el.VariableMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.odysseus.el.ExpressionFactoryImpl;
-import de.odysseus.el.util.SimpleContext;
 import plugins.upgradekit.entitys.Version;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig.App;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig.Cmd;
+import de.odysseus.el.ExpressionFactoryImpl;
+import de.odysseus.el.util.SimpleContext;
 
 /**  
  * 功能描述：
@@ -44,13 +44,12 @@ public class VersionUpgradeExecutor {
 		}
 		ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
 		App app = config.getApp(version.getApplication().getNumber());
-		if(app != null && app.getCmds() != null){
+		if(app != null && app.getInstallCmds() != null){
 			ExpressionFactory elFactory = new ExpressionFactoryImpl();
 			ELContext elCtx = new SimpleContext();
 			VariableMapper variableMapper = elCtx.getVariableMapper();
 			variableMapper.setVariable("version", elFactory.createValueExpression(version, Version.class));
-			for(Cmd cmd : app.getCmds()){
-				String c = cmd.getCmd();
+			for(Cmd cmd : app.getInstallCmds()){
 				String[] params = new String[0];
 				if(cmd.getParams() != null && !cmd.getParams().isEmpty()){
 					params = new String[cmd.getParams().size()];
@@ -59,8 +58,11 @@ public class VersionUpgradeExecutor {
 					}
 				}
 				//默认5分钟超时
-				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, c, params,1000*300);
+				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
 			}
+		}else{
+			logger.debug("应用未配置:{}",version.getApplication().getNumber());
+			writer.write("应用编号:" + version.getApplication().getNumber() + "没有找到相应的升级配置");
 		}
 	}
 	

@@ -127,9 +127,9 @@ public class ApplicationUpgradeConfig {
 		App app = new App();
 		app.setId(element.getChildTextTrim("id"));
 		app.setName(element.getChildTextTrim("name"));
-		element = element.getChild("commands");
-		if(element != null){
-			List<Element> children = element.getChildren();
+		Element cmdsElement = element.getChild("commands");
+		if(cmdsElement != null){
+			List<Element> children = cmdsElement.getChildren();
 			if(children != null && !children.isEmpty()){
 				List<Cmd> cmdList = new LinkedList<ApplicationUpgradeConfig.Cmd>();
 				for(Element ele : children){
@@ -139,16 +139,42 @@ public class ApplicationUpgradeConfig {
 						cmdList.add(cmd);
 					}
 				}
-				app.setCmds(cmdList);
+				app.setInstallCmds(cmdList);
 			}
+		}
+		//应用状态
+		Element statusCmd = element.getChild("statusCmd");
+		if(statusCmd != null){
+			StatusCmd cmd = readStatusCmd(statusCmd);
+			app.setStatusCmd(cmd);
+		}
+		//启动命令
+		Element startCmd = element.getChild("startCmd");
+		if(startCmd != null){
+			Cmd cmd = readCmd(startCmd);
+			app.setStartCmd(cmd);
+		}
+		//关闭命令
+		Element stopCmd = element.getChild("stopCmd");
+		if(stopCmd != null){
+			Cmd cmd = readCmd(stopCmd);
+			app.setStopCmd(cmd);
 		}
 		logger.info("读取App,id:{},name:{}",app.getId(),app.getName());
 		return app;
 	}
 	
+	private StatusCmd readStatusCmd(Element element){
+		StatusCmd cmd = new StatusCmd();
+		cmd.setCmd(element.getChildTextTrim("cmd"));
+		cmd.setIncludeValue(element.getChildTextTrim("include"));
+		return cmd;
+	}
+	
 	@SuppressWarnings("unchecked")
 	private Cmd readCmd(Element element){
 		Cmd cmd = new Cmd();
+		cmd.setPath(element.getChildTextTrim("path"));
 		cmd.setCmd(element.getChildTextTrim("cmd"));
 		element = element.getChild("params");
 		if(element != null){
@@ -185,7 +211,10 @@ public class ApplicationUpgradeConfig {
 	public static class App{
 		private String id;
 		private String name;
-		private List<Cmd> cmds;
+		private StatusCmd statusCmd;
+		private Cmd startCmd;
+		private Cmd stopCmd;
+		private List<Cmd> installCmds;
 		public String getId() {
 			return id;
 		}
@@ -198,15 +227,51 @@ public class ApplicationUpgradeConfig {
 		public void setName(String name) {
 			this.name = name;
 		}
-		public List<Cmd> getCmds() {
-			return cmds;
+		public List<Cmd> getInstallCmds() {
+			return installCmds;
 		}
-		public void setCmds(List<Cmd> cmds) {
-			this.cmds = cmds;
+		public void setInstallCmds(List<Cmd> cmds) {
+			this.installCmds = cmds;
+		}
+		public StatusCmd getStatusCmd() {
+			return statusCmd;
+		}
+		public void setStatusCmd(StatusCmd statusCmd) {
+			this.statusCmd = statusCmd;
+		}
+		public Cmd getStartCmd() {
+			return startCmd;
+		}
+		public void setStartCmd(Cmd startCmd) {
+			this.startCmd = startCmd;
+		}
+		public Cmd getStopCmd() {
+			return stopCmd;
+		}
+		public void setStopCmd(Cmd stopCmd) {
+			this.stopCmd = stopCmd;
+		}
+	}
+	
+	public static class StatusCmd{
+		private String cmd;
+		private String includeValue;
+		public String getCmd() {
+			return cmd;
+		}
+		public void setCmd(String cmd) {
+			this.cmd = cmd;
+		}
+		public String getIncludeValue() {
+			return includeValue;
+		}
+		public void setIncludeValue(String includeValue) {
+			this.includeValue = includeValue;
 		}
 	}
 	
 	public static class Cmd{
+		private String path;
 		private String cmd;
 		private List<Param> params;
 		public String getCmd() {
@@ -220,6 +285,12 @@ public class ApplicationUpgradeConfig {
 		}
 		public void setParams(List<Param> params) {
 			this.params = params;
+		}
+		public String getPath() {
+			return path;
+		}
+		public void setPath(String path) {
+			this.path = path;
 		}
 	}
 	

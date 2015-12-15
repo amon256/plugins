@@ -11,10 +11,10 @@
 	
 	$(function(){
 		var appId = '${app.id}';
-		var params = [{appId:appId}];
+		var params = [{name: "application.id",value: appId}];
 		var gridConfig = {
 			url : webCtx + "/version/listData",
-			params : params,
+			parms : params,
 			columns: [
                 { display: '应用名', name: 'application.name', isSort : false,width: 100},
                 { display: '版本号', name: 'number', width: 100,align:'left' }, 
@@ -33,8 +33,9 @@
                 } }, 
                 { display: '操作', name: '',width : 100,isSort : false,render : function(rowdata, index, value){
                 	if(rowdata.status && rowdata.status != 'SUCCESS'){
+                		var rowId = rowdata.id;
                 		var result = hrefCallbackLabel('更新',function(){
-                    		openDialog(webCtx + '/version/toUpgrade?id='+rowdata.id,'应用更新('+rowdata.application.name+':'+rowdata.number+')');
+                    		openDialog(webCtx + '/version/toUpgrade?id='+rowId,'应用更新('+rowdata.application.name+':'+rowdata.number+')');
                     	});
                 	}
                 	return result;

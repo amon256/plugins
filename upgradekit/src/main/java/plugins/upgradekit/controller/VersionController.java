@@ -8,7 +8,6 @@ package plugins.upgradekit.controller;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -18,6 +17,9 @@ import javax.persistence.criteria.Root;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -67,7 +69,8 @@ public class VersionController extends BaseController {
 	
 	@RequestMapping(value="listData")
 	@ResponseBody
-	public Pagination<Version> listData(Pagination<Version> pagination,Version version){
+	public Pagination<Version> listData(Pagination<Version> pagination,Version version) throws JsonGenerationException, JsonMappingException, IOException{
+		logger.debug("查询版本数据:{}",new ObjectMapper().writeValueAsString(version));
 		if(StringUtils.isEmpty(version.getSort_())){
 			version.setSort_("createTime");
 			version.setOrder_("desc");
@@ -119,6 +122,7 @@ public class VersionController extends BaseController {
 			versionService.addEntity(version);
 			rb.success();
 		}
+		logger.debug("新增版本数据:{}",new ObjectMapper().writeValueAsString(version));
 		return rb;
 	}
 	
@@ -138,6 +142,7 @@ public class VersionController extends BaseController {
 		response.setHeader("Content-type", "text/html;charset=UTF-8");  
 		response.setCharacterEncoding("UTF-8");
 		Version version = versionService.getEntityById(id);
+		logger.debug("执行版本升级:{}",new ObjectMapper().writeValueAsString(version));
 		final PrintWriter pw = response.getWriter();
 		MessageWriter writer = new MessageWriter() {
 			@Override
@@ -176,18 +181,5 @@ public class VersionController extends BaseController {
 			rb.setMsg("参数异常");
 		}
 		return rb;
-	}
-	
-	private String msgScript(String msg,String functionName){
-		try{
-			msg = URLEncoder.encode(msg.trim(),"utf-8").replaceAll("\\+", "%20");
-		}catch(Exception e){
-			logger.error("转码异常:"+msg,e);
-		}
-		StringBuilder script = new StringBuilder("<script type=\"text/javascript\">");
-		script.append("window.parent."+functionName+"(decodeURIComponent('"+msg+"'))");
-		script.append("</script>");
-		System.out.println(script.toString());
-		return script.toString();
 	}
 }
