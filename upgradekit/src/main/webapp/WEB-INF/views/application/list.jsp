@@ -18,16 +18,45 @@
                 { display: '应用名', name: 'name', width: 100},
                 { display: '编号', name: 'number', width: 100,align:'left' }, 
                 { display: '创建日期', name: 'createTime', width: 75,align : "right" ,render : gridDateFormatterFunction('yyyy-MM-dd')},
-                { display: '最后更新时间', name: 'lastUpdateTime',width : 130 ,align : "right",render : gridDateFormatterFunction('yyyy-MM-dd HH:mm:ss')},
                 { display: '描述', name: 'description', width: 100,align:'left' }, 
-                { display: '操作', name: 'operation',width : 100,isSort : false,render : function(rowdata, index, value){
+                { display: '运行状态', name: 'runStatus',width: 80, align: 'center', render: function(rowdata,index,value){
+                	if(value == 'stop'){
+                		return '<span id="runStatus'+rowdata.id+'" class="l-icon l-icon-busy">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="runStatusText'+rowdata.id+'" >己停止</span>';
+                	}else if(value == 'running'){
+                		return '<span id="runStatus'+rowdata.id+'" class="l-icon l-icon-ok">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="runStatusText'+rowdata.id+'" >运行中</span>';
+                	}else{
+                		return '<span id="runStatus'+rowdata.id+'" class="l-icon l-icon-process">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="runStatusText'+rowdata.id+'" >加载中</span>';
+                	}
+                }},
+                { display: '版本更新', name: 'operation',width : 100,isSort : false,render : function(rowdata, index, value){
                 	var rowId = rowdata.id;
                 	var result = hrefCallbackLabel('版本更新',function(){
                 		openDialog(webCtx + '/version/list?appId='+rowId,'版本更新',{width:900,height:500});
                 	});
                 	return result;
                 }}
-            ]
+            ],
+            onAfterShowData: function(currentData,a,b,c){
+            	if(currentData && currentData.datas && currentData.datas.length > 0){
+            		for(var i = 0; i < currentData.datas.length; i++){
+            			var id = currentData.datas[i].id;
+            			$.post(webCtx+'/application/checkStatus',{id : id},function(data){
+            				if(data && data.status == 'success' && data.appStatus){
+            					var span = $('#runStatus' + data.id).removeClass('l-icon-process');
+            					if(data.appStatus == 'running'){
+            						span.addClass('l-icon-ok');
+            						$('#runStatusText'+data.id).empty().text('运行中');
+            					}else{
+            						span.addClass('l-icon-busy').empty().text('己停止');
+            						$('#runStatusText'+data.id).empty().text('己停止');
+            					}
+            				}else{
+            					$('#runStatusText'+data.id).empty().text('未配置');
+            				}
+            			});
+            		}
+            	}
+            }
         };
 		var dataGrid = $("#dataGrid").ligerGrid($.extend(true,{},DefaultConfig.dataGridConfig,gridConfig)); 
 		$.metadata.setType("attr", "validate");

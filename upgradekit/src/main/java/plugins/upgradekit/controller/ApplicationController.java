@@ -27,9 +27,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import plugins.upgradekit.entitys.Application;
 import plugins.upgradekit.service.ApplicationService;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig;
+import plugins.upgradekit.tools.ApplicationUpgradeConfig.App;
 import plugins.upgradekit.tools.MessageWriter;
 import plugins.upgradekit.tools.NativeCommandExecutor;
-import plugins.upgradekit.tools.ApplicationUpgradeConfig.App;
 import plugins.utils.CreateQueryHandler;
 import plugins.utils.Pagination;
 import plugins.utils.ResponseObject;
@@ -100,7 +100,9 @@ public class ApplicationController extends BaseController {
 	public ResponseObject checkStatus(@RequestParam(value="id",required=true)String id){
 		ResponseObject rb = ResponseObject.newInstance().success();
 		Application application = applicationService.getEntityById(id);
+		rb.put("id", id);
 		if(application != null){
+			rb.put("appStatus", "running");
 			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
 			App app = config.getApp(application.getNumber());
 			if(app != null && app.getStatusCmd() != null){
@@ -113,6 +115,8 @@ public class ApplicationController extends BaseController {
 				},app.getStatusCmd().getCmd(), config.getCharset(), new String[]{},null,10000);
 				if(result.indexOf(app.getStatusCmd().getIncludeValue()) >= 0){
 					rb.put("appStatus", "running");
+				}else{
+					rb.put("appStatus", "stop");
 				}
 			}else{
 				rb.fail();
