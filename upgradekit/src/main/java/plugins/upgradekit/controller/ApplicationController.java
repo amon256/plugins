@@ -5,11 +5,14 @@
  */
 package plugins.upgradekit.controller;
 
+import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.JsonGenerationException;
@@ -28,8 +31,10 @@ import plugins.upgradekit.entitys.Application;
 import plugins.upgradekit.service.ApplicationService;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig.App;
+import plugins.upgradekit.tools.ApplicationUpgradeConfig.Cmd;
 import plugins.upgradekit.tools.MessageWriter;
 import plugins.upgradekit.tools.NativeCommandExecutor;
+import plugins.upgradekit.tools.VersionUpgradeExecutor;
 import plugins.utils.CreateQueryHandler;
 import plugins.utils.Pagination;
 import plugins.utils.ResponseObject;
@@ -112,7 +117,7 @@ public class ApplicationController extends BaseController {
 					public void write(String message) {
 						result.append(message).append("\n");
 					}
-				},app.getStatusCmd().getCmd(), config.getCharset(), new String[]{},null,10000);
+				}, config.getCharset(), app.getStatusCmd().getCmd(), new String[]{},null,10000);
 				if(result.indexOf(app.getStatusCmd().getIncludeValue()) >= 0){
 					rb.put("appStatus", "running");
 				}else{
@@ -127,5 +132,89 @@ public class ApplicationController extends BaseController {
 			rb.setMsg("应用不存在");
 		}
 		return rb;
+	}
+	
+	@RequestMapping(value="start")
+	@ResponseBody
+	public void start(@RequestParam(value="id",required=true)String id,
+			@RequestParam(value="msgFunctionName",required=true)final String msgFunctionName,
+			@RequestParam(value="completeFunctionName",required=true)final String completeFunctionName,
+			HttpServletResponse response) throws IOException{
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.setHeader("Content-type", "text/html;charset=UTF-8");  
+		response.setCharacterEncoding("UTF-8");
+		final PrintWriter pw = response.getWriter();
+		Application application = applicationService.getEntityById(id);
+		if(application != null){
+			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
+			App app = config.getApp(application.getNumber());
+			if(app != null && app.getStartCmd() != null){
+				Cmd cmd = app.getStartCmd();
+				String[] params = new String[0];
+				if(cmd.getParams() != null && !cmd.getParams().isEmpty()){
+					params = new String[cmd.getParams().size()];
+					for(int i = 0; i < cmd.getParams().size(); i++){
+						params[i] = cmd.getParams().get(i).getName() + "=" + cmd.getParams().get(i).getValue();
+					}
+				}
+				MessageWriter writer = new MessageWriter() {
+					@Override
+					public void write(String message) {
+						String script = VersionUpgradeExecutor.messageScript(message, msgFunctionName);
+						pw.write(script);
+						pw.flush();
+					}
+				};
+				//默认5分钟超时
+				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
+			}else{
+				pw.write(VersionUpgradeExecutor.messageScript("应用启用命令未配置",completeFunctionName));
+			}
+		}else{
+			pw.write(VersionUpgradeExecutor.messageScript("应用不存在",completeFunctionName));
+		}
+		pw.flush();
+	}
+	
+	@RequestMapping(value="stop")
+	@ResponseBody
+	public void stop(@RequestParam(value="id",required=true)String id,
+			@RequestParam(value="msgFunctionName",required=true)final String msgFunctionName,
+			@RequestParam(value="completeFunctionName",required=true)final String completeFunctionName,
+			HttpServletResponse response) throws IOException{
+		response.setStatus(HttpServletResponse.SC_OK);
+		response.setHeader("Content-type", "text/html;charset=UTF-8");  
+		response.setCharacterEncoding("UTF-8");
+		final PrintWriter pw = response.getWriter();
+		Application application = applicationService.getEntityById(id);
+		if(application != null){
+			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
+			App app = config.getApp(application.getNumber());
+			if(app != null && app.getStopCmd() != null){
+				Cmd cmd = app.getStopCmd();
+				String[] params = new String[0];
+				if(cmd.getParams() != null && !cmd.getParams().isEmpty()){
+					params = new String[cmd.getParams().size()];
+					for(int i = 0; i < cmd.getParams().size(); i++){
+						params[i] = cmd.getParams().get(i).getName() + "=" + cmd.getParams().get(i).getValue();
+					}
+				}
+				MessageWriter writer = new MessageWriter() {
+					@Override
+					public void write(String message) {
+						String script = VersionUpgradeExecutor.messageScript(message, msgFunctionName);
+						pw.write(script);
+						pw.flush();
+					}
+				};
+				//默认5分钟超时
+				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
+			}else{
+				pw.write(VersionUpgradeExecutor.messageScript("应用关闭命令未配置",completeFunctionName));
+			}
+		}else{
+			pw.write(VersionUpgradeExecutor.messageScript("应用不存在",completeFunctionName));
+		}
+		pw.flush();
 	}
 }

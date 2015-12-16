@@ -19,7 +19,7 @@
                 { display: '编号', name: 'number', width: 100,align:'left' }, 
                 { display: '创建日期', name: 'createTime', width: 75,align : "right" ,render : gridDateFormatterFunction('yyyy-MM-dd')},
                 { display: '描述', name: 'description', width: 100,align:'left' }, 
-                { display: '运行状态', name: 'runStatus',width: 80, align: 'center', render: function(rowdata,index,value){
+                { display: '运行状态', name: 'runStatus',width: 80, align: 'center', isSort : false,render: function(rowdata,index,value){
                 	if(value == 'stop'){
                 		return '<span id="runStatus'+rowdata.id+'" class="l-icon l-icon-busy">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="runStatusText'+rowdata.id+'" >己停止</span>';
                 	}else if(value == 'running'){
@@ -34,6 +34,10 @@
                 		openDialog(webCtx + '/version/list?appId='+rowId,'版本更新',{width:900,height:500});
                 	});
                 	return result;
+                }},{display: '版本更新', name: 'operation',width : 200,isSort : false,render : function(rowdata, index, value){
+                	var rowId = rowdata.id;
+                	return '<button id="startBtn'+rowId+'" onclick="startApplication(\''+rowId+'\')" class="l-button l-button-disabled" disabled="disabled">启动</button>'
+                		+ '&nbsp;&nbsp;&nbsp;<button id="stopBtn'+rowId+'" onclick="stopApplication(\''+rowId+'\')" class="l-button l-button-disabled" disabled="disabled">停止</button>';
                 }}
             ],
             onAfterShowData: function(currentData,a,b,c){
@@ -46,9 +50,13 @@
             					if(data.appStatus == 'running'){
             						span.addClass('l-icon-ok');
             						$('#runStatusText'+data.id).empty().text('运行中');
+            						$('#stopBtn'+data.id).removeAttr('disabled');
+            						$('#stopBtn'+data.id).removeClass('l-button-disabled');
             					}else{
-            						span.addClass('l-icon-busy').empty().text('己停止');
+            						span.addClass('l-icon-busy');
             						$('#runStatusText'+data.id).empty().text('己停止');
+            						$('#startBtn'+data.id).removeAttr('disabled');
+            						$('#startBtn'+data.id).removeClass('l-button-disabled');
             					}
             				}else{
             					$('#runStatusText'+data.id).empty().text('未配置');
@@ -83,6 +91,44 @@
     		},config),false);
 		}
 	});
+	function startApplication(id){
+		executeRemoteCmd("启动应用",webCtx + '/application/start?id='+id);
+	}
+	
+	function stopApplication(id){
+		executeRemoteCmd("停止应用",webCtx + '/application/stop?id='+id);
+	}
+	
+	function executeRemoteCmd(title,url){
+		$.ligerDialog.confirm('确认'+title, function (ok) {
+			if(ok){
+				art.dialog({
+					title: title,
+					lock : true,
+					opacity : 0.2,
+					padding: '3px',
+					content: document.getElementById('msgContainer'),
+					init: function(){
+						$('#msgArea').empty();
+						$('#cmdExecuteForm').attr('action',url);
+						$('#cmdExecuteForm').submit();
+					}
+				});
+			}
+		});
+	}
+	var colors = ['#6F6C5C','#8B7C40'];
+	var colorIdx = 0;
+	function appendMsg(msg){
+		var color = colors[colorIdx];
+		colorIdx = colorIdx==0?1:0;
+		$('#msgArea').append("<nobr style=\"color:"+color+"\">" + msg + "</nobr></br>");
+		$('#msgContainer').scrollTop( $('#msgArea').height() );
+	}
+	function executeComplete(status){
+		appendMsg(status);
+		art.dialog.tips("己完成");
+	}
 </script>
 <body  style="overflow:hidden;padding: 5px;">
 	<div id="main">
@@ -113,6 +159,17 @@
 			<div class="-clear"/>
 			 <div id="dataGrid"></div>
         </div> 
+	</div>
+	<div id="msgContainer" style="width:400px;height: 400px;overflow: scroll;" class="l-panel" >
+		<div id="msgArea" />
+	</div>
+	<div style="display: none">
+		<form id="cmdExecuteForm" target="remoteCommandFrame">
+			<input type="text" name="id"/>
+			<input type="text" name="msgFunctionName" value="appendMsg"/>
+			<input type="text" name="completeFunctionName" value="executeComplete"/>
+		</form>
+		<iframe name='remoteCommandFrame'></iframe>
 	</div>
 </body>
 </html>

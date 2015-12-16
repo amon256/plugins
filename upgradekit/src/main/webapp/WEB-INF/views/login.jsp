@@ -169,4 +169,13 @@ html, body {
 		</div>
 	</div>
 </body>
+<script type="text/javascript">
+	$(function(){
+		if($('#account').val()){
+			$('#pwd').focus();
+		}else{
+			$('#account').focus();
+		}
+	});
+</script>
 </html>

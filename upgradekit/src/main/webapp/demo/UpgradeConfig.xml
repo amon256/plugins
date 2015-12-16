@@ -32,9 +32,9 @@
 			</command>
 		</commands>
 		<statusCmd>
-			<!-- 应用状态检测命令 -->
-			<cmd>ps -ef | grep 8080 | grep tomcat</cmd>
-			<include>8080</include>
+			<!-- 应用状态检测命令,直接写管道命令不能执行，需要将ps -ef | grep 8181 | grep tomcat写在sh中执行 -->
+			<cmd>/usr/local/status/winplan2.sh</cmd>
+			<include>tomcat</include>
 		</statusCmd>
 		<startCmd>
 			<path>/usr/local/tomcat8080/bin</path>
