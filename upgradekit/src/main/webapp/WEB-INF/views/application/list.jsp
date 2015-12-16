@@ -92,14 +92,14 @@
 		}
 	});
 	function startApplication(id){
-		executeRemoteCmd("启动应用",webCtx + '/application/start?id='+id);
+		executeRemoteCmd("启动应用",webCtx + '/application/start',id);
 	}
 	
 	function stopApplication(id){
-		executeRemoteCmd("停止应用",webCtx + '/application/stop?id='+id);
+		executeRemoteCmd("停止应用",webCtx + '/application/stop',id);
 	}
 	
-	function executeRemoteCmd(title,url){
+	function executeRemoteCmd(title,url,applicationId){
 		$.ligerDialog.confirm('确认'+title, function (ok) {
 			if(ok){
 				art.dialog({
@@ -111,6 +111,7 @@
 					init: function(){
 						$('#msgArea').empty();
 						$('#cmdExecuteForm').attr('action',url);
+						$('#applicationId').val(applicationId);
 						$('#cmdExecuteForm').submit();
 					}
 				});
@@ -165,7 +166,7 @@
 	</div>
 	<div style="display: none">
 		<form id="cmdExecuteForm" target="remoteCommandFrame">
-			<input type="text" name="id"/>
+			<input type="text" name="id" id="applicationId"/>
 			<input type="text" name="msgFunctionName" value="appendMsg"/>
 			<input type="text" name="completeFunctionName" value="executeComplete"/>
 		</form>

@@ -38,7 +38,7 @@
 		</statusCmd>
 		<startCmd>
 			<path>/usr/local/tomcat8080/bin</path>
-			<cmd>./start.sh</cmd>
+			<cmd>./startup.sh</cmd>
 			<!-- 命令参数,可以为空 
 			<params>
 				<param>
