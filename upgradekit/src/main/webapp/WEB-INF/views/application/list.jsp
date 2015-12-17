@@ -19,6 +19,20 @@
                 { display: '编号', name: 'number', width: 100,align:'left' }, 
                 { display: '创建日期', name: 'createTime', width: 75,align : "right" ,render : gridDateFormatterFunction('yyyy-MM-dd')},
                 { display: '描述', name: 'description', width: 100,align:'left' }, 
+                { display: '配置文件', name: 'configFiles',width : 100,isSort : false,render : function(rowdata, index, value){
+                	var rowId = rowdata.id;
+                	var result = hrefCallbackLabel('配置文件',function(){
+                		openDialog(webCtx + '/application/toConfigFiles?id='+rowId,'配置文件',{width:900,height:500});
+                	});
+                	return result;
+                }},
+                { display: '版本更新', name: 'operation',width : 100,isSort : false,render : function(rowdata, index, value){
+                	var rowId = rowdata.id;
+                	var result = hrefCallbackLabel('版本更新',function(){
+                		openDialog(webCtx + '/version/list?appId='+rowId,'版本更新',{width:900,height:500});
+                	});
+                	return result;
+                }},
                 { display: '运行状态', name: 'runStatus',width: 80, align: 'center', isSort : false,render: function(rowdata,index,value){
                 	if(value == 'stop'){
                 		return '<span id="runStatus'+rowdata.id+'" class="l-icon l-icon-busy">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="runStatusText'+rowdata.id+'" >己停止</span>';
@@ -28,13 +42,7 @@
                 		return '<span id="runStatus'+rowdata.id+'" class="l-icon l-icon-process">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span id="runStatusText'+rowdata.id+'" >加载中</span>';
                 	}
                 }},
-                { display: '版本更新', name: 'operation',width : 100,isSort : false,render : function(rowdata, index, value){
-                	var rowId = rowdata.id;
-                	var result = hrefCallbackLabel('版本更新',function(){
-                		openDialog(webCtx + '/version/list?appId='+rowId,'版本更新',{width:900,height:500});
-                	});
-                	return result;
-                }},{display: '版本更新', name: 'operation',width : 200,isSort : false,render : function(rowdata, index, value){
+               {display: '系统启停', name: 'appStartStop',width : 200,isSort : false,render : function(rowdata, index, value){
                 	var rowId = rowdata.id;
                 	return '<button id="startBtn'+rowId+'" onclick="startApplication(\''+rowId+'\')" class="l-button l-button-disabled" disabled="disabled">启动</button>'
                 		+ '&nbsp;&nbsp;&nbsp;<button id="stopBtn'+rowId+'" onclick="stopApplication(\''+rowId+'\')" class="l-button l-button-disabled" disabled="disabled">停止</button>';

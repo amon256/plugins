@@ -5,9 +5,18 @@
  */
 package plugins.upgradekit.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileFilter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -216,5 +225,162 @@ public class ApplicationController extends BaseController {
 			pw.write(VersionUpgradeExecutor.messageScript("应用不存在",completeFunctionName));
 		}
 		pw.flush();
+	}
+	
+	@RequestMapping(value="toConfigFiles")
+	public String toConfigFiles(@RequestParam(value="id",required=true)String id,ModelMap model){
+		Application application = applicationService.getEntityById(id);
+		model.put("application", application);
+		return "application/configFiles";
+	}
+	
+	@RequestMapping(value="configFiles")
+	@ResponseBody
+	public ResponseObject configFiles(@RequestParam(value="id",required=true)String id){
+		ResponseObject rb = ResponseObject.newInstance().success();
+		Application application = applicationService.getEntityById(id);
+		if(application != null){
+			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
+			App app = config.getApp(application.getNumber());
+			if(app != null && StringUtils.isNotEmpty(app.getRootPath())){
+				File root = new File(app.getRootPath());
+				if(root.exists() && root.isDirectory()){
+					Map<String,Object> map = new HashMap<String, Object>();
+					map.put("name", root.getName());
+					map.put("path", root.getAbsolutePath());
+					map.put("isParent", true);
+					map.put("children", listFiles(root));
+					rb.put("datas", new Object[]{map});
+				}else{
+					rb.fail();
+					rb.setMsg("应用根路径配置错误");
+				}
+			}else{
+				rb.fail();
+				rb.setMsg("应用根路径未配置");
+			}
+		}else{
+			rb.fail();
+			rb.setMsg("应用不存在");
+		}
+		return rb;
+	}
+	
+	private List<Map<String, Object>> listFiles(File root){
+		File[] files = root.listFiles(new FileFilter() {
+			@Override
+			public boolean accept(File file) {
+				return file.isDirectory() 
+						|| file.getName().endsWith(".xml") 
+						|| file.getName().endsWith(".properties")
+						|| file.getName().endsWith(".js");
+			}
+		});
+		if(files != null && files.length > 0){
+			List<Map<String, Object>> fileList = new ArrayList<Map<String,Object>>(files.length);
+			for(File file : files){
+				Map<String,Object> map = new HashMap<String, Object>();
+				map.put("name", file.getName());
+				map.put("path", file.getAbsolutePath());
+				map.put("isParent", false);
+				if(file.isDirectory()){
+					List<Map<String, Object>> children = listFiles(file);
+					if(children != null && !children.isEmpty()){
+						map.put("isParent", true);
+						map.put("children", children);
+					}
+				}else{
+					map.put("file", true);
+				}
+				fileList.add(map);
+			}
+			return fileList;
+		}
+		return null;
+	}
+	
+	@RequestMapping(value="fileContent")
+	@ResponseBody
+	public ResponseObject fileContent(@RequestParam(value="id",required=true)String id,@RequestParam(value="filePath",required=true)String filePath) throws Exception{
+		ResponseObject rb = ResponseObject.newInstance().fail();
+		Application application = applicationService.getEntityById(id);
+		if(application != null){
+			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
+			App app = config.getApp(application.getNumber());
+			if(app != null && StringUtils.isNotEmpty(app.getRootPath())){
+				File root = new File(app.getRootPath());
+				if(root.exists() && root.isDirectory()){
+					File file = new File(filePath);
+					if(file.exists()){
+						if(file.getAbsolutePath().startsWith(root.getAbsolutePath())){
+							if(file.length() <= 1024*1024){
+								StringBuilder content = new StringBuilder();
+								BufferedReader br = new BufferedReader(new FileReader(file));
+								String line = null;
+								while((line = br.readLine()) != null){
+									content.append(line).append("\n");
+								}
+								rb.success();
+								rb.put("content", content.toString());
+								br.close();
+							}else{
+								rb.setMsg("文件大于1M，请使用ftp下载进行查看");
+							}
+						}else{
+							rb.setMsg("文件在允许查看的范围外");
+						}
+					}else{
+						rb.setMsg("文件不存在");
+					}
+				}else{
+					rb.setMsg("应用根路径配置错误");
+				}
+			}else{
+				rb.setMsg("应用根路径未配置");
+			}
+		}else{
+			rb.setMsg("应用不存在");
+		}
+		return rb;
+	}
+	
+	@RequestMapping(value="saveFile")
+	@ResponseBody
+	public ResponseObject saveFile(@RequestParam(value="id",required=true)String id,
+			@RequestParam(value="filePath",required=true)String filePath,
+			@RequestParam(value="fileContent",required=true)String fileContent) throws Exception{
+		ResponseObject rb = ResponseObject.newInstance().fail();
+		Application application = applicationService.getEntityById(id);
+		if(application != null){
+			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
+			App app = config.getApp(application.getNumber());
+			if(app != null && StringUtils.isNotEmpty(app.getRootPath())){
+				File root = new File(app.getRootPath());
+				if(root.exists() && root.isDirectory()){
+					File file = new File(filePath);
+					if(file.exists()){
+						if(file.getAbsolutePath().startsWith(root.getAbsolutePath())){
+							BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+							bw.write(fileContent);
+							bw.flush();
+							bw.close();
+							rb.success();
+							rb.setMsg("保存成功");
+						}else{
+							rb.setMsg("文件在允许查看的范围外");
+						}
+					}else{
+						rb.setMsg("文件不存在");
+					}
+				}else{
+					rb.setMsg("应用根路径配置错误");
+				}
+			}else{
+				rb.setMsg("应用根路径未配置");
+			}
+		}else{
+			rb.setMsg("应用不存在");
+		}
+		return rb;
 	}
 }

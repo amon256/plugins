@@ -3,8 +3,10 @@
 	<application>
 		<id>DNS_COLLECT</id>
 		<name>网络局数据前台WEB</name>
+		<rootPath>G:\target\DNSCollectKernel</rootPath>
 		<commands>
 			<command>
+				<path>G:\source</<path>
 				<cmd>G:\source\install.bat</cmd>
 				<params>
 					<param>
