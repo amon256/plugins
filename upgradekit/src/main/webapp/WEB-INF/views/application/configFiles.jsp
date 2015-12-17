@@ -21,31 +21,48 @@
 		callback: {
 			onClick: function(event, treeId, treeNode) {
 			    if(treeNode.file){
-			    	$.post(webCtx+'/application/fileContent',{id:appId,filePath: treeNode.path},function(data){
-			    		if(data.status == 'success'){
-			    			$('#filePath').val(treeNode.path);
-			    			$('#fileContent').val(data.content);
-			    			art.dialog({
-								title: "文件编辑-"+treeNode.name,
-								lock : true,
-								opacity : 0.2,
-								padding: '3px',
-								content: document.getElementById('editDiv'),
-								ok: function(){
-									saveEditFile();
-								},
-								okVal: "保存",
-								cancel: true,
-								cancelVal: "取消"
-							});
-			    		}else{
-			    			$.ligerDialog.warn(data.msg);
-			    		}
-			    	});
+			    	$('#filePath').val(treeNode.path);
+	    			art.dialog({
+						title: "文件编辑-"+treeNode.name,
+						lock : true,
+						opacity : 0.2,
+						padding: '3px',
+						content: document.getElementById('editDiv'),
+						ok: function(){
+							saveEditFile();
+							return false;
+						},
+						okVal: "保存",
+						cancel: true,
+						cancelVal: "取消",
+						init: function(){
+							loadFileContent(appId, treeNode.path);
+						}
+					});
 			    }
 			}
 		}
 	};
+
+	function loadFileContent(){
+		var filePath = $('#filePath').val();
+		var charset = $('#fileCharset').val();
+		var param = {id:appId,filePath:filePath};
+		if(charset){
+			param.charset = charset;
+		}
+		$.ligerDialog.waitting('文件内容正在加载中,请稍候...');
+		$.post(webCtx+'/application/fileContent',param,function(data){
+			$.ligerDialog.closeWaitting();
+    		if(data.status == 'success'){
+    			$('#fileContent').val(data.content);
+    			$('#fileCharset').val(data.charset);
+    		}else{
+    			$.ligerDialog.warn(data.msg);
+    		}
+    	});
+	}
+	
 	$(function(){
 		$.post(webCtx+'/application/configFiles',{id : appId},function(data){
 			if(data.status == 'success'){
@@ -53,6 +70,9 @@
 			}else{
 				$.ligerDialog.warn(data.msg);
 			}
+		});
+		$('#fileCharset').bind('change',function(){
+			loadFileContent();
 		});
 	});
 	
@@ -89,7 +109,12 @@
 		<form id="editForm" action="${ctx}/application/saveFile" method="post" style="width: 100%;height: 100px;">
 			<input type="hidden" name="id" id="applicationId" value="${application.id}"/>
 			<input type="hidden" name="filePath" id="filePath"/>
-			<textarea name="fileContent" id="fileContent" style="height: 400px;width: 100%;word-wrap:normal;overflow:auto;"></textarea>
+			<select id="fileCharset" name="charset">
+				<option>UTF-8</option>
+				<option>GBK</option>
+				<option>GB2312</option>
+			</select>
+			<textarea name="fileContent" id="fileContent" style="height: 370px;width: 100%;word-wrap:normal;overflow:auto;"></textarea>
 		</form>
 	</div>
 </body>

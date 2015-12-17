@@ -313,8 +313,11 @@ public class ApplicationController extends BaseController {
 	
 	@RequestMapping(value="fileContent")
 	@ResponseBody
-	public ResponseObject fileContent(@RequestParam(value="id",required=true)String id,@RequestParam(value="filePath",required=true)String filePath) throws Exception{
+	public ResponseObject fileContent(@RequestParam(value="id",required=true)String id,
+			@RequestParam(value="filePath",required=true)String filePath,
+			@RequestParam(value="charset",required=false,defaultValue="utf-8")String charset) throws Exception{
 		ResponseObject rb = ResponseObject.newInstance().fail();
+		rb.put("charset", charset);
 		Application application = applicationService.getEntityById(id);
 		if(application != null){
 			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
@@ -327,7 +330,7 @@ public class ApplicationController extends BaseController {
 						if(file.getAbsolutePath().startsWith(root.getAbsolutePath())){
 							if(file.length() <= 1024*1024){
 								StringBuilder content = new StringBuilder();
-								BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
+								BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), charset));
 								String line = null;
 								while((line = br.readLine()) != null){
 									content.append(line).append("\n");
@@ -360,7 +363,8 @@ public class ApplicationController extends BaseController {
 	@ResponseBody
 	public ResponseObject saveFile(@RequestParam(value="id",required=true)String id,
 			@RequestParam(value="filePath",required=true)String filePath,
-			@RequestParam(value="fileContent",required=true)String fileContent) throws Exception{
+			@RequestParam(value="fileContent",required=true)String fileContent,
+			@RequestParam(value="charset",required=false,defaultValue="utf-8")String charset) throws Exception{
 		ResponseObject rb = ResponseObject.newInstance().fail();
 		Application application = applicationService.getEntityById(id);
 		if(application != null){
@@ -372,7 +376,7 @@ public class ApplicationController extends BaseController {
 					File file = new File(filePath);
 					if(file.exists()){
 						if(file.getAbsolutePath().startsWith(root.getAbsolutePath())){
-							BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
+							BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), charset));
 							bw.write(fileContent);
 							bw.flush();
 							bw.close();
