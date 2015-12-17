@@ -6,7 +6,7 @@
 		<rootPath>G:\target\DNSCollectKernel</rootPath>
 		<commands>
 			<command>
-				<path>G:\source</<path>
+				<path>G:\source</path>
 				<cmd>G:\source\install.bat</cmd>
 				<params>
 					<param>

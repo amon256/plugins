@@ -9,9 +9,13 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -176,6 +180,7 @@ public class ApplicationController extends BaseController {
 				};
 				//默认5分钟超时
 				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
+				pw.write(VersionUpgradeExecutor.messageScript("启动命令执行完成",completeFunctionName));
 			}else{
 				pw.write(VersionUpgradeExecutor.messageScript("应用启用命令未配置",completeFunctionName));
 			}
@@ -218,6 +223,7 @@ public class ApplicationController extends BaseController {
 				};
 				//默认5分钟超时
 				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
+				pw.write(VersionUpgradeExecutor.messageScript("关闭命令执行完成",completeFunctionName));
 			}else{
 				pw.write(VersionUpgradeExecutor.messageScript("应用关闭命令未配置",completeFunctionName));
 			}
@@ -315,7 +321,7 @@ public class ApplicationController extends BaseController {
 						if(file.getAbsolutePath().startsWith(root.getAbsolutePath())){
 							if(file.length() <= 1024*1024){
 								StringBuilder content = new StringBuilder();
-								BufferedReader br = new BufferedReader(new FileReader(file));
+								BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "utf-8"));
 								String line = null;
 								while((line = br.readLine()) != null){
 									content.append(line).append("\n");
@@ -360,7 +366,7 @@ public class ApplicationController extends BaseController {
 					File file = new File(filePath);
 					if(file.exists()){
 						if(file.getAbsolutePath().startsWith(root.getAbsolutePath())){
-							BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+							BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file), "utf-8"));
 							bw.write(fileContent);
 							bw.flush();
 							bw.close();

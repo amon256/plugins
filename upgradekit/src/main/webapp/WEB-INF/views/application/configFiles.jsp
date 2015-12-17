@@ -30,7 +30,13 @@
 								lock : true,
 								opacity : 0.2,
 								padding: '3px',
-								content: document.getElementById('editDiv')
+								content: document.getElementById('editDiv'),
+								ok: function(){
+									saveEditFile();
+								},
+								okVal: "保存",
+								cancel: true,
+								cancelVal: "取消"
 							});
 			    		}else{
 			    			$.ligerDialog.warn(data.msg);
@@ -79,13 +85,11 @@
 			 <div id="tree" class="ztree"></div>
         </div> 
 	</div>
-	<div id="editDiv" style="display: none;width:600px;height: 400px;">
+	<div id="editDiv" style="display: none;width:800px;height: 400px;">
 		<form id="editForm" action="${ctx}/application/saveFile" method="post" style="width: 100%;height: 100px;">
 			<input type="hidden" name="id" id="applicationId" value="${application.id}"/>
 			<input type="hidden" name="filePath" id="filePath"/>
-			<textarea name="fileContent" id="fileContent" style="height: 360px;width: 100%;word-wrap:normal;overflow:auto;"></textarea>
-			<button type="button" onclick="saveEditFile()" class="l-button">保存</button>
-			<button type="button" onclick="exitEditFile()" class="l-button">取消</button>
+			<textarea name="fileContent" id="fileContent" style="height: 400px;width: 100%;word-wrap:normal;overflow:auto;"></textarea>
 		</form>
 	</div>
 </body>
