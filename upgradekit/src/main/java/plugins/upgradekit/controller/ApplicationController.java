@@ -279,6 +279,12 @@ public class ApplicationController extends BaseController {
 				return file.isDirectory() 
 						|| file.getName().endsWith(".xml") 
 						|| file.getName().endsWith(".properties")
+						|| file.getName().endsWith(".txt")
+						|| file.getName().endsWith(".json")
+						|| file.getName().endsWith(".svg")
+						|| file.getName().endsWith(".vml")
+						|| file.getName().endsWith(".html")
+						|| file.getName().endsWith(".css")
 						|| file.getName().endsWith(".js");
 			}
 		});
