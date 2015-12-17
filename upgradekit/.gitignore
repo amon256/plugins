@@ -4,3 +4,5 @@
 /upgradekit/
 /versionfiles/
 /install.log
+/.settings/
+/.classpath
