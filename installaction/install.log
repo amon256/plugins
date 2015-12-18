@@ -1274,3 +1274,5 @@ freemarker.core.InvalidReferenceException: Expression home is undefined on line 
 2015-12-11 14:57:51 INFO [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:113)] 设置参数 province.code=025
 2015-12-11 14:57:51 INFO [plugins.installation.execute.FileEditExecution.editProperties(FileEditExecution.java:113)] 设置参数 workDirRoot=${install_target}/work
 2015-12-11 14:57:51 INFO [plugins.installation.InstallAuto.main(InstallAuto.java:52)] 安装完成.
+2015-12-18 09:18:29 INFO [plugins.installation.config.InstallConfig.loadFrom(InstallConfig.java:77)] 加载安装配置文件[G:\source\install.xml]
+2015-12-18 09:18:41 INFO [plugins.installation.Installer.main(Installer.java:57)] *************DNSCollectKernel安装****************
