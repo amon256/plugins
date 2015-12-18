@@ -26,15 +26,12 @@
 						$.ligerDialog.closeWaitting();
 						if(data.status == 'success'){
 							$.ligerDialog.success("密码修改成功","提示",function(){
-								form.clear();
+								$('#editForm')[0].reset();
 							});
 						}else{
 							$.ligerDialog.error(data.msg);
 						}
 					});
-				}},
-				{text: '取消', width: 60, click: function(){
-					art.dialog.close();
 				}}
 			]
 		});

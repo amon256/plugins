@@ -21,7 +21,7 @@ request.setAttribute("ctx", ctx);
 <script type="text/javascript" src="${ctx }/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/ligerUI/js/ligerui.min.js"></script>
 <script type="text/javascript" src="${ctx }/js/menu.js"></script>
-<title>应用管理套件 Application Management Suite</title>
+<title>Upgrade Kit ——Application Upgrade Kit </title>
 <style type="text/css">
 body, html {
 	height: 100%;
@@ -193,23 +193,47 @@ body {
 		}, function() {
 			$(this).removeClass("l-link-over");
 		});
+		//树
+		$("#menuTree").ligerTree(
+				{
+					data : indexdata,
+					checkbox : false,
+					slide : false,
+					nodeWidth : 120,
+					attribute : [ 'nodename', 'url' ],
+					render : function(a) {
+						if (!a.isnew)
+							return a.text;
+						return '<a href="' + a.url + '" target="_blank">'
+								+ a.text + '</a>';
+					},
+					onSelect : function(node) {
+						if (!node.data.url)
+							return;
+						if (node.data.isnew) {
+							return;
+						}
+						var tabid = $(node.target).attr("tabid");
+						if (!tabid) {
+							tabid = new Date().getTime();
+							$(node.target).attr("tabid", tabid)
+						}
+						mainTabAdd(tabid, node.data.text, node.data.url);
+					}
+				});
 		tab = liger.get("framecenter");
+		tree = liger.get("menuTree");
 		$("#pageloading").hide();
 	});
 	function windowHeightChanged(options) {
-		if (tab){
+		if (tab)
 			tab.addHeight(options.diff);
-		}
 	}
 	function mainTabAdd(tabid, text, url) {
-		
-	}
-	function changePwd(){
-		var tabid = '10001';
 		tab.addTabItem({
 			tabid : tabid,
-			text : "密码修改",
-			url : webCtx+'/adminuser/toPassword'
+			text : text,
+			url : url
 		});
 	}
 </script>
@@ -217,17 +241,16 @@ body {
 <body style="padding: 0px; background: #EAEEF5;">
 	<div id="pageloading"></div>
 	<div id="topmenu" class="l-topmenu">
-		<div class="l-topmenu-logo">应用管理套件 Application Management Suite</div>
+		<div class="l-topmenu-logo">Application Upgrade Kit</div>
 		<div class="l-topmenu-welcome">
-			<a href="javascript:void(0);" class="l-link2" target="_blank" onclick="changePwd();">密码修改</a>
-			<a href="${ctx }/logout" class="l-link2">注销</a>
+			<a href="${ctx }/logout" class="l-link2" target="_blank">注销</a>
 		</div>
 	</div>
 	<div id="mainLayout" style="width: 99.2%; margin: 0 auto; margin-top: 4px;">
+		<div position="left" title="菜单">
+			<ul id="menuTree" style="margin-top: 3px;">
+		</div>
 		<div position="center" id="framecenter"> 
-			<div tabid="10" title="应用管理">
-                <iframe frameborder="0" name="home" id="home" src="${ctx }/application/list"></iframe>
-            </div> 
         </div> 
 	</div>
 </body>

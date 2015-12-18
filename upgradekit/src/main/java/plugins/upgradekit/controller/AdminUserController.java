@@ -210,7 +210,7 @@ public class AdminUserController extends BaseController{
 	public ResponseObject password(String oldPassword,String password,String repassword){
 		ResponseObject rb = ResponseObject.newInstance().fail();
 		AdminUser user = WebContext.getLoginUser();
-		if(user.getPassword().equals(oldPassword)){
+		if(!user.getPassword().equals(SecurityUtil.encryptSHA(oldPassword))){
 			rb.setMsg("旧密码不正确");
 		}else if(password == null || "".equals(password.trim())){
 			rb.setMsg("密码不能为空");

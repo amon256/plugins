@@ -16,6 +16,7 @@
 <link href="${ctx }/bootstrap/3.3.4/css/bootstrap-theme.min.css" rel="stylesheet">
 <script type="text/javascript" src="${ctx }/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<title>应用管理套件 Application Management Suite</title>
 <style type="text/css">
 html, body {
 	height: 100%;
@@ -123,7 +124,7 @@ html, body {
 			</c:if>
 			<div class="login-title text-center">
 				<h1>
-					<small>Upgrade Kit</small>
+					<small>应用管理套件</small>
 				</h1>
 			</div>
 			<div class="login-content ">
