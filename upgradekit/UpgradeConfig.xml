@@ -1,32 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<applications charset="gbk">
+<applications charset="UTF-8">
 	<application>
-		<id>DNS_COLLECT</id>
-		<name>网络局数据前台WEB</name>
-		<rootPath>G:\target\DNSCollectKernel</rootPath>
-		<commands>
-			<command>
-				<path>G:\source</path>
-				<cmd>G:\source\install.bat</cmd>
-				<params>
-					<param>
-						<name>versionFile</name>
-						<value>${version.file}</value>
-					</param>
-					<param>
-						<name>versionFileName</name>
-						<value>${version.fileName}</value>
-					</param>
-					<param>
-						<name>configFile</name>
-						<value>${version.configFile}</value>
-					</param>
-					<param>
-						<name>configFileName</name>
-						<value>${version.configFileName}</value>
-					</param>
-				</params>
-			</command>
-		</commands>
+		<id>DNSCollect</id>
+		<name>DNS采集</name>
+		<appRoot>G:/target/DNSCollectKernel</appRoot>		
+		<configRoot>G:/target/DNSCollectKernel</configRoot>		
+		<!-- <statusCmd>
+			<cmd>/usr/local/status/winplan.sh</cmd>
+			<include>tomcat</include>
+		</statusCmd> -->
+		<!-- <startCmd>
+			<path>/usr/local/tomcat8080/bin</path>
+			<cmd>./startup.sh</cmd>
+		</startCmd> -->
+		<!-- <stopCmd>
+			<path>/usr/local/tomcat8080/bin</path>
+			<cmd>./shutdown.sh</cmd>
+		</stopCmd> -->
 	</application>
 </applications>

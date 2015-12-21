@@ -33,4 +33,8 @@ public class SecurityUtil {
 		}
 		return null;
 	}
+	
+	public static void main(String[] args) {
+		System.out.println(encryptSHA("111"));
+	}
 }

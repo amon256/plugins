@@ -127,7 +127,8 @@ public class ApplicationUpgradeConfig {
 		App app = new App();
 		app.setId(element.getChildTextTrim("id"));
 		app.setName(element.getChildTextTrim("name"));
-		app.setRootPath(element.getChildTextTrim("rootPath"));
+		app.setAppRoot(element.getChildTextTrim("appRoot"));
+		app.setConfigRoot(element.getChildTextTrim("configRoot"));
 		Element cmdsElement = element.getChild("commands");
 		if(cmdsElement != null){
 			List<Element> children = cmdsElement.getChildren();
@@ -212,7 +213,8 @@ public class ApplicationUpgradeConfig {
 	public static class App{
 		private String id;
 		private String name;
-		private String rootPath;
+		private String appRoot;
+		private String configRoot;
 		private StatusCmd statusCmd;
 		private Cmd startCmd;
 		private Cmd stopCmd;
@@ -253,11 +255,17 @@ public class ApplicationUpgradeConfig {
 		public void setStopCmd(Cmd stopCmd) {
 			this.stopCmd = stopCmd;
 		}
-		public String getRootPath() {
-			return rootPath;
+		public String getAppRoot() {
+			return appRoot;
 		}
-		public void setRootPath(String rootPath) {
-			this.rootPath = rootPath;
+		public void setAppRoot(String appRoot) {
+			this.appRoot = appRoot;
+		}
+		public String getConfigRoot() {
+			return configRoot;
+		}
+		public void setConfigRoot(String configRoot) {
+			this.configRoot = configRoot;
 		}
 	}
 	

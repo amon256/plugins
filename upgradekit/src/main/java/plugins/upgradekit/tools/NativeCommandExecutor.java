@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import plugins.installation.logs.MessageWriter;
+
 /**  
  * 功能描述：
  * 
@@ -33,6 +35,10 @@ public class NativeCommandExecutor {
 			public void write(String message) {
 				pw.write(message + "\n");
 				pw.flush();
+			}
+			@Override
+			public boolean isAvailable() {
+				return true;
 			}
 		};
 		executeNativeCommand(writer, "gbk", "java -version", new String[]{},null,300);

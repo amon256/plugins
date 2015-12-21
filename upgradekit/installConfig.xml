@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <install name="DNSCollectKernel安装" targetname="DNSCollectKernel安装目录">
 	<!-- 参数集合
-		${install_home} 程序执行目录
+		${install_file} 应用文件
 		${install_target} 安装目标根目录
 		${install_config} 安装过程配置文件
 		${install_argfile} 文件编辑参数文件
@@ -9,25 +9,25 @@
 		${TIME} 时间字符串,格式：HHmmss
 		${DATETIME} 日期字符串,格式：yyyyMMddHHmmss
 	 -->
-	<unzip desc="解压dns-config.zip" file="${install_home}/dns-config.zip" to="${install_home}/dns_config"/>
+	<unzip desc="解压安装文件" file="${install_file}" to="${install_file}/../${DATE}"/>
+	<unzip desc="解压dns-config.zip" file="${install_file}/../${DATE}/dns-config.zip" to="${install_file}/../${DATE}/dns_config"/>
+	<copy desc="拷贝jar" from="${install_file}/../${DATE}/kernel/DNSCollectKernel/lib" to="${install_target}/lib" />
+	<copy desc="拷贝config_dns到DNSCollectKernel" from="${install_file}/../${DATE}/dns_config/config/config_dns" to="${install_target}/config_dns" />
+	<copy desc="拷贝deploy_config_dns到DNSCollectKernel" from="${install_file}/../${DATE}/dns_config/config/deploy_config_dns" to="${install_target}/deploy_config_dns" />
 	
-	<copy desc="拷贝DNSCollectKernel" from="${install_home}/kernel/DNSCollectKernel" to="${install_target}/DNSCollectKernel" />
-	<copy desc="拷贝config_dns到DNSCollectKernel" from="${install_home}/dns_config/config/config_dns" to="${install_target}/DNSCollectKernel/config_dns" />
-	<copy desc="拷贝deploy_config_dns到DNSCollectKernel" from="${install_home}/dns_config/config/deploy_config_dns" to="${install_target}/DNSCollectKernel/deploy_config_dns" />
-	
-	<edit file="${install_target}/DNSCollectKernel/deploy_config_dns/compare/compare.properties">
+	<edit file="${install_target}/deploy_config_dns/compare/compare.properties">
 		<item name="SplitRootPath" desc="核查文件分拆根目录" value="${install_target}/split"/>
 		<item name="CompareResultRootPath" desc="比对结果文件存放的根目录" value="${install_target}/compareResult"/>
 	</edit>
-	<edit file="${install_target}/DNSCollectKernel/deploy_config_dns/database/jdbc.properties">
+	<edit file="${install_target}/deploy_config_dns/database/jdbc.properties">
 		<item name="jdbc.url" desc="Oracle数据库连接JDBC地址" value="jdbc\:oracle\:thin\:@10.12.12.52\:1522\:ora10g"/>
 		<item name="jdbc.username" desc="数据库用户名" value="ndmpps"/>
 		<item name="jdbc.password" desc="数据库密码" value="ndmpps"/>
 	</edit>
-	<edit file="${install_target}/DNSCollectKernel/deploy_config_dns/portalclient/portalclient.xml">
+	<edit file="${install_target}/deploy_config_dns/portalclient/portalclient.xml">
 		<item name="portalclient/portal/domain" desc="Portal门户Url" value="http://10.1.3.247:28080/admin"/>
 	</edit>
-	<edit file="${install_target}/DNSCollectKernel/deploy_config_dns/province-config.properties">
+	<edit file="${install_target}/deploy_config_dns/province-config.properties">
 		<item name="province.code" desc="省份编码" value="025"/>
 		<item name="workDirRoot" desc="系统临时文件存放目录" value="${install_target}/work"/>
 	</edit>

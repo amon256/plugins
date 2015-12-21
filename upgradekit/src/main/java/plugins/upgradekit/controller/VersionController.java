@@ -30,12 +30,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import plugins.installation.logs.MessageWriter;
 import plugins.upgradekit.entitys.Application;
 import plugins.upgradekit.entitys.Version;
 import plugins.upgradekit.enums.UpgradeStatusEnum;
 import plugins.upgradekit.service.ApplicationService;
 import plugins.upgradekit.service.VersionService;
-import plugins.upgradekit.tools.MessageWriter;
 import plugins.upgradekit.tools.UpgradeContext;
 import plugins.upgradekit.tools.VersionUpgradeExecutor;
 import plugins.utils.CollectionUtils;
@@ -150,6 +150,11 @@ public class VersionController extends BaseController {
 				String script = VersionUpgradeExecutor.messageScript(message, msgFunctionName);
 				pw.write(script);
 				pw.flush();
+			}
+
+			@Override
+			public boolean isAvailable() {
+				return pw != null;
 			}
 		};
 		if(version != null && version.getApplication() != null){

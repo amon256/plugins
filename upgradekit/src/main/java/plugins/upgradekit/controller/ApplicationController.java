@@ -11,8 +11,6 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -40,12 +38,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import plugins.installation.logs.MessageWriter;
 import plugins.upgradekit.entitys.Application;
 import plugins.upgradekit.service.ApplicationService;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig.App;
 import plugins.upgradekit.tools.ApplicationUpgradeConfig.Cmd;
-import plugins.upgradekit.tools.MessageWriter;
 import plugins.upgradekit.tools.NativeCommandExecutor;
 import plugins.upgradekit.tools.VersionUpgradeExecutor;
 import plugins.utils.CreateQueryHandler;
@@ -130,6 +128,11 @@ public class ApplicationController extends BaseController {
 					public void write(String message) {
 						result.append(message).append("\n");
 					}
+
+					@Override
+					public boolean isAvailable() {
+						return result != null;
+					}
 				}, config.getCharset(), app.getStatusCmd().getCmd(), new String[]{},null,10000);
 				if(result.indexOf(app.getStatusCmd().getIncludeValue()) >= 0){
 					rb.put("appStatus", "running");
@@ -177,6 +180,11 @@ public class ApplicationController extends BaseController {
 						pw.write(script);
 						pw.flush();
 					}
+					
+					@Override
+					public boolean isAvailable() {
+						return pw != null;
+					}
 				};
 				//默认5分钟超时
 				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
@@ -220,6 +228,11 @@ public class ApplicationController extends BaseController {
 						pw.write(script);
 						pw.flush();
 					}
+
+					@Override
+					public boolean isAvailable() {
+						return pw != null;
+					}
 				};
 				//默认5分钟超时
 				NativeCommandExecutor.executeNativeCommand(writer, config.getCharset()	, cmd.getCmd(), params,new File(cmd.getPath()),1000*300);
@@ -248,8 +261,8 @@ public class ApplicationController extends BaseController {
 		if(application != null){
 			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
 			App app = config.getApp(application.getNumber());
-			if(app != null && StringUtils.isNotEmpty(app.getRootPath())){
-				File root = new File(app.getRootPath());
+			if(app != null && StringUtils.isNotEmpty(app.getConfigRoot())){
+				File root = new File(app.getConfigRoot());
 				if(root.exists() && root.isDirectory()){
 					Map<String,Object> map = new HashMap<String, Object>();
 					map.put("name", root.getName());
@@ -322,8 +335,8 @@ public class ApplicationController extends BaseController {
 		if(application != null){
 			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
 			App app = config.getApp(application.getNumber());
-			if(app != null && StringUtils.isNotEmpty(app.getRootPath())){
-				File root = new File(app.getRootPath());
+			if(app != null && StringUtils.isNotEmpty(app.getConfigRoot())){
+				File root = new File(app.getConfigRoot());
 				if(root.exists() && root.isDirectory()){
 					File file = new File(filePath);
 					if(file.exists()){
@@ -370,8 +383,8 @@ public class ApplicationController extends BaseController {
 		if(application != null){
 			ApplicationUpgradeConfig config = ApplicationUpgradeConfig.getInstance();
 			App app = config.getApp(application.getNumber());
-			if(app != null && StringUtils.isNotEmpty(app.getRootPath())){
-				File root = new File(app.getRootPath());
+			if(app != null && StringUtils.isNotEmpty(app.getConfigRoot())){
+				File root = new File(app.getConfigRoot());
 				if(root.exists() && root.isDirectory()){
 					File file = new File(filePath);
 					if(file.exists()){
