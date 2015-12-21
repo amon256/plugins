@@ -20,7 +20,7 @@ import plugins.upgradekit.context.SystemInitContext;
  */
 @Component
 @Lazy(value=false)
-public class SpringContextStartedListner implements ApplicationListener<ContextRefreshedEvent> {
+public class SpringContextStartedListener implements ApplicationListener<ContextRefreshedEvent> {
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
