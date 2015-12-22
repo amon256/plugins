@@ -47,16 +47,15 @@
 <body  style="overflow:hidden;padding: 5px;min-width: 600px;min-height: 430px;">
 	<div id="main">
 		<div position="center">
-				<div>
-					<span id="buttons">
-						<button id="submitBtn" onclick="executeUpdate()" class="l-button">开始升级</button><span id="msgTip"></span>
-					</span>
-				</div>
-				<div id="msgContainer" style="padding:5px;margin-top:5px;height: 400px;overflow: scroll;" class="l-panel" >
-					<div id="upgradeMsg" />
-				</div>
+			<div>
+				<span id="buttons">
+					<button id="submitBtn" onclick="executeUpdate()" class="l-button">开始升级</button><span id="msgTip"></span>
+				</span>
 			</div>
-        </div> 
+			<div id="msgContainer" style="padding:5px;margin-top:5px;height: 400px;overflow: scroll;" class="l-panel" >
+				<div id="upgradeMsg" />
+			</div>
+		</div>
 	</div>
 	<div style="display: none">
 		<form id="upgradeExecuteForm" action="${ctx }/version/executeVersionUpdate" target="updateMsgFrame">
