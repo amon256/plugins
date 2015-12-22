@@ -67,7 +67,7 @@
 		}
 	});
 </script>
-<body  style="overflow:hidden;min-width: 600px;min-height: 400px;">
+<body  style="overflow:hidden;min-width: 600px;min-height: 400px;padding: 5px;">
 	<div id="main">
 		<div position="center">
 			<div id="queryPanel" class="l-panel" style="height:60px;padding-left: 0px;padding-right: 0px;">

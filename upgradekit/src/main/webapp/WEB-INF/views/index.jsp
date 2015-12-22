@@ -15,13 +15,12 @@ request.setAttribute("ctx", ctx);
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="${ctx }/favicon.ico">
 <link href="${ctx }/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet">
+<script type="text/javascript" src="${ctx }/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="${ctx }/ligerUI/js/ligerui.min.js"></script>
+<title>应用管理套件 Application Management Suite</title>
 <script type="text/javascript">
 	var webCtx = '${ctx }';
 </script>
-<script type="text/javascript" src="${ctx }/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="${ctx }/ligerUI/js/ligerui.min.js"></script>
-<script type="text/javascript" src="${ctx }/js/menu.js"></script>
-<title>应用管理套件 Application Management Suite</title>
 <style type="text/css">
 body, html {
 	height: 100%;

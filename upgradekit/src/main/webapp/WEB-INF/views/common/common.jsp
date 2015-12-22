@@ -17,7 +17,7 @@ request.setAttribute("ctx", ctx);
 <script type="text/javascript" src="${ctx }/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${ctx }/jquery-validation/jquery.metadata.js"></script>
 <script type="text/javascript" src="${ctx }/jquery-validation/messages_cn.js"></script>
-<script type="text/javascript" src="${ctx }/artDialog/artDialog.js?skin=aero"></script>
+<script type="text/javascript" src="${ctx }/artDialog/artDialog.js?skin=simple"></script>
 <script type="text/javascript" src="${ctx }/artDialog/plugins/iframeTools.js"></script>
 <script type="text/javascript" src="${ctx }/js/json2.js"></script>
 <script type="text/javascript" src="${ctx }/js/common.js"></script>

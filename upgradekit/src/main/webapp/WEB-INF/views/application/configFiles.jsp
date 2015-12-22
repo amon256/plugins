@@ -101,7 +101,7 @@
 </script>
 <body  style="padding: 5px;">
 	<div id="main">
-		<div position="center">
+		<div position="center" class="l-panel">
 			 <div id="tree" class="ztree"></div>
         </div> 
 	</div>

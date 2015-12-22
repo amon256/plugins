@@ -11,7 +11,7 @@
 	function executeComplete(status){
 		appendMsg('升级结束');
 		$('#msgTip').empty();
-		$('<a href="javascript:void(0)">觉得升级失败？点这里。</a>').bind('click',function(){
+		$('<a href="javascript:void(0)">觉得升级失败了？点这里。</a>').bind('click',function(){
 			$.ligerDialog.confirm('确认升级失败', function (ok) {
 				if(ok){
 					$.post(webCtx+'/version/confirmResult',{id:'${version.id}',status:'FAIL'},function(data){
@@ -49,7 +49,7 @@
 		<div position="center">
 				<div>
 					<span id="buttons">
-						<button id="submitBtn" onclick="executeUpdate()">开始升级</button><span id="msgTip"></span>
+						<button id="submitBtn" onclick="executeUpdate()" class="l-button">开始升级</button><span id="msgTip"></span>
 					</span>
 				</div>
 				<div id="msgContainer" style="padding:5px;margin-top:5px;height: 400px;overflow: scroll;" class="l-panel" >

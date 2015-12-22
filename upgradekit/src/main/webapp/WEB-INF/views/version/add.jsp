@@ -49,30 +49,63 @@
 		});
 	}
 </script>
-<body  style="overflow:hidden;padding: 5px;min-width: 400px;min-height: 320px;">
+<body  style="overflow:hidden;padding: 5px;min-width: 400px;min-height: 160px;padding: 5px;">
 	<div id="main">
 		<div position="center">
-				<form id="addForm" action="${ctx }/version/addSave" onsubmit="return false;" enctype="multipart/form-data" method="post">
+				<form id="addForm" class="l-form"  action="${ctx }/version/addSave" onsubmit="return false;" enctype="multipart/form-data" method="post">
 					<input type="hidden" name="application.id" value="${app.id }"/>
-					<table>
-						<tr>
-							<td align="left" width="80">版本号: </td>
-							<td><input type="text" id="number" name="number"/></td>
-						</tr>
-						<tr>
-							<td>升级文件</td>
-							<td><input type="file" id="versionFile" name="versionFileUpload"/></td>
-						</tr>
-						<tr>
-							<td>安装过程文件</td>
-							<td><input type="file" id="configFile" name="configFileUpload"/></td>
-						</tr>
-						<tr>
-							<td>
-								<button type="button" class="l_button" id="submitBtn" onclick="ajaxSubmit()">确定保存</button>
-							</td>
-						</tr>
-					</table>
+					<div class="l-form-container">
+						<ul>
+							<li class="l-fieldcontainer l-fieldcontainer-first" >
+								<ul>
+									<li style="width: 100px; text-align: left;">版本号：</li>
+									<li style="width: 170px; text-align: left;">
+										<div class="l-text" style="width: 168px;">
+											<input type="text" id="number" name="number" class="l-text-field" style="width: 164px;">
+											<div class="l-text-l"></div>
+											<div class="l-text-r"></div>
+										</div>
+									</li>
+									<li style="width: 40px;"><span class="l-star">*</span></li>
+								</ul>
+							</li>
+						</ul>
+						<ul>
+							<li class="l-fieldcontainer l-fieldcontainer-first" >
+								<ul>
+									<li style="width: 100px; text-align: left;">升级文件：</li>
+									<li style="width: 170px; text-align: left;">
+										<div class="l-text" style="width: 168px;">
+											<input type="file" id="versionFile" name="versionFileUpload" class="l-text-field" style="width: 164px;">
+											<div class="l-text-l"></div>
+											<div class="l-text-r"></div>
+										</div>
+									</li>
+									<li style="width: 40px;"><span class="l-star">*</span></li>
+								</ul>
+							</li>
+						</ul>
+						<ul>
+							<li class="l-fieldcontainer l-fieldcontainer-first" >
+								<ul>
+									<li style="width: 100px; text-align: left;">安装过程文件：</li>
+									<li style="width: 170px; text-align: left;">
+										<div class="l-text" style="width: 168px;">
+											<input type="file" id="configFile" name="configFileUpload" class="l-text-field" style="width: 164px;">
+											<div class="l-text-l"></div>
+											<div class="l-text-r"></div>
+										</div>
+									</li>
+									<li style="width: 40px;"><span class="l-star">*</span></li>
+								</ul>
+							</li>
+						</ul>
+						<ul>
+							<li style="width: 80px; text-align: center;">
+								<button type="button" class="l-button" id="submitBtn" onclick="ajaxSubmit()">确定保存</button>
+							</li>
+						</ul>
+					</div>
 				</form>
 			</div>
         </div> 
