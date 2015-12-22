@@ -89,18 +89,22 @@ public class FileUnZipExecution implements Execution {
 		}else{
 			zipFile = new ZipFile(file,"gb2312");
 		}
+		logger.info("开始解压文件{} 至 {}",filepath,topath);
 		try{
 			for(Enumeration<? extends ZipEntry> zipEntrys = zipFile.getEntries(); zipEntrys.hasMoreElements();){
 				ZipEntry entry = zipEntrys.nextElement();
 				if(entry.isDirectory()){
 					File dir = new File(to, entry.getName());
 					if(!dir.exists()){
+						logger.info("文件夹{}不存在,创建.",dir.getAbsolutePath());
 						dir.mkdirs();
 					}
 				}else{
 					InputStream in = zipFile.getInputStream(entry);
 					File outFile = new File(to, entry.getName());
+					logger.info("解压{} 至 {}",entry.getName(),outFile.getAbsolutePath());
 					if(!outFile.getParentFile().exists()){
+						logger.info("文件夹{}不存在,创建.",outFile.getParentFile().getAbsolutePath());
 						outFile.getParentFile().mkdirs();
 					}
 					OutputStream out = new FileOutputStream(outFile);
@@ -115,6 +119,7 @@ public class FileUnZipExecution implements Execution {
 			}
 		}finally{
 			zipFile.close();
+			logger.info("解压结束.");
 		}
 	}
 
