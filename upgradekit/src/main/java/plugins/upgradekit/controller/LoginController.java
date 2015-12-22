@@ -19,6 +19,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.google.code.kaptcha.Constants;
+
 import plugins.upgradekit.context.WebContext;
 import plugins.upgradekit.entitys.AdminUser;
 import plugins.upgradekit.service.AdminUserService;
@@ -42,12 +44,12 @@ public class LoginController extends BaseController {
 	private AdminUserService userService;
 
 	@RequestMapping(value="login")
-	public String login(AdminUser user,ModelMap model,HttpServletRequest request,HttpServletResponse response){
+	public String login(AdminUser user,String kaptcha,ModelMap model,HttpServletRequest request,HttpServletResponse response){
 		if(WebContext.hasLogin()){
 			return "redirect:index";
 		}
 		if(!StringUtils.isEmpty(user.getAccount())){
-			if(loginProcess(user,model)){
+			if(loginProcess(user,kaptcha,request, model)){
 				loginCookie(user, request, response);
 				return "redirect:index";
 			}
@@ -132,15 +134,26 @@ public class LoginController extends BaseController {
 	
 	/**
 	 * 登录过程
+	 * @param kaptcha 
 	 * @param account
 	 * @param pwd
 	 * @param model 
 	 * @return
 	 */
-	private boolean loginProcess(AdminUser user, ModelMap model){
+	private boolean loginProcess(AdminUser user, String kaptcha,HttpServletRequest request, ModelMap model){
 		if(StringUtils.isEmpty(user.getPassword())){
 			model.put("msg", "密码不能为空");
 			return false;
+		}
+		if(StringUtils.isEmpty(kaptcha)){
+			model.put("msg", "验证码不能为空");
+			return false;
+		}else{
+			String sessionKaptcha = (String) request.getSession().getAttribute(Constants.KAPTCHA_SESSION_KEY);
+			if(!kaptcha.trim().equalsIgnoreCase(sessionKaptcha)){
+				model.put("msg", "验证码不正确");
+				return false;
+			}
 		}
 		AdminUser validateUser = userService.findByAccount(user.getAccount());
 		if(validateUser != null && SecurityUtil.encryptSHA(user.getPassword()).equals(validateUser.getPassword())){

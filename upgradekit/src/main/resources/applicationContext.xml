@@ -65,12 +65,30 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
-	
+	<bean id="captchaProducer" class="com.google.code.kaptcha.impl.DefaultKaptcha">
+		<property name="config">
+			<bean class="com.google.code.kaptcha.util.Config">
+				<constructor-arg>
+					<props>
+						<prop key="kaptcha.border">no</prop>
+						<prop key="kaptcha.border.color">105,179,90</prop>
+						<prop key="kaptcha.textproducer.font.color">red</prop>
+						<prop key="kaptcha.image.width">100</prop>
+						<prop key="kaptcha.textproducer.font.size">28</prop>
+						<prop key="kaptcha.image.height">40</prop>
+						<prop key="kaptcha.session.key">kaptcha.session.key</prop>
+						<prop key="kaptcha.textproducer.char.length">4</prop>
+						<prop key="kaptcha.textproducer.font.names">宋体,楷体,微软雅黑</prop>
+					</props>
+				</constructor-arg>
+			</bean>
+		</property>
+	</bean>
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/**"/>
 			<bean class="plugins.upgradekit.interceptors.LoginInterceptor">
-				<property name="exclude" value="/login"/>
+				<property name="exclude" value="/login,/kaptcha"/>
 			</bean>
 		</mvc:interceptor>
 		<!-- <mvc:interceptor>

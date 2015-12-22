@@ -71,7 +71,7 @@ html, body {
 }
 
 .input-group {
-	margin: 0px 0px 30px 0px !important;
+	margin: 0px 0px 15px 0px !important;
 }
 
 .form-control, .input-group {
@@ -157,6 +157,16 @@ html, body {
 								</div>
 							</div>
 						</div>
+						<div class="form-group">
+							<div class="col-xs-12  ">
+								<div class="input-group">
+									<span class="input-group-addon"><span class="glyphicon glyphicon-text-color fa fa-fw fa-unlock"></span></span>
+									<input type="text" class="form-control" style="width: 80px;" id="kaptcha" name="kaptcha" placeholder="验证码">
+									<img id="img_kaptcha" alt="验证码，点击刷新" src="${ctx }/kaptcha">
+									<a id="hrefFefreshKaptch" href="javascript:void(0);" ><span class="form-control-static">看不清？点击刷新</span></a>
+								</div>
+							</div>
+						</div>
 						<div class="form-group form-actions">
 							<div class="col-xs-4 col-xs-offset-4 ">
 								<button type="submit" class="btn btn-sm btn-info">
@@ -177,6 +187,10 @@ html, body {
 		}else{
 			$('#account').focus();
 		}
+		$('#hrefFefreshKaptch').click(function(){
+			$('#img_kaptcha').attr('src','${ctx}/kaptcha?i='+new Date().getTime());
+		});
 	});
+	
 </script>
 </html>
