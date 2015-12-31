@@ -1,0 +1,9 @@
+/target/
+/.apt_generated/
+/.settings/
+/logs/
+/.classpath
+/.factorypath
+/.project
+/apm.db
+/apm.xml

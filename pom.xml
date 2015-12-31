@@ -17,5 +17,8 @@
     <module>applicationUpgradeKit</module>
     <module>monitortools</module>
     <module>upgradekit</module>
+    <module>apm-core</module>
+    <module>apm-client</module>
+    <module>apm-webmanager</module>
   </modules>
 </project>
