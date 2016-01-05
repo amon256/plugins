@@ -20,7 +20,6 @@ $(function(){
             return editor;
         }
 	});
-	
 });
 
 

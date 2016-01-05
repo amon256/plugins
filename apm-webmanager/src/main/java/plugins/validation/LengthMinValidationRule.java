@@ -7,11 +7,11 @@ package plugins.validation;
  * @author fengmengyue
  *
  */
-public class LengMinValidationRule implements ValidationRule {
+public class LengthMinValidationRule implements ValidationRule {
 	
 	private int minLength;
 	
-	public LengMinValidationRule(int minLength){
+	public LengthMinValidationRule(int minLength){
 		this.minLength = minLength;
 	}
 

@@ -21,17 +21,17 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import plugins.apm.context.WebContext;
 import plugins.apm.entitys.AdminUser;
+import plugins.apm.entitys.AdminUser_;
 import plugins.apm.enums.AdminUserStatusEnum;
 import plugins.apm.permission.PermissionManager;
 import plugins.apm.permission.SystemMenu;
 import plugins.apm.service.AdminUserService;
-import plugins.upgradekit.entitys.AdminUser_;
 import plugins.utils.CollectionUtils;
 import plugins.utils.Pagination;
 import plugins.utils.ResponseObject;
 import plugins.utils.SecurityUtil;
 import plugins.utils.persistence.SimplePrepareQueryhandler;
-import plugins.validation.LengRangeValidationRule;
+import plugins.validation.LengthRangeValidationRule;
 import plugins.validation.RegexpValidationRule;
 import plugins.validation.RequiredValidationRule;
 import plugins.validation.Validation;
@@ -102,17 +102,17 @@ public class AdminUserController extends BaseController{
 		List<ValidationResult> results = ValidationUtil.validate(entity,
 				new Validation("name", "昵称", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(2, 10)
+						new LengthRangeValidationRule(2, 10)
 				),
 				new Validation("account", "账号", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(4, 20),
+						new LengthRangeValidationRule(4, 20),
 						new RegexpValidationRule("[_@$.0-9a-zA-Z]+"),
 						new ExistsUserValidationRule(entity)
 				),
 				new Validation("password", "密码", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(4, 20)
+						new LengthRangeValidationRule(4, 20)
 				),
 				new Validation("mobile", "手机", 
 						new RegexpValidationRule("1[0-9]{10}"),
@@ -167,7 +167,7 @@ public class AdminUserController extends BaseController{
 		List<ValidationResult> results = ValidationUtil.validate(entity,
 				new Validation("name", "昵称", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(2, 10)
+						new LengthRangeValidationRule(2, 10)
 				),
 				new Validation("mobile", "手机", 
 						new RegexpValidationRule("1[0-9]{10}"),

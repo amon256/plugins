@@ -9,22 +9,22 @@
 </head>
 <script type="text/javascript">
 	$(function(){
-		$.metadata.setType("attr", "validate");
 		var form = $('#editForm').ligerForm({
 			inputWidth: 170, labelWidth: 60, space: 40,
 			validate : true,
 			prefixID : 'field_',
 			fields: [
-				{name: 'id', type: 'hidden', options: {value: '${application.id}'}},
-				{ display: '应用名', name: 'name', validate : {required:true,rangelength:[3,20]}, options: {value: '${application.name}'}},
-				{ display: '编号', name: 'number', validate : {required:true,rangelength:[3,20]}, options: {value: '${application.number}'}},
-				{ display: '描述', name: 'description', type: 'textarea',validate : {rangelength:[0,500]}, options: {value: '${application.description}'}}
+				{name: 'id', type: 'hidden', options: {value: '${entity.id}'}},
+				{ display: '主机名', name: 'name', validate : {required:true,rangelength:[3,20]}, options: {value: '${entity.name}'}},
+				{ display: '地址', name: 'host', validate : {required:true}, options: {value: '${entity.host}'}},
+				{ display: '端口', name: 'port', validate : {required:true,range:[1000,65535]}, options: {value: '${entity.port}'}},
+				{ display: '描述', name: 'description', type: 'textarea',validate : {rangelength:[0,500]}, options: {value: '${entity.description}'}}
 			],
 			buttons : [
 				{text: '保存', width: 60, click: function(){
 					var submitData = form.getData();
 					$.ligerDialog.waitting('正在保存中,请稍候...');
-					$.post(webCtx + '/application/editSave',submitData,function(data){
+					$.post(webCtx + '/hostmachine/saveEdit',submitData,function(data){
 						$.ligerDialog.closeWaitting();
 						if(data.status == 'success'){
 							$.ligerDialog.success("保存成功","提示",function(){

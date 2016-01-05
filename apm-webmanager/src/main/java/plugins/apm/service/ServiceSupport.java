@@ -7,6 +7,7 @@ package plugins.apm.service;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
 import javax.persistence.criteria.Root;
 import javax.persistence.criteria.Selection;
 
@@ -148,6 +150,8 @@ public abstract class ServiceSupport<T extends CoreEntity> implements IService<T
 		CriteriaBuilder cb = entityManager.getCriteriaBuilder();
 		CriteriaQuery<T> query = getCriteriaQuery(handler);
 		Selection<T> selection = query.getSelection();
+		List<Order> orders = query.getOrderList();
+		query.orderBy(new ArrayList<Order>(0));
 		CriteriaQuery tmpQuery = query;
 		CriteriaQuery<Long> countQuery = tmpQuery;
 		countQuery.select(cb.count(query.getRoots().iterator().next()));
@@ -155,6 +159,7 @@ public abstract class ServiceSupport<T extends CoreEntity> implements IService<T
 		pagination.setRecordCount(recordCount);
 		if(recordCount > 0){
 			query.select(selection);
+			query.orderBy(orders);
 			List<T> dataList = entityManager.createQuery(query).setFirstResult((int) pagination.getStartIndex()).setMaxResults((int) pagination.getPageSize()).getResultList();
 			pagination.setDatas(dataList);
 		}

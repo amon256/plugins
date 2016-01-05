@@ -5,6 +5,7 @@ package plugins.utils.persistence;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
@@ -30,11 +31,22 @@ public class SimplePrepareQueryhandler<T extends CoreEntity> implements PrepareQ
 	public CriteriaQuery<T> create(CriteriaBuilder cb) {
 		CriteriaQuery<T> query = (CriteriaQuery<T>) cb.createQuery(entity.getClass());
 		Root<T> root = (Root<T>) query.from(entity.getClass());
+		onCreated(cb, query, root);
 		if(StringUtils.isNotEmpty(entity.getSort_())){
+			Path<Object> path = null;
+			if(entity.getSort_().indexOf(".") > 0){
+				String[] paths = entity.getSort_().trim().split("\\.");
+				path = root.get(paths[0]);
+				for(int i = 1; i < paths.length; i++){
+					path = path.get(paths[i]);
+				}
+			}else{
+				path = root.get(entity.getSort_().trim());
+			}
 			if("asc".equalsIgnoreCase(entity.getOrder_())){
-				query.orderBy(cb.asc(root.get(entity.getSort_())));
+				query.orderBy(cb.asc(path));
 			}else if("desc".equalsIgnoreCase(entity.getOrder_())){
-				query.orderBy(cb.desc(root.get(entity.getSort_())));
+				query.orderBy(cb.desc(path));
 			}
 		}
 		Predicate[] conditions = getWhereCondition(cb, entity,root);
@@ -44,7 +56,9 @@ public class SimplePrepareQueryhandler<T extends CoreEntity> implements PrepareQ
 		return query;
 	}
 	
-	
+	protected void onCreated(CriteriaBuilder cb,CriteriaQuery<T> query,Root<T> root){
+		
+	}
 
 	protected Predicate[] getWhereCondition(CriteriaBuilder cb,T entity,Root<T> root){
 		return null;

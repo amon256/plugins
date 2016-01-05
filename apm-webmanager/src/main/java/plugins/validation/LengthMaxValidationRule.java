@@ -7,11 +7,11 @@ package plugins.validation;
  * @author fengmengyue
  *
  */
-public class LengMaxValidationRule implements ValidationRule {
+public class LengthMaxValidationRule implements ValidationRule {
 	
 	private int maxLength;
 	
-	public LengMaxValidationRule(int maxLength){
+	public LengthMaxValidationRule(int maxLength){
 		this.maxLength = maxLength;
 	}
 

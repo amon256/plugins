@@ -5,18 +5,13 @@
  */
 package plugins.apm.entitys;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import plugins.apm.enums.UpgradeStatusEnum;
 import plugins.apm.tools.UpgradeVersion;
 
 /**  
@@ -64,19 +59,6 @@ public class Version extends DataEntity implements UpgradeVersion{
 	@JoinColumn(name="applicationId")
 	private Application application;
 	
-	/**
-	 * 升级状态
-	 */
-	@Column(length=20)
-	@Enumerated(EnumType.STRING)
-	private UpgradeStatusEnum status;
-	
-	/**
-	 * 升级时间
-	 */
-	@Column
-	private Date upgradeTime;
-
 	public String getNumber() {
 		return number;
 	}
@@ -101,14 +83,6 @@ public class Version extends DataEntity implements UpgradeVersion{
 		this.application = application;
 	}
 
-	public UpgradeStatusEnum getStatus() {
-		return status;
-	}
-
-	public void setStatus(UpgradeStatusEnum status) {
-		this.status = status;
-	}
-
 	public String getFileName() {
 		return fileName;
 	}
@@ -131,13 +105,5 @@ public class Version extends DataEntity implements UpgradeVersion{
 
 	public void setConfigFileName(String configFileName) {
 		this.configFileName = configFileName;
-	}
-
-	public Date getUpgradeTime() {
-		return upgradeTime;
-	}
-
-	public void setUpgradeTime(Date upgradeTime) {
-		this.upgradeTime = upgradeTime;
 	}
 }

@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import plugins.apm.entitys.Application;
+import plugins.apm.entitys.Application_;
 import plugins.apm.service.ApplicationService;
 import plugins.apm.tools.ApplicationUpgradeConfig;
 import plugins.apm.tools.NativeCommandExecutor;
@@ -46,12 +47,11 @@ import plugins.apm.tools.VersionUpgradeExecutor;
 import plugins.apm.tools.ApplicationUpgradeConfig.App;
 import plugins.apm.tools.ApplicationUpgradeConfig.Cmd;
 import plugins.installation.logs.MessageWriter;
-import plugins.upgradekit.entitys.Application_;
 import plugins.utils.CollectionUtils;
 import plugins.utils.Pagination;
 import plugins.utils.ResponseObject;
 import plugins.utils.persistence.SimplePrepareQueryhandler;
-import plugins.validation.LengRangeValidationRule;
+import plugins.validation.LengthRangeValidationRule;
 import plugins.validation.RegexpValidationRule;
 import plugins.validation.RequiredValidationRule;
 import plugins.validation.Validation;
@@ -112,13 +112,13 @@ public class ApplicationController extends BaseController {
 		ResponseObject rb = ResponseObject.newInstance().fail();
 		//必填和格式校验
 		List<ValidationResult> results = ValidationUtil.validate(application,
-				new Validation("name", "名称", 
+				new Validation("name", "应用名称", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(2, 10)
+						new LengthRangeValidationRule(2, 20)
 				),
 				new Validation("number", "编号", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(4, 20),
+						new LengthRangeValidationRule(4, 20),
 						new RegexpValidationRule("[_@$.0-9a-zA-Z]+"),
 						new ExistsApplicationValidationRule(application)
 				)
@@ -148,11 +148,11 @@ public class ApplicationController extends BaseController {
 		List<ValidationResult> results = ValidationUtil.validate(application,
 				new Validation("name", "名称", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(2, 10)
+						new LengthRangeValidationRule(2, 10)
 				),
 				new Validation("number", "编号", 
 						new RequiredValidationRule(),
-						new LengRangeValidationRule(4, 20),
+						new LengthRangeValidationRule(4, 20),
 						new RegexpValidationRule("[_@$.0-9a-zA-Z]+"),
 						new ExistsApplicationValidationRule(application)
 				)

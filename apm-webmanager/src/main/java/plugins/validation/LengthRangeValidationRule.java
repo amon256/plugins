@@ -7,12 +7,12 @@ package plugins.validation;
  * @author fengmengyue
  *
  */
-public class LengRangeValidationRule implements ValidationRule {
+public class LengthRangeValidationRule implements ValidationRule {
 	
 	private int min;
 	private int max;
 	
-	public LengRangeValidationRule(int minLength,int maxLength){
+	public LengthRangeValidationRule(int minLength,int maxLength){
 		if(minLength >= maxLength){
 			throw new IllegalArgumentException("min is eq or gt than max");
 		}

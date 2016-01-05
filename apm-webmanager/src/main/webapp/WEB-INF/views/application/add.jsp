@@ -33,7 +33,7 @@
 							if(data.validateErrors && data.validateErrors.length > 0){
 								for(var i = 0; i < data.validateErrors.length; i++){
 									var err = data.validateErrors[i];
-									msg += '<br/><span style="color:red;"><label style="color:blue;">'+err[i].fieldName+'</label>'+err[i].message+'</span>';
+									msg += '<br/><span style="color:red;"><label style="color:blue;">'+err.fieldName+'</label>'+err.message+'</span>';
 								}
 							}
 							$.ligerDialog.error(msg);

@@ -7,7 +7,6 @@ package plugins.apm.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.LinkedList;
@@ -35,14 +34,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import plugins.apm.entitys.Application;
 import plugins.apm.entitys.Version;
-import plugins.apm.enums.UpgradeStatusEnum;
+import plugins.apm.entitys.Version_;
 import plugins.apm.service.ApplicationService;
 import plugins.apm.service.VersionService;
 import plugins.apm.tools.UpgradeContext;
-import plugins.apm.tools.VersionUpgradeExecutor;
-import plugins.installation.logs.MessageWriter;
-import plugins.upgradekit.entitys.Version_;
-import plugins.utils.CollectionUtils;
 import plugins.utils.Pagination;
 import plugins.utils.ResponseObject;
 import plugins.utils.persistence.PrepareQueryHandler;
@@ -131,7 +126,6 @@ public class VersionController extends BaseController {
 				version.setConfigFile(file.getName());
 				version.setConfigFileName(configFile.getOriginalFilename());
 			}
-			version.setStatus(UpgradeStatusEnum.NOTDO);
 			versionService.insert(version);
 			rb.success();
 		}
@@ -156,48 +150,28 @@ public class VersionController extends BaseController {
 		response.setCharacterEncoding("UTF-8");
 		Version version = versionService.findEntity(id);
 		logger.debug("执行版本升级:{}",new ObjectMapper().writeValueAsString(version));
-		final PrintWriter pw = response.getWriter();
-		MessageWriter writer = new MessageWriter() {
-			@Override
-			public void write(String message) {
-				String script = VersionUpgradeExecutor.messageScript(message, msgFunctionName);
-				pw.write(script);
-				pw.flush();
-			}
-
-			@Override
-			public boolean isAvailable() {
-				return pw != null;
-			}
-		};
-		if(version != null && version.getApplication() != null){
-			version.setUpgradeTime(new Date());
-			VersionUpgradeExecutor.execute(version, writer);
-			version.setStatus(UpgradeStatusEnum.SUCCESS);
-			versionService.update(version, CollectionUtils.createSet(String.class, "status","upgradeTime"));
-		}
-		String msg = VersionUpgradeExecutor.messageScript("success",completeFunctionName);
-		pw.write(msg);
-		pw.flush();
-	}
-	
-	@RequestMapping(value="confirmResult")
-	@ResponseBody
-	public ResponseObject confirmResult(Version version){
-		ResponseObject rb = ResponseObject.newInstance().fail();
-		if(StringUtils.isNotEmpty(version.getId()) && version.getStatus() != null){
-			UpgradeStatusEnum status = version.getStatus();
-			version = versionService.findEntity(version.getId());
-			if(version != null){
-				version.setStatus(status);
-				versionService.update(version, CollectionUtils.createSet(String.class, "status"));
-				rb.success();
-			}else{
-				rb.setMsg("版本不存在");
-			}
-		}else{
-			rb.setMsg("参数异常");
-		}
-		return rb;
+//		final PrintWriter pw = response.getWriter();
+//		MessageWriter writer = new MessageWriter() {
+//			@Override
+//			public void write(String message) {
+//				String script = VersionUpgradeExecutor.messageScript(message, msgFunctionName);
+//				pw.write(script);
+//				pw.flush();
+//			}
+//
+//			@Override
+//			public boolean isAvailable() {
+//				return pw != null;
+//			}
+//		};
+//		if(version != null && version.getApplication() != null){
+//			version.setUpgradeTime(new Date());
+//			VersionUpgradeExecutor.execute(version, writer);
+//			version.setStatus(UpgradeStatusEnum.SUCCESS);
+//			versionService.update(version, CollectionUtils.createSet(String.class, "status","upgradeTime"));
+//		}
+//		String msg = VersionUpgradeExecutor.messageScript("success",completeFunctionName);
+//		pw.write(msg);
+//		pw.flush();
 	}
 }

@@ -12,17 +12,14 @@
 	$(function(){
 		var params = [];
 		var gridConfig = {
-			url : webCtx + "/application/listData",
+			url : webCtx + "/deployinfo/listData",
 			params : params,
 			columns: [
-                { display: '应用名', name: 'name', width: 150, render : function(rowdata, index, value){
-                	var rowId = rowdata.id;
-                	var result = hrefCallbackLabel(value,function(){
-                		openDialog(webCtx + '/application/toEdit?id='+rowId,'修改',{});
-                	});
-                	return result;
-                }},
-                { display: '编号', name: 'number', width: 100,align:'left' }, 
+                { display: '识别码', name: 'identity', width: 100}, 
+                { display: '主机', name: 'machine.name', width: 150},
+                { display: '主机地址', name: 'machine.host', width: 150},
+                { display: '应用', name: 'application.name', width: 150},
+                { display: '应用编号', name: 'application.number', width: 100}, 
                 { display: '创建日期', name: 'createTime', width: 100,align : "center" ,render : gridDateFormatterFunction('yyyy-MM-dd')},
                 { display: '描述', name: 'description', width: 180,align:'left' }, 
                 /*{ display: '配置文件', name: 'configFiles',width : 100,isSort : false,render : function(rowdata, index, value){
@@ -91,7 +88,7 @@
             }
 		});
 		$('#addBtn').bind('click',function(){
-			openDialog(webCtx + '/application/toAdd','新增');
+			openDialog(webCtx + '/deployinfo/toAdd','新增');
 		});
 		function openDialog(url,title,config){
 			config = config || {};

@@ -13,7 +13,7 @@ request.setAttribute("ctx", ctx);
 <link href="${ctx }/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="${ctx }/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx }/jquery/jquery.form.js"></script>
-<script type="text/javascript" src="${ctx }/ligerUI/js/ligerui.min.js"></script>
+<script type="text/javascript" src="${ctx }/ligerUI/js/ligerui.all.js"></script>
 <script type="text/javascript" src="${ctx }/jquery-validation/jquery.validate.min.js"></script>
 <script type="text/javascript" src="${ctx }/jquery-validation/jquery.metadata.js"></script>
 <script type="text/javascript" src="${ctx }/jquery-validation/messages_cn.js"></script>

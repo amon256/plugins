@@ -21,11 +21,11 @@ var indexdata = [
 		text : "应用管理"
 	},
 	{
-		url : webCtx + "/remotemachine/list",
-		text : "远程主机"
+		url : webCtx + "/hostmachine/list",
+		text : "主机管理"
 	},
 	{
-		url : webCtx + "/appdeploy/list",
-		text : "应用部署"
+		url : webCtx + "/deployinfo/list",
+		text : "部署管理"
 	}
 ];
